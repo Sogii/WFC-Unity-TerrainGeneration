@@ -26,13 +26,13 @@ public class RiverGenerator : MonoBehaviour
     
     private void GenerateRiverMesh(){
         float dst = 0;
-        while(dst < _riverPath.length){
+        while(dst <= _riverPath.length){
             Vector3 point = _riverPath.GetPointAtDistance(dst);
+            Vector3 normal = _riverPath.GetNormalAtDistance(dst);            
             Instantiate(Prefab, point, Prefab.transform.rotation ,SplineHolder.transform);
+            Instantiate(Prefab, point+ (normal * _riverWidth), Prefab.transform.rotation, SplineHolder.transform);
+            Instantiate(Prefab, point+ (normal * -1 * _riverWidth), Prefab.transform.rotation, SplineHolder.transform);
             dst += stepSize; 
         }   
-    }
-
-    
-
+    }    
 }

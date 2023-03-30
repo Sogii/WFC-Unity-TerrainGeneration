@@ -153,9 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630a1cad62f886f47b7bb56e1b271115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
-  SplineHolder: {fileID: 0}
-  _stepCount: 0
+  Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
+  SplineHolder: {fileID: 1430570516}
+  _stepCount: 7
+  _riverWidth: 0.2
 --- !u!114 &1430570518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +174,8 @@ MonoBehaviour:
       points:
       - {x: -2, y: 0, z: 0}
       - {x: -1, y: 0, z: 0.5}
-      - {x: 1.0333691, y: 0, z: -0.13143134}
-      - {x: 2.033369, y: 0, z: 0.36856866}
+      - {x: 0.45961666, y: 0, z: -1.4722626}
+      - {x: 1.9014702, y: 0, z: 0.51565146}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -188,7 +189,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
