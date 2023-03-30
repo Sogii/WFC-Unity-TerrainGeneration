@@ -20,7 +20,7 @@ namespace PathCreation.Examples {
 
         MeshFilter meshFilter;
         MeshRenderer meshRenderer;
-        Mesh mesh;
+        public Mesh riverMesh;
 
         protected override void PathUpdated () {
             if (pathCreator != null) {
@@ -106,15 +106,15 @@ namespace PathCreation.Examples {
                 triIndex += 6;
             }
 
-            mesh.Clear ();
-            mesh.vertices = verts;
-            mesh.uv = uvs;
-            mesh.normals = normals;
-            mesh.subMeshCount = 3;
-            mesh.SetTriangles (roadTriangles, 0);
-            mesh.SetTriangles (underRoadTriangles, 1);
-            mesh.SetTriangles (sideOfRoadTriangles, 2);
-            mesh.RecalculateBounds ();
+            riverMesh.Clear ();
+            riverMesh.vertices = verts;
+            riverMesh.uv = uvs;
+            riverMesh.normals = normals;
+            riverMesh.subMeshCount = 3;
+            riverMesh.SetTriangles (roadTriangles, 0);
+            riverMesh.SetTriangles (underRoadTriangles, 1);
+            riverMesh.SetTriangles (sideOfRoadTriangles, 2);
+            riverMesh.RecalculateBounds ();
         }
 
         // Add MeshRenderer and MeshFilter components to this gameobject if not already attached
@@ -138,10 +138,10 @@ namespace PathCreation.Examples {
 
             meshRenderer = meshHolder.GetComponent<MeshRenderer> ();
             meshFilter = meshHolder.GetComponent<MeshFilter> ();
-            if (mesh == null) {
-                mesh = new Mesh ();
+            if (riverMesh == null) {
+                riverMesh = new Mesh ();
             }
-            meshFilter.sharedMesh = mesh;
+            meshFilter.sharedMesh = riverMesh;
         }
 
         void AssignMaterials () {

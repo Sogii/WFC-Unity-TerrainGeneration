@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathCreation;
 
-public class RiverFromPathCreator : MonoBehaviour
+public class RiverBedGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public RoadMeshCreator roadMeshCreator;
+    private Mesh extractedRiverMesh;
+    
     void Start()
     {
-        
+        extractedRiverMesh = roadMeshCreator.RiverMesh;
     }
 
     // Update is called once per frame
