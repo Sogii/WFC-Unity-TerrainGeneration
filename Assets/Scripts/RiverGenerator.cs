@@ -16,22 +16,29 @@ public class RiverGenerator : MonoBehaviour
     private PathCreator pathCreator;
     private Mesh _riverMesh;
     private Mesh _riverSideMesh;
-    private float _riverSidesWidth;
+     [SerializeField] private float _riverSidesWidth;
     private MeshFilter meshFilter;
     private GameObject _river;
+    private GameObject _leftRiverSideObject;
+    private Mesh _leftRiverSideMesh; 
+    private GameObject _rightRiverSideObject;
+    private Mesh _rightRiverSideMesh;
     private void Start(){
         pathCreator = this.gameObject.GetComponent<PathCreator>();
         _riverPath = pathCreator.path;
         _pathLength = _riverPath.length;
         stepSize = (_pathLength - .001f) /_stepCount;
-        _riverMesh = new Mesh();
+       
         GenerateRiverMesh();
+        GenerateRiverSideMesh();
         
     }
 
     
     private void GenerateRiverMesh(){
+        _riverMesh = new Mesh();
         List<Vector3> vertices = new List<Vector3>(); 
+        List<Vector3> normals = new List<Vector3>(); 
         float dst = 0;
         while(dst <= _riverPath.length)
         {
@@ -40,9 +47,12 @@ public class RiverGenerator : MonoBehaviour
             Instantiate(Prefab, point, Prefab.transform.rotation ,SplineHolder.transform);
             Instantiate(Prefab, point+ (normal * _riverWidth), Prefab.transform.rotation, SplineHolder.transform);
             Instantiate(Prefab, point+ (normal * -1 * _riverWidth), Prefab.transform.rotation, SplineHolder.transform);
-           // vertices.Add(point);
+
             vertices.Add(point + (normal * _riverWidth));
+            normals.Add(normal);
             vertices.Add(point - (normal * _riverWidth));
+            normals.Add(-normal);
+            
             dst += stepSize;
             
         }
@@ -68,30 +78,80 @@ public class RiverGenerator : MonoBehaviour
         }
         
         _riverMesh.vertices = vertices.ToArray();
+        _riverMesh.normals = normals.ToArray();
         _riverMesh.triangles = triangles.ToArray();
-        AssignMeshComponents();
+        AssignMeshComponents(_river, _riverMesh, "River");
     }   
 
     private void GenerateRiverSideMesh(){
+        _leftRiverSideMesh = new Mesh();
+        _rightRiverSideMesh = new Mesh();
         List<Vector3> leftVertices = new List<Vector3>(); 
-         List<Vector3> rightVertices = new List<Vector3>(); 
+        List<Vector3> rightVertices = new List<Vector3>(); 
         for (int i = 0; i < _riverMesh.vertices.Length; i++){
             if(i%2 == 0){
-                leftVertices.Add(_riverMesh.vertices[i]);
                 leftVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));
+                leftVertices.Add(_riverMesh.vertices[i]);      
             }
             else{
-                rightVertices.Add(_riverMesh.vertices[i]);
-                rightVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));
+                rightVertices.Add(_riverMesh.vertices[i]);  
+                rightVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));             
             }
         }
+        List<int>leftTriangles = new List<int>();
+        for (int i = 0; i < (leftVertices.Count/ 2) -1 ; i++){
+            
+            int index1 = i* 2;
+            int index2 = index1+ 1;
+            int index3 = index1 + 2;
+            int index4 = index1+ 3;
+
+            //Triangle 1
+            leftTriangles.Add(index1);
+            leftTriangles.Add(index4);
+            leftTriangles.Add(index3); 
+
+            //Triangle 2
+            leftTriangles.Add(index1);
+            leftTriangles.Add(index2);
+            leftTriangles.Add(index4);
+        }
+
+            List<int>rightTriangles = new List<int>();
+        for (int i = 0; i < (rightVertices.Count/ 2) -1 ; i++){
+            
+            int index1 = i* 2;
+            int index2 = index1+ 1;
+            int index3 = index1 + 2;
+            int index4 = index1+ 3;
+
+            //Triangle 1
+            rightTriangles.Add(index1);
+            rightTriangles.Add(index4);
+            rightTriangles.Add(index3); 
+
+            //Triangle 2
+            rightTriangles.Add(index1);
+            rightTriangles.Add(index2);
+            rightTriangles.Add(index4);
+        }
+
+        _leftRiverSideMesh.vertices = leftVertices.ToArray();
+        _leftRiverSideMesh.triangles = leftTriangles.ToArray();
+        AssignMeshComponents(_leftRiverSideObject, _leftRiverSideMesh, "LeftRiverSide");
+
+        _rightRiverSideMesh.vertices = rightVertices.ToArray();
+        _rightRiverSideMesh.triangles = rightTriangles.ToArray();
+        AssignMeshComponents(_rightRiverSideObject, _rightRiverSideMesh, "RightRiverSide");
+
+
     } 
 
-    private void AssignMeshComponents(){
-        _river = new GameObject("River");
-        _river.AddComponent<MeshFilter>();
-        _river.AddComponent<MeshRenderer>();
-        meshFilter = _river.GetComponent<MeshFilter>();
-        meshFilter.sharedMesh = _riverMesh;        
+    private void AssignMeshComponents(GameObject gameObject, Mesh meshToAssign, string objectName){
+        gameObject = new GameObject(objectName);
+        gameObject.AddComponent<MeshFilter>();
+        gameObject.AddComponent<MeshRenderer>();
+        meshFilter = gameObject.GetComponent<MeshFilter>();
+        meshFilter.sharedMesh = meshToAssign;        
     }
 }

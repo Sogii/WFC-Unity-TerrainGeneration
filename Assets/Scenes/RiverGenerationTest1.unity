@@ -155,8 +155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 1430570516}
-  _stepCount: 30
+  _stepCount: 10
   _riverWidth: 0.8
+  _riverSidesWidth: 2.35
 --- !u!114 &1430570518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,10 +173,13 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -2, y: 0, z: 0}
-      - {x: -1, y: 0, z: 0.5}
-      - {x: 9.64041, y: 0, z: -3.2026384}
-      - {x: 11.082264, y: 0, z: -1.2147243}
+      - {x: -3.2481766, y: 0, z: 4.5817413}
+      - {x: 0.28248024, y: 0, z: 4.7327323}
+      - {x: 4.974837, y: 0, z: 2.4895623}
+      - {x: 5.584435, y: 0, z: -0.61489797}
+      - {x: 7.497728, y: 0, z: -10.3586}
+      - {x: 11.480539, y: 0, z: 1.5538995}
+      - {x: 14.450365, y: 0, z: -1.7857983}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -185,6 +189,7 @@ MonoBehaviour:
         m_Center: {x: 0, y: 0, z: 0}
         m_Extent: {x: 2, y: 0.14433756, z: 0}
       perAnchorNormalsAngle:
+      - 0
       - 0
       - 0
       globalNormalsAngle: 0
@@ -197,12 +202,12 @@ MonoBehaviour:
     showPerSegmentBounds: 0
     displayAnchorPoints: 1
     displayControlPoints: 1
-    bezierHandleScale: 1
+    bezierHandleScale: 3.39
     globalDisplaySettingsFoldout: 0
     keepConstantHandleSize: 0
     showNormalsInVertexMode: 0
     showBezierPathInVertexMode: 0
-    showDisplayOptions: 0
+    showDisplayOptions: 1
     showPathOptions: 1
     showVertexPathDisplayOptions: 0
     showVertexPathOptions: 1
