@@ -155,8 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 1430570516}
-  _stepCount: 7
-  _riverWidth: 0.2
+  _stepCount: 30
+  _riverWidth: 0.8
 --- !u!114 &1430570518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +174,8 @@ MonoBehaviour:
       points:
       - {x: -2, y: 0, z: 0}
       - {x: -1, y: 0, z: 0.5}
-      - {x: 0.45961666, y: 0, z: -1.4722626}
-      - {x: 1.9014702, y: 0, z: 0.51565146}
+      - {x: 9.64041, y: 0, z: -3.2026384}
+      - {x: 11.082264, y: 0, z: -1.2147243}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430570516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.684231, y: -0.9788145, z: -3.6096828}
+  m_LocalPosition: {x: -11.684231, y: -0.09, z: -3.6096828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
