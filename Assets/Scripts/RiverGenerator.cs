@@ -16,6 +16,7 @@ public class RiverGenerator : MonoBehaviour
     private PathCreator pathCreator;
     private Mesh _riverMesh;
     private Mesh _riverSideMesh;
+    private float _riverSidesWidth;
     private MeshFilter meshFilter;
     private GameObject _river;
     private void Start(){
@@ -72,12 +73,16 @@ public class RiverGenerator : MonoBehaviour
     }   
 
     private void GenerateRiverSideMesh(){
+        List<Vector3> leftVertices = new List<Vector3>(); 
+         List<Vector3> rightVertices = new List<Vector3>(); 
         for (int i = 0; i < _riverMesh.vertices.Length; i++){
             if(i%2 == 0){
-                _riverMesh.vertices[i] 
+                leftVertices.Add(_riverMesh.vertices[i]);
+                leftVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));
             }
             else{
-
+                rightVertices.Add(_riverMesh.vertices[i]);
+                rightVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));
             }
         }
     } 
