@@ -23,6 +23,8 @@ public class RiverGenerator : MonoBehaviour
     private Mesh _leftRiverSideMesh; 
     private GameObject _rightRiverSideObject;
     private Mesh _rightRiverSideMesh;
+    [SerializeField] Material _riverMaterial;
+    [SerializeField] Material _riverSideMaterial;
     private void Start(){
         pathCreator = this.gameObject.GetComponent<PathCreator>();
         _riverPath = pathCreator.path;
@@ -36,7 +38,9 @@ public class RiverGenerator : MonoBehaviour
 
     
     private void GenerateRiverMesh(){
-        _riverMesh = new Mesh();
+        if(_riverMesh == null) _riverMesh = new Mesh();
+        else _riverMesh.Clear();
+        
         List<Vector3> vertices = new List<Vector3>(); 
         List<Vector3> normals = new List<Vector3>(); 
         float dst = 0;
@@ -80,12 +84,14 @@ public class RiverGenerator : MonoBehaviour
         _riverMesh.vertices = vertices.ToArray();
         _riverMesh.normals = normals.ToArray();
         _riverMesh.triangles = triangles.ToArray();
-        AssignMeshComponents(_river, _riverMesh, "River");
+        AssignMeshComponents(_river, _riverMesh, "River", _riverMaterial);
     }   
 
     private void GenerateRiverSideMesh(){
-        _leftRiverSideMesh = new Mesh();
-        _rightRiverSideMesh = new Mesh();
+        if(_leftRiverSideMesh == null) _leftRiverSideMesh = new Mesh();
+            else _leftRiverSideMesh.Clear();
+        if(_rightRiverSideMesh == null) _rightRiverSideMesh = new Mesh();
+            else _rightRiverSideMesh.Clear();
         List<Vector3> leftVertices = new List<Vector3>(); 
         List<Vector3> rightVertices = new List<Vector3>(); 
         for (int i = 0; i < _riverMesh.vertices.Length; i++){
@@ -138,20 +144,26 @@ public class RiverGenerator : MonoBehaviour
 
         _leftRiverSideMesh.vertices = leftVertices.ToArray();
         _leftRiverSideMesh.triangles = leftTriangles.ToArray();
-        AssignMeshComponents(_leftRiverSideObject, _leftRiverSideMesh, "LeftRiverSide");
+        AssignMeshComponents(_leftRiverSideObject, _leftRiverSideMesh, "LeftRiverSide", _riverSideMaterial);
 
         _rightRiverSideMesh.vertices = rightVertices.ToArray();
         _rightRiverSideMesh.triangles = rightTriangles.ToArray();
-        AssignMeshComponents(_rightRiverSideObject, _rightRiverSideMesh, "RightRiverSide");
+        AssignMeshComponents(_rightRiverSideObject, _rightRiverSideMesh, "RightRiverSide", _riverSideMaterial);
 
 
     } 
 
-    private void AssignMeshComponents(GameObject gameObject, Mesh meshToAssign, string objectName){
-        gameObject = new GameObject(objectName);
+    private void AssignMeshComponents(GameObject gameObject, Mesh meshToAssign, string objectName, Material materialToAssign){
+        if(gameObject == null)  gameObject = new GameObject(objectName);
+            else{
+                Destroy(gameObject);
+                new GameObject(objectName);
+            }          
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
         meshFilter = gameObject.GetComponent<MeshFilter>();
+        gameObject.GetComponent<MeshRenderer>().material = materialToAssign;
+
         meshFilter.sharedMesh = meshToAssign;        
     }
 }

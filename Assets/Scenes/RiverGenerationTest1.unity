@@ -155,9 +155,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 1430570516}
-  _stepCount: 10
-  _riverWidth: 0.8
-  _riverSidesWidth: 2.35
+  _stepCount: 138
+  _riverWidth: 0.4
+  _riverSidesWidth: 3
+  _riverMaterial: {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
+  _riverSideMaterial: {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
 --- !u!114 &1430570518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,13 +175,13 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -3.2481766, y: 0, z: 4.5817413}
-      - {x: 0.28248024, y: 0, z: 4.7327323}
+      - {x: -2.378086, y: 0, z: 23.275211}
+      - {x: 1.1525707, y: 0, z: 23.4262}
       - {x: 4.974837, y: 0, z: 2.4895623}
       - {x: 5.584435, y: 0, z: -0.61489797}
       - {x: 7.497728, y: 0, z: -10.3586}
-      - {x: 11.480539, y: 0, z: 1.5538995}
-      - {x: 14.450365, y: 0, z: -1.7857983}
+      - {x: 29.138245, y: 0, z: -25.678816}
+      - {x: 32.10807, y: 0, z: -29.018515}
       isClosed: 0
       space: 2
       controlMode: 0
