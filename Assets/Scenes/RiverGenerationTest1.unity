@@ -156,8 +156,8 @@ MonoBehaviour:
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 1430570516}
   _stepCount: 138
-  _riverWidth: 0.4
-  _riverSidesWidth: 3
+  _riverWidth: 1
+  _riverSidesWidth: 6
   _riverMaterial: {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
   _riverSideMaterial: {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
 --- !u!114 &1430570518
@@ -175,13 +175,19 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -2.378086, y: 0, z: 23.275211}
-      - {x: 1.1525707, y: 0, z: 23.4262}
-      - {x: 4.974837, y: 0, z: 2.4895623}
-      - {x: 5.584435, y: 0, z: -0.61489797}
-      - {x: 7.497728, y: 0, z: -10.3586}
-      - {x: 29.138245, y: 0, z: -25.678816}
-      - {x: 32.10807, y: 0, z: -29.018515}
+      - {x: -0.49928856, y: 0, z: 58.87032}
+      - {x: -0.052571297, y: 0, z: 56.03648}
+      - {x: 4.363369, y: 0, z: 43.644623}
+      - {x: 6.675124, y: 0, z: 38.38339}
+      - {x: 9.359526, y: 0, z: 32.274063}
+      - {x: 10.285945, y: 0, z: 23.371357}
+      - {x: 11.150411, y: 0, z: 13.990591}
+      - {x: 11.871702, y: 0, z: 6.1634808}
+      - {x: 13.32589, y: 0, z: -1.8655965}
+      - {x: 16.760454, y: 0, z: -13.500764}
+      - {x: 23.01904, y: 0, z: -34.702766}
+      - {x: 34.392017, y: 0, z: -57.617268}
+      - {x: 34.87288, y: 0, z: -60.907124}
       isClosed: 0
       space: 2
       controlMode: 0
@@ -194,14 +200,16 @@ MonoBehaviour:
       - 0
       - 0
       - 0
+      - 0
+      - 0
       globalNormalsAngle: 0
       flipNormals: 0
     vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
-    showPathBounds: 0
-    showPerSegmentBounds: 0
+    showPathBounds: 1
+    showPerSegmentBounds: 1
     displayAnchorPoints: 1
     displayControlPoints: 1
     bezierHandleScale: 3.39
@@ -308,14 +316,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775798925}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.50022995, y: -0.4937211, z: 0.5032817, w: 0.5027097}
+  m_LocalPosition: {x: -4.3, y: 70.2, z: 11.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.2, y: 30.63, z: 120.29}
 --- !u!1 &1905987873
 GameObject:
   m_ObjectHideFlags: 0

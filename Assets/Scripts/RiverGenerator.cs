@@ -96,7 +96,8 @@ public class RiverGenerator : MonoBehaviour
         List<Vector3> rightVertices = new List<Vector3>(); 
         for (int i = 0; i < _riverMesh.vertices.Length; i++){
             if(i%2 == 0){
-                leftVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));
+                rightVertices.Add(_riverMesh.vertices[i] + (_riverMesh.normals[i] * _riverSidesWidth));
+                //leftVertices.Add(_riverMesh.vertices[i] + new Vector3(3*i,0,0));
                 leftVertices.Add(_riverMesh.vertices[i]);      
             }
             else{
