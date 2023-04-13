@@ -68,8 +68,7 @@ public class RiverGenerator : MonoBehaviour
             vertices.Add(point - (normal * _riverWidth));
             normals.Add(-normal);
             
-            dst += stepSize;
-            
+            dst += stepSize;            
         }
 
         List<int>triangles = new List<int>();  
