@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathCreation.Utility;
-using PathCreation.Examples;
 using PathCreation;
 public class RiverGenerator : MonoBehaviour
 {
