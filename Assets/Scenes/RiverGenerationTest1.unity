@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 1430570516}
-  _stepCount: 30
+  _stepCount: 60
   _riverWidth: 1
   _riverSidesWidth: 2
   _riverMaterial: {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
