@@ -3,37 +3,51 @@ using UnityEngine;
 using PathCreation;
 public class RiverGenerator : MonoBehaviour
 {
+
+    [Header("Prefabs & Objects")]
     public GameObject Prefab;
     public GameObject SplineHolder;
+
+     [Header("River Settings")]
     [SerializeField] private int _stepCount;
     [SerializeField] private float _riverWidth;
-    private float  _pathLength;
-    private float stepSize;
-    private VertexPath _riverPath;
-    private PathCreator pathCreator;
+    [SerializeField] private float _riverSidesWidth;
+
+    [Header("River Material Data")]
+    [SerializeField] Material _riverMaterial;
+    [SerializeField] Material _riverSideMaterial;
+
+    #region Private Mesh Data
     private Mesh _riverMesh;
     private Mesh _riverSideMesh;
-     [SerializeField] private float _riverSidesWidth;
+    private VertexPath _riverPath;
+    private PathCreator pathCreator;
     private MeshFilter meshFilter;
     private GameObject _river;
     private GameObject _leftRiverSideObject;
     private Mesh _leftRiverSideMesh; 
     private GameObject _rightRiverSideObject;
     private Mesh _rightRiverSideMesh;
-    [SerializeField] Material _riverMaterial;
-    [SerializeField] Material _riverSideMaterial;
-    private void Start(){
-        pathCreator = this.gameObject.GetComponent<PathCreator>();
+    #endregion
+
+    private float  _pathLength;
+    private float stepSize;
+
+    private void Start()
+    {      
+        InitializePath();
+        GenerateRiverMesh();
+        GenerateRiverSideMesh();     
+    }
+
+    private void InitializePath()
+    {
+         pathCreator = this.gameObject.GetComponent<PathCreator>();
         _riverPath = pathCreator.path;
         _pathLength = _riverPath.length;
         stepSize = (_pathLength - .001f) /_stepCount;
-       
-        GenerateRiverMesh();
-        GenerateRiverSideMesh();
-        
     }
 
-    
     private void GenerateRiverMesh(){
         if(_riverMesh == null) _riverMesh = new Mesh();
         else _riverMesh.Clear();
