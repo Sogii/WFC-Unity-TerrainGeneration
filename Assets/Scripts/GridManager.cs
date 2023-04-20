@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-     public static GridManager Instance { get; private set; }
+    public static GridManager Instance { get; private set; }
 
     [Header("Gridinfo")]
     public int GridWidth = 50;
@@ -18,7 +18,7 @@ public class GridManager : MonoBehaviour
     public GameObject ForestPrefab;
     public GameObject MountainPrefab;
 
-      private void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -33,9 +33,23 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
-        TileGrid = new Tile[GridWidth, GridHeight];
+        InnitializeGrid();
         FillGridWithRandomTiles();
+        ConvertRiverToGrid();
         InstantiateTiles();
+    }
+
+
+    private void InnitializeGrid()
+    {
+        TileGrid = new Tile[GridWidth, GridHeight];
+    }
+
+
+    private void ConvertRiverToGrid()
+    {
+        RiverToGridConverter riverToGridConverter = GetComponent<RiverToGridConverter>();
+        riverToGridConverter.InteGrateRiverMesh();
     }
 
     public Vector3 GridToWorldSpace(int x, int y)

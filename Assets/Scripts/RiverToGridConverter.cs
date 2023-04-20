@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class RiverToGridConverter : MonoBehaviour
 {
-    private RiverGenerator _riverGenerator;
+    //private RiverGenerator _riverGenerator;
+    private GameObject _river;
     private MeshFilter _riverMeshFilter;
+    private int riverSamplePoints = 5;
     //private Mesh _riverMesh;
     void Start()
     {
-        _riverGenerator = gameObject.GetComponent<RiverGenerator>();
-        _riverMeshFilter = _riverGenerator.GetComponent<MeshFilter>();
+        _river = GameObject.Find("River");
+        _riverMeshFilter = _river.GetComponent<MeshFilter>();
     }
 
     void Update()
@@ -18,19 +20,26 @@ public class RiverToGridConverter : MonoBehaviour
 
     }
 
-    void InteGrateRiverMesh()
+    public void InteGrateRiverMesh()
     {
         Vector3[] vertices = _riverMeshFilter.mesh.vertices;
 
-        foreach (Vector3 vertex in vertices)
+        for (int i = 0; i < vertices.Length; i += 2)
         {
-            //convert vertex from localspace to world space
-            Vector3 WorldVertex = _riverMeshFilter.transform.TransformPoint(vertex);
-            Vector2Int gridCoords = WorldSpaceToGridSpace(WorldVertex);
+            Vector3 vertex1 = _riverMeshFilter.transform.TransformPoint(vertices[i]);
+            Vector3 vertex2 = _riverMeshFilter.transform.TransformPoint(vertices[i + 1]);
 
-             if (gridCoords.x >= 0 && gridCoords.x < GridManager.Instance.GridWidth && gridCoords.y >= 0 && gridCoords.y < GridManager.Instance.GridHeight)
+            for (int j = 0; j < riverSamplePoints; j++)
             {
-                GridManager.Instance.TileGrid[gridCoords.x, gridCoords.y] = new Tile(Tile.TileType.Water, 0);
+                float t = (float)j / (riverSamplePoints - 1);
+                Vector3 samplePoint = Vector3.Lerp(vertex1, vertex2, t);
+
+                Vector2Int gridCoords = WorldSpaceToGridSpace(samplePoint);
+
+                if (gridCoords.x >= 0 && gridCoords.x < GridManager.Instance.GridWidth && gridCoords.y >= 0 && gridCoords.y < GridManager.Instance.GridHeight)
+                {
+                    GridManager.Instance.TileGrid[gridCoords.x, gridCoords.y] = new Tile(Tile.TileType.Water, 0);
+                }
             }
         }
 

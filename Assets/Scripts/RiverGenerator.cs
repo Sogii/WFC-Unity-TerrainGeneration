@@ -30,14 +30,20 @@ public class RiverGenerator : MonoBehaviour
     private Mesh _rightRiverSideMesh;
     #endregion
 
+    public GameObject River;
+
     private float _pathLength;
     private float stepSize;
 
-    private void Start()
+    private void Awake()
     {
         InitializePath();
         GenerateRiverMesh();
         GenerateRiverSideMesh();
+    }
+    private void Start()
+    {
+
     }
 
     private void InitializePath()
