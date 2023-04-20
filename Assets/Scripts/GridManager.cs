@@ -35,7 +35,8 @@ public class GridManager : MonoBehaviour
     {
         InnitializeGrid();
         FillGridWithRandomTiles();
-        ConvertRiverToGrid();
+        ConvertObjectsToGrid();
+        
         InstantiateTiles();
     }
 
@@ -46,10 +47,11 @@ public class GridManager : MonoBehaviour
     }
 
 
-    private void ConvertRiverToGrid()
+    private void ConvertObjectsToGrid()
     {
-        RiverToGridConverter riverToGridConverter = GetComponent<RiverToGridConverter>();
+        ObjectToGridConverter riverToGridConverter = GetComponent<ObjectToGridConverter>();
         riverToGridConverter.InteGrateRiverMesh();
+        riverToGridConverter.InteGrateRiverBankMesh();
     }
 
     public Vector3 GridToWorldSpace(int x, int y)

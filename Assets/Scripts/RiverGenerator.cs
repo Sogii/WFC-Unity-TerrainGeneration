@@ -23,14 +23,13 @@ public class RiverGenerator : MonoBehaviour
     private VertexPath _riverPath;
     private PathCreator pathCreator;
     private MeshFilter meshFilter;
-    private GameObject _river;
+    public GameObject River;
     private GameObject _leftRiverSideObject;
     private Mesh _leftRiverSideMesh;
     private GameObject _rightRiverSideObject;
     private Mesh _rightRiverSideMesh;
     #endregion
 
-    public GameObject River;
 
     private float _pathLength;
     private float stepSize;
@@ -40,10 +39,6 @@ public class RiverGenerator : MonoBehaviour
         InitializePath();
         GenerateRiverMesh();
         GenerateRiverSideMesh();
-    }
-    private void Start()
-    {
-
     }
 
     private void InitializePath()
@@ -101,7 +96,7 @@ public class RiverGenerator : MonoBehaviour
         RiverMesh.vertices = vertices.ToArray();
         RiverMesh.normals = normals.ToArray();
         RiverMesh.triangles = triangles.ToArray();
-        AssignMeshComponents(_river, RiverMesh, "River", _riverMaterial);
+        AssignMeshComponents(River, RiverMesh, "River", _riverMaterial);
     }
 
     private void GenerateRiverSideMesh()
@@ -178,7 +173,10 @@ public class RiverGenerator : MonoBehaviour
 
     private void AssignMeshComponents(GameObject gameObject, Mesh meshToAssign, string objectName, Material materialToAssign)
     {
-        if (gameObject == null) gameObject = new GameObject(objectName);
+        if (gameObject == null)
+        {
+            gameObject = new GameObject(objectName);
+        }
         else
         {
             Destroy(gameObject);
