@@ -2,26 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile
+public class GridManager : MonoBehaviour
 {
-    public enum TileType { Ground, Water, Forest, Mountain }
-    public TileType type;
-    public int rotation;
+     public static GridManager Instance { get; private set; }
 
-    public Tile(TileType type, int rotation)
-    {
-        this.type = type;
-        this.rotation = rotation;
-    }
-}
-
-public class Grid : MonoBehaviour
-{
     [Header("Gridinfo")]
-    [SerializeField] private int _gridWidth = 50;
-    [SerializeField] private int _gridHeight = 50;
+    public int GridWidth = 50;
+    public int GridHeight = 50;
     [SerializeField] private float _tileSize = 1f;
-    private Tile[,] _grid;
+    public Tile[,] TileGrid;
 
     [Header("TilePrefabs")]
     public GameObject GroundPrefab;
@@ -29,9 +18,22 @@ public class Grid : MonoBehaviour
     public GameObject ForestPrefab;
     public GameObject MountainPrefab;
 
+      private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        _grid = new Tile[_gridWidth, _gridHeight];
+        TileGrid = new Tile[GridWidth, GridHeight];
         FillGridWithRandomTiles();
         InstantiateTiles();
     }
@@ -44,13 +46,13 @@ public class Grid : MonoBehaviour
 
     void FillGridWithRandomTiles()
     {
-        for (int x = 0; x < _gridWidth; x++)
+        for (int x = 0; x < GridWidth; x++)
         {
-            for (int y = 0; y < _gridHeight; y++)
+            for (int y = 0; y < GridHeight; y++)
             {
                 Tile.TileType randomType = GetRandomTileType();
                 int randomRotation = GetRandomRotation();
-                _grid[x, y] = new Tile(randomType, randomRotation);
+                TileGrid[x, y] = new Tile(randomType, randomRotation);
             }
         }
     }
@@ -70,11 +72,11 @@ public class Grid : MonoBehaviour
 
     void InstantiateTiles()
     {
-        for (int x = 0; x < _gridWidth; x++)
+        for (int x = 0; x < GridWidth; x++)
         {
-            for (int y = 0; y < _gridHeight; y++)
+            for (int y = 0; y < GridHeight; y++)
             {
-                Tile currentTile = _grid[x, y];
+                Tile currentTile = TileGrid[x, y];
                 GameObject tilePrefab = null;
 
                 // Choose the appropriate prefab based on the tile type
