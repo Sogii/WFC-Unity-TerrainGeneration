@@ -49,8 +49,14 @@ public class GridManager : MonoBehaviour
     private void ConvertObjectsToGrid()
     {
         ObjectToGridConverter objectToGridConverter = this.gameObject.GetComponent<ObjectToGridConverter>();
-        objectToGridConverter.InteGrateRiverMesh();
-        objectToGridConverter.InteGrateRiverBankMesh();
+        objectToGridConverter.IntegrateMeshByName("Water", Tile.TileType.Water);
+        objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Mountain);
+        objectToGridConverter.IntegrateMeshByName("Greenery", Tile.TileType.Forest);
+        objectToGridConverter.IntegrateMeshByName("Traintracks", Tile.TileType.Mountain);
+        objectToGridConverter.IntegrateMeshByName("Urban", Tile.TileType.Mountain);
+        objectToGridConverter.IntegrateMeshByName("Walkingarea", Tile.TileType.Ground);
+        // objectToGridConverter.InteGrateRiverMesh();
+        // objectToGridConverter.InteGrateRiverBankMesh();
     }
 
     public Vector3 GridToWorldSpace(int x, int y)
