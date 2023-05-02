@@ -201,6 +201,10 @@ PrefabInstance:
       value: mapdata exported
       objectReference: {fileID: 0}
     - target: {fileID: 5623215804310540242, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0166
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623215804310540242, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.0038
       objectReference: {fileID: 0}
