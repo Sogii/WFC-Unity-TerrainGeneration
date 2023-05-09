@@ -11,8 +11,6 @@ public class ObjectToGridConverter : MonoBehaviour
     private MeshFilter _leftRiverBankMeshFilter;
     private GameObject _rightRiverBank;
     private MeshFilter _rightRiverBankMeshFilter;
-    private int _samplePoints = 25;
-
     public MeshObject[] MeshObjects;
 
     [System.Serializable]
@@ -102,7 +100,6 @@ public class ObjectToGridConverter : MonoBehaviour
         //Debug.DrawRay(rayOrigin, rayDirection * 100, Color.red, 5.0f);
         while (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, rayDistance))
         {
-           Debug.Log("Hit test"); 
             if (hit.collider == meshCollider)
             {
                 

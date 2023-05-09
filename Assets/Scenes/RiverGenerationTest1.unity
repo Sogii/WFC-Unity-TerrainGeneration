@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &185133507 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7803273523942036792, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
-  m_PrefabInstance: {fileID: 212162975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &195960595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3507081502874321218, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
@@ -200,13 +195,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: mapdata exported
       objectReference: {fileID: 0}
+    - target: {fileID: 2328364576389424118, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0054
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326884247264983140, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0066
+      objectReference: {fileID: 0}
     - target: {fileID: 5623215804310540242, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0166
       objectReference: {fileID: 0}
     - target: {fileID: 5623215804310540242, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0038
+      value: -0.0246
       objectReference: {fileID: 0}
     - target: {fileID: 6099135959303080388, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
       propertyPath: m_Name
@@ -249,7 +252,7 @@ MonoBehaviour:
   _tileSize: 1
   GroundPrefab: {fileID: 7216206873488092703, guid: 13273a1b053e1ac4a808ef9fc13eb83a, type: 3}
   WaterPrefab: {fileID: 3326118740871146785, guid: 7c61393c72343f742906fd9876b9554e, type: 3}
-  ForestPrefab: {fileID: 5624583712772160604, guid: c7f1163d4cfaa914dae6c16343319b21, type: 3}
+  ForestPrefab: {fileID: 5962265672971551060, guid: 2320436a2e0a9a24388f4381f521a1d7, type: 3}
   MountainPrefab: {fileID: 4607061939710478667, guid: f733597c1fbdc544884a36442872333a, type: 3}
 --- !u!4 &408296470
 Transform:
@@ -283,21 +286,12 @@ MonoBehaviour:
     MeshName: Bikelane
   - MeshHolder: {fileID: 1734236386}
     MeshName: Buildings
-  - MeshHolder: {fileID: 485726952}
-    MeshName: Greenery
   - MeshHolder: {fileID: 1358510021}
     MeshName: Water
   - MeshHolder: {fileID: 769771096}
     MeshName: Traintracks
   - MeshHolder: {fileID: 195960595}
     MeshName: Urban
-  - MeshHolder: {fileID: 185133507}
-    MeshName: Walkingarea
---- !u!1 &485726952 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -4180894212974506583, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}
-  m_PrefabInstance: {fileID: 212162975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &769771096 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4275146110004632561, guid: 04ed3619048afcd43b749094cbe0e938, type: 3}

@@ -9,7 +9,6 @@ public class GridManager : MonoBehaviour
     [Header("Gridinfo")]
     public int GridWidth = 50;
     public int GridHeight = 50;
-    [SerializeField] private float _tileSize = 1f;
     public Tile[,] TileGrid;
 
     [Header("TilePrefabs")]
@@ -17,6 +16,9 @@ public class GridManager : MonoBehaviour
     public GameObject WaterPrefab;
     public GameObject ForestPrefab;
     public GameObject MountainPrefab;
+
+    [Header("SharedData")]
+    public SharedData sharedData;
 
     private void Awake()
     {
@@ -34,8 +36,9 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         InnitializeGrid();
-        FillGridWithRandomTiles();
-        ConvertObjectsToGrid();     
+        //FillGridWithRandomTiles();
+        FillGridWithFillerTiles(Tile.TileType.Forest);
+        ConvertObjectsToGrid();
         InstantiateTiles();
     }
 
@@ -50,21 +53,32 @@ public class GridManager : MonoBehaviour
     {
         ObjectToGridConverter objectToGridConverter = this.gameObject.GetComponent<ObjectToGridConverter>();
         objectToGridConverter.IntegrateMeshByName("Water", Tile.TileType.Water);
-        objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Mountain);
-        objectToGridConverter.IntegrateMeshByName("Greenery", Tile.TileType.Forest);
+        objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Ground);
+        //  objectToGridConverter.IntegrateMeshByName("Greenery", Tile.TileType.Forest);
         objectToGridConverter.IntegrateMeshByName("Traintracks", Tile.TileType.Mountain);
         objectToGridConverter.IntegrateMeshByName("Urban", Tile.TileType.Mountain);
-        objectToGridConverter.IntegrateMeshByName("Walkingarea", Tile.TileType.Ground);
-        // objectToGridConverter.InteGrateRiverMesh();
-        // objectToGridConverter.InteGrateRiverBankMesh();
+        //  objectToGridConverter.IntegrateMeshByName("Walkingarea", Tile.TileType.Ground);
     }
 
     public Vector3 GridToWorldSpace(int x, int y)
     {
-        return new Vector3(x * _tileSize, 0, y * _tileSize);
+        return new Vector3(x * sharedData.TileSize, 0, y * sharedData.TileSize);
     }
 
 
+    void FillGridWithFillerTiles(Tile.TileType tileType)
+    {
+        for (int x = 0; x < GridWidth; x++)
+        {
+            for (int y = 0; y < GridHeight; y++)
+            {
+                TileGrid[x, y] = new Tile(tileType, 0);
+            }
+        }
+    }
+    
+
+    
     void FillGridWithRandomTiles()
     {
         for (int x = 0; x < GridWidth; x++)
@@ -121,7 +135,7 @@ public class GridManager : MonoBehaviour
                 if (tilePrefab != null)
                 {
                     Vector3 worldPosition = GridToWorldSpace(x, y);
-                    GameObject instance = Instantiate(tilePrefab, worldPosition, Quaternion.Euler(0, currentTile.rotation, 0));
+                    GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
                     instance.transform.parent = transform;
                 }
             }
