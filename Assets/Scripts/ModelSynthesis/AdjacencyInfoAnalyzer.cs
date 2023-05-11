@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Text;
+
 
 
 [System.Serializable]
@@ -11,7 +14,7 @@ public class ModelTile
 }
 public class AdjacencyInfoAnalyzer : MonoBehaviour
 {
-    
+
     // Assuming you have an enum for directions like this
     public enum Direction { North, East, South, West }
 
@@ -19,39 +22,45 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
     Dictionary<string, Dictionary<Direction, HashSet<string>>> adjacencyDict = new Dictionary<string, Dictionary<Direction, HashSet<string>>>();
 
+    string filePath;
+   void awake()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
+    }
     void Start()
     {
         AnalyzeAdjacency();
+        WriteToFile(adjacencyDict);
     }
 
-   void AnalyzeAdjacency()
-{
-    for (int i = 0; i < tiles.Length; i++)
+    void AnalyzeAdjacency()
     {
-        string tileType = tiles[i].type;
-
-        // Initialize the dictionaries for this tile type
-        if (!adjacencyDict.ContainsKey(tileType))
+        for (int i = 0; i < tiles.Length; i++)
         {
-            adjacencyDict[tileType] = new Dictionary<Direction, HashSet<string>>();
+            string tileType = tiles[i].type;
+
+            // Initialize the dictionaries for this tile type
+            if (!adjacencyDict.ContainsKey(tileType))
+            {
+                adjacencyDict[tileType] = new Dictionary<Direction, HashSet<string>>();
+                foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
+                {
+                    adjacencyDict[tileType][dir] = new HashSet<string>();
+                }
+            }
+
+            // Check each direction
             foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
             {
-                adjacencyDict[tileType][dir] = new HashSet<string>();
-            }
-        }
-
-        // Check each direction
-        foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
-        {
-            int adjacentIndex = GetAdjacentIndex(i, dir);
-            if (adjacentIndex >= 0 && adjacentIndex < tiles.Length)
-            {
-                string adjacentTileType = tiles[adjacentIndex].type;
-                adjacencyDict[tileType][dir].Add(adjacentTileType);
+                int adjacentIndex = GetAdjacentIndex(i, dir);
+                if (adjacentIndex >= 0 && adjacentIndex < tiles.Length)
+                {
+                    string adjacentTileType = tiles[adjacentIndex].type;
+                    adjacencyDict[tileType][dir].Add(adjacentTileType);
+                }
             }
         }
     }
-}
 
 
     // Given an index in the 1D array and a direction, returns the index of the tile in that direction
@@ -80,4 +89,27 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
         return y * 4 + x;
     }
+
+   public void WriteToFile(Dictionary<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> dict)
+{
+    // Create file path
+    string path = Path.Combine(Application.dataPath, "Resources/temp.txt");
+
+    // Use a StringBuilder to create the string to write to the file
+    StringBuilder builder = new StringBuilder();
+
+    foreach (KeyValuePair<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> outerEntry in dict)
+    {
+        builder.AppendLine($"{outerEntry.Key}:");
+        foreach (KeyValuePair<AdjacencyInfoAnalyzer.Direction, HashSet<string>> innerEntry in outerEntry.Value)
+        {
+            builder.AppendLine($"\t{innerEntry.Key}: {string.Join(", ", innerEntry.Value)}");
+        }
+    }
+
+    // Write to the file
+    File.WriteAllText(path, builder.ToString());
+}
+
+
 }
