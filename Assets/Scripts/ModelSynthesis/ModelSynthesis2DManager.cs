@@ -16,6 +16,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
     public LabelGrid LabelGrid;
     private PropagationManager propagationManager;
     private OutputMesh outputMesh;
+    public SharedData sharedData;
 
 
     private void Awake()
@@ -39,11 +40,11 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     private void Initialize()
     {
-        inputMesh = new InputMesh(inputTexture);
-        int[,] adjacencyMatrix = adjacencyInfoAnalyzer.ConstructAdjacencyMatrix();
-      //  LabelGrid labelGrid = new LabelGrid(gridWidth, gridHeight, adjacencyMatrix);
-       // propagationManager = new PropagationManager(LabelGrid, adjacencyMatrix);
-        outputMesh = new OutputMesh();
+        adjacencyInfoAnalyzer.AnalyzeAdjacency();
+        int[,] adjecencyMatrix = adjacencyInfoAnalyzer.ConstructAdjacencyMatrix();
+        LabelGrid labelGrid = new LabelGrid(8, 8, adjacencyMatrix);
+        //    // propagationManager = new PropagationManager(LabelGrid, adjacencyMatrix);
+        //     outputMesh = new OutputMesh();
     }
 
     private void RunModelSynthesis()
@@ -54,7 +55,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     private void AssignInitialLabels()
     {
-        LabelGrid.AssignAllPossibleLabels();
+        LabelGrid.AssignAllPossibleLabels(sharedData.AllModelTiles);
     }
 
     private void PropagateConstraints()
@@ -64,6 +65,6 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     private void DisplayOutputMesh()
     {
-      //  outputMesh.Display();
+        //  outputMesh.Display();
     }
 }

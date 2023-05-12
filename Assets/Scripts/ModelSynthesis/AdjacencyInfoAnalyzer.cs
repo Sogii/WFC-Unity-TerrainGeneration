@@ -31,7 +31,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
     {
         AnalyzeAdjacency();
         WriteToFile(adjecencyDictionary);
-    }
+    }    
 
     void AnalyzeAdjacency()
     {
