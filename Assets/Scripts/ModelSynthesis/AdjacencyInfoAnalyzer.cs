@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
-
-
+using System;
 
 [System.Serializable]
 public class ModelTile
@@ -17,20 +16,21 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
     // Assuming you have an enum for directions like this
     public enum Direction { North, East, South, West }
+    public string[] tileTypes;
 
     public ModelTile[] tiles = new ModelTile[16];
 
-    Dictionary<string, Dictionary<Direction, HashSet<string>>> adjacencyDict = new Dictionary<string, Dictionary<Direction, HashSet<string>>>();
+    Dictionary<string, Dictionary<Direction, HashSet<string>>> adjecencyDictionary = new Dictionary<string, Dictionary<Direction, HashSet<string>>>();
 
     string filePath;
-   void awake()
+    void awake()
     {
         string filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
     }
     void Start()
     {
         AnalyzeAdjacency();
-        WriteToFile(adjacencyDict);
+        WriteToFile(adjecencyDictionary);
     }
 
     void AnalyzeAdjacency()
@@ -40,12 +40,12 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
             string tileType = tiles[i].type;
 
             // Initialize the dictionaries for this tile type
-            if (!adjacencyDict.ContainsKey(tileType))
+            if (!adjecencyDictionary.ContainsKey(tileType))
             {
-                adjacencyDict[tileType] = new Dictionary<Direction, HashSet<string>>();
+                adjecencyDictionary[tileType] = new Dictionary<Direction, HashSet<string>>();
                 foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
                 {
-                    adjacencyDict[tileType][dir] = new HashSet<string>();
+                    adjecencyDictionary[tileType][dir] = new HashSet<string>();
                 }
             }
 
@@ -56,7 +56,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
                 if (adjacentIndex >= 0 && adjacentIndex < tiles.Length)
                 {
                     string adjacentTileType = tiles[adjacentIndex].type;
-                    adjacencyDict[tileType][dir].Add(adjacentTileType);
+                    adjecencyDictionary[tileType][dir].Add(adjacentTileType);
                 }
             }
         }
@@ -90,26 +90,56 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         return y * 4 + x;
     }
 
-   public void WriteToFile(Dictionary<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> dict)
-{
-    // Create file path
-    string path = Path.Combine(Application.dataPath, "Resources/temp.txt");
-
-    // Use a StringBuilder to create the string to write to the file
-    StringBuilder builder = new StringBuilder();
-
-    foreach (KeyValuePair<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> outerEntry in dict)
+    public void WriteToFile(Dictionary<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> dict)
     {
-        builder.AppendLine($"{outerEntry.Key}:");
-        foreach (KeyValuePair<AdjacencyInfoAnalyzer.Direction, HashSet<string>> innerEntry in outerEntry.Value)
+        // Create file path
+        string path = Path.Combine(Application.dataPath, "Resources/temp.txt");
+
+        // Use a StringBuilder to create the string to write to the file
+        StringBuilder builder = new StringBuilder();
+
+        foreach (KeyValuePair<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> outerEntry in dict)
         {
-            builder.AppendLine($"\t{innerEntry.Key}: {string.Join(", ", innerEntry.Value)}");
+            builder.AppendLine($"{outerEntry.Key}:");
+            foreach (KeyValuePair<AdjacencyInfoAnalyzer.Direction, HashSet<string>> innerEntry in outerEntry.Value)
+            {
+                builder.AppendLine($"\t{innerEntry.Key}: {string.Join(", ", innerEntry.Value)}");
+            }
         }
+
+        // Write to the file
+        File.WriteAllText(path, builder.ToString());
     }
 
-    // Write to the file
-    File.WriteAllText(path, builder.ToString());
-}
+    public int[,] ConstructAdjacencyMatrix()
+    {
+        int tileTypeCount = tileTypes.Length;
+        int[,] adjacencyMatrix = new int[tileTypeCount, tileTypeCount];
 
+        // Initialize matrix with zeros
+        for (int i = 0; i < tileTypeCount; i++)
+        {
+            for (int j = 0; j < tileTypeCount; j++)
+            {
+                adjacencyMatrix[i, j] = 0;
+            }
+        }
+
+        // Iterate over adjacencyDictionary and set adjacencyMatrix[i, j] = 1 if tile type i can be adjacent to tile type j
+        foreach (KeyValuePair<string, Dictionary<Direction, HashSet<string>>> outerEntry in adjecencyDictionary)
+        {
+            int i = Array.IndexOf(tileTypes, outerEntry.Key);
+            foreach (KeyValuePair<Direction, HashSet<string>> innerEntry in outerEntry.Value)
+            {
+                foreach (string adjacentTileType in innerEntry.Value)
+                {
+                    int j = Array.IndexOf(tileTypes, adjacentTileType);
+                    adjacencyMatrix[i, j] = 1;
+                }
+            }
+        }
+
+        return adjacencyMatrix;
+    }
 
 }

@@ -12,6 +12,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     private InputMesh inputMesh;
     private AdjacencyMatrix adjacencyMatrix;
+    public AdjacencyInfoAnalyzer adjacencyInfoAnalyzer;
     public LabelGrid LabelGrid;
     private PropagationManager propagationManager;
     private OutputMesh outputMesh;
@@ -39,9 +40,9 @@ public class ModelSynthesis2DManager : MonoBehaviour
     private void Initialize()
     {
         inputMesh = new InputMesh(inputTexture);
-        adjacencyMatrix = new AdjacencyMatrix(inputMesh.Tiles);
-        LabelGrid = new LabelGrid(outputWidth, outputHeight, adjacencyMatrix);
-        propagationManager = new PropagationManager(LabelGrid, adjacencyMatrix);
+        int[,] adjacencyMatrix = adjacencyInfoAnalyzer.ConstructAdjacencyMatrix();
+      //  LabelGrid labelGrid = new LabelGrid(gridWidth, gridHeight, adjacencyMatrix);
+       // propagationManager = new PropagationManager(LabelGrid, adjacencyMatrix);
         outputMesh = new OutputMesh();
     }
 
