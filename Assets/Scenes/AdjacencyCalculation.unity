@@ -152,6 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21091fc8e29042346b58b55721c3bcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileTypes:
+  - Water
+  - Path corner
+  - Path horizontal
+  - Path vertical
+  - Fence horizontal
+  - Grass
   tiles:
   - gameObject: {fileID: 642258072728421617}
     type: Water
