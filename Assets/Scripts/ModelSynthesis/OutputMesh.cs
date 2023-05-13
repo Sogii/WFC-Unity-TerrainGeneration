@@ -11,18 +11,17 @@ public class OutputMesh : MonoBehaviour
     private int gridHeight;
     private float tileSize;
 
-    void Start()
+
+    public void AssignData()
     {
         modelSynthesis2DManager = ModelSynthesis2DManager.Instance;
         labelGrid = modelSynthesis2DManager.LabelGrid;
         gridWidth = labelGrid.Width;
         gridHeight = labelGrid.Height;
         tileSize = modelSynthesis2DManager.TileSize;
-
-        GenerateMesh();
     }
 
-    private void GenerateMesh()
+    public void GenerateMesh()
     {
         for (int x = 0; x < gridWidth; x++)
         {

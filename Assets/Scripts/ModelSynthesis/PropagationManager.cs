@@ -37,7 +37,7 @@ public class PropagationManager
             (int x, int y) = queue.Dequeue();
 
             // For each label that this label could be...
-            foreach (int label in labelGrid.Grid[x, y].ToList())  // We create a copy of the list to avoid modifying it while iterating over it.
+            foreach (int label in labelGrid.Grid[x, y])  // We create a copy of the list to avoid modifying it while iterating over it.
             {
                 // Assume that this label is not consistent with its neighbors.
                 bool isConsistent = false;
