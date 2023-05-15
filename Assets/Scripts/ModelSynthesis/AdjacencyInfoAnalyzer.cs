@@ -14,13 +14,14 @@ public class ModelTile
 public class AdjacencyInfoAnalyzer : MonoBehaviour
 {
 
+    public SharedData SharedData;
     // Assuming you have an enum for directions like this
-    public enum Direction { North, East, South, West }
+  //  public enum Direction { North, East, South, West }
     public string[] tileTypes;
 
     public ModelTile[] tiles = new ModelTile[16];
 
-    Dictionary<string, Dictionary<Direction, HashSet<string>>> adjecencyDictionary = new Dictionary<string, Dictionary<Direction, HashSet<string>>>();
+    Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjecencyDictionary = new Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>>();
 
     string filePath;
     void awake()
@@ -29,11 +30,12 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
     }
     void Start()
     {
-        AnalyzeAdjacency();
-        WriteToFile(adjecencyDictionary);
+     
+      //  AnalyzeAdjacency();
+     //   WriteToFile(adjecencyDictionary);
     }    
 
-    void AnalyzeAdjacency()
+    public void AnalyzeAdjacency()
     {
         for (int i = 0; i < tiles.Length; i++)
         {
@@ -42,15 +44,15 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
             // Initialize the dictionaries for this tile type
             if (!adjecencyDictionary.ContainsKey(tileType))
             {
-                adjecencyDictionary[tileType] = new Dictionary<Direction, HashSet<string>>();
-                foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
+                adjecencyDictionary[tileType] = new Dictionary<SharedData.Direction, HashSet<string>>();
+                foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
                 {
                     adjecencyDictionary[tileType][dir] = new HashSet<string>();
                 }
             }
 
             // Check each direction
-            foreach (Direction dir in System.Enum.GetValues(typeof(Direction)))
+            foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
             {
                 int adjacentIndex = GetAdjacentIndex(i, dir);
                 if (adjacentIndex >= 0 && adjacentIndex < tiles.Length)
@@ -64,23 +66,23 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
 
     // Given an index in the 1D array and a direction, returns the index of the tile in that direction
-    int GetAdjacentIndex(int index, Direction dir)
+    int GetAdjacentIndex(int index, SharedData.Direction dir)
     {
         int x = index % 4;
         int y = index / 4;
 
         switch (dir)
         {
-            case Direction.North:
+            case SharedData.Direction.North:
                 y++;
                 break;
-            case Direction.East:
+            case SharedData.Direction.East:
                 x++;
                 break;
-            case Direction.South:
+            case SharedData.Direction.South:
                 y--;
                 break;
-            case Direction.West:
+            case SharedData.Direction.West:
                 x--;
                 break;
         }
@@ -90,7 +92,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         return y * 4 + x;
     }
 
-    public void WriteToFile(Dictionary<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> dict)
+    public void WriteToFile(Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> dict)
     {
         // Create file path
         string path = Path.Combine(Application.dataPath, "Resources/temp.txt");
@@ -98,10 +100,10 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         // Use a StringBuilder to create the string to write to the file
         StringBuilder builder = new StringBuilder();
 
-        foreach (KeyValuePair<string, Dictionary<AdjacencyInfoAnalyzer.Direction, HashSet<string>>> outerEntry in dict)
+        foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in dict)
         {
             builder.AppendLine($"{outerEntry.Key}:");
-            foreach (KeyValuePair<AdjacencyInfoAnalyzer.Direction, HashSet<string>> innerEntry in outerEntry.Value)
+            foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 builder.AppendLine($"\t{innerEntry.Key}: {string.Join(", ", innerEntry.Value)}");
             }
@@ -126,10 +128,10 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         }
 
         // Iterate over adjacencyDictionary and set adjacencyMatrix[i, j] = 1 if tile type i can be adjacent to tile type j
-        foreach (KeyValuePair<string, Dictionary<Direction, HashSet<string>>> outerEntry in adjecencyDictionary)
+        foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjecencyDictionary)
         {
             int i = Array.IndexOf(tileTypes, outerEntry.Key);
-            foreach (KeyValuePair<Direction, HashSet<string>> innerEntry in outerEntry.Value)
+            foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 foreach (string adjacentTileType in innerEntry.Value)
                 {

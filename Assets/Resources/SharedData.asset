@@ -13,14 +13,8 @@ MonoBehaviour:
   m_Name: SharedData
   m_EditorClassIdentifier: 
   TileSize: 1
-  AllModelTiles:
-  - gameObject: {fileID: 3346372359054876294, guid: 5ad039dd1d759a64baa27cb6dff2d06c, type: 3}
-    type: Water
-  - gameObject: {fileID: 5527604094314511555, guid: 3d6b330567adbef4183bb2de1935ffa2, type: 3}
-    type: Streethorizontal
-  - gameObject: {fileID: 8099057844817640299, guid: a7fc9a5fce310334a84f8e4e1e34fee2, type: 3}
-    type: Streetcorner
-  - gameObject: {fileID: 8759562423012867741, guid: 1e1dbafd1ad33d94894b919fc33d305d, type: 3}
-    type: Fencehorizontal
-  - gameObject: {fileID: 4518045436840867714, guid: c0ef35912b9fe844e88257678df48a18, type: 3}
-    type: Grass
+  TileTypes:
+  - gameObject: {fileID: 0}
+    type: 
+  - gameObject: {fileID: 0}
+    type: 
