@@ -32,11 +32,13 @@ public class ModelSynthesis2DManager : MonoBehaviour
     }
     void Start()
     {
+        AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         int[,] adjecencyMatrix = AdjacencyInfoAnalyzer.ConstructAdjacencyMatrix();
-        LabelGrid labelGrid = new LabelGrid(8, 8, AdjecencyMatrix);
-        PropagationManager = new PropagationManager(LabelGrid, AdjecencyMatrix);
-        OutputMesh.AssignData();
-        OutputMesh.GenerateMesh();
+       // LabelGrid = new LabelGrid(8, 8, AdjecencyMatrix);
+        // PropagationManager = new PropagationManager(LabelGrid, AdjecencyMatrix);
+        // PropagationManager.PropagateConstraints();
+        // OutputMesh.AssignData();
+        // OutputMesh.GenerateMesh();
     }
 
     private void Initialize()

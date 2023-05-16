@@ -7,5 +7,5 @@ public class SharedData : ScriptableObject
     public int TileSize = 1;
     public ModelTile[] TileTypes;
     public enum Direction { North, East, South, West }
-    [SerializeField] public enum TileType {Water, Fencehorizontal}};
+    [SerializeField] public enum TileType {Water, Grass, Fencehorizontal, Streetcorner, Streethorizontal, Streetvertical};
 }

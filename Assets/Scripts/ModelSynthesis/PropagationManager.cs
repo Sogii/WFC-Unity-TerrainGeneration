@@ -36,6 +36,8 @@ public class PropagationManager
             // Dequeue a label to check.
             (int x, int y) = queue.Dequeue();
 
+            Debug.Log($"Queue count: {queue.Count}, LabelGrid at ({x}, {y}): {labelGrid.GetLabelAt(x, y)}");
+
             // For each label that this label could be...
             foreach (int label in labelGrid.Grid[x, y])  // We create a copy of the list to avoid modifying it while iterating over it.
             {

@@ -9,15 +9,12 @@ using System;
 public class ModelTile
 {
     public GameObject gameObject;
-    public string type;
+    public SharedData.TileType tileType;
 }
 public class AdjacencyInfoAnalyzer : MonoBehaviour
 {
 
     public SharedData SharedData;
-    // Assuming you have an enum for directions like this
-  //  public enum Direction { North, East, South, West }
-    public string[] tileTypes;
 
     public ModelTile[] tiles = new ModelTile[16];
 
@@ -28,18 +25,11 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
     {
         string filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
     }
-    void Start()
-    {
-     
-      //  AnalyzeAdjacency();
-     //   WriteToFile(adjecencyDictionary);
-    }    
-
     public void AnalyzeAdjacency()
     {
         for (int i = 0; i < tiles.Length; i++)
         {
-            string tileType = tiles[i].type;
+            string tileType = tiles[i].tileType.ToString();
 
             // Initialize the dictionaries for this tile type
             if (!adjecencyDictionary.ContainsKey(tileType))
@@ -57,7 +47,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
                 int adjacentIndex = GetAdjacentIndex(i, dir);
                 if (adjacentIndex >= 0 && adjacentIndex < tiles.Length)
                 {
-                    string adjacentTileType = tiles[adjacentIndex].type;
+                    string adjacentTileType = tiles[adjacentIndex].tileType.ToString();
                     adjecencyDictionary[tileType][dir].Add(adjacentTileType);
                 }
             }
@@ -115,7 +105,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
     public int[,] ConstructAdjacencyMatrix()
     {
-        int tileTypeCount = tileTypes.Length;
+        int tileTypeCount = SharedData.TileTypes.Length;
         int[,] adjacencyMatrix = new int[tileTypeCount, tileTypeCount];
 
         // Initialize matrix with zeros
@@ -130,16 +120,29 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         // Iterate over adjacencyDictionary and set adjacencyMatrix[i, j] = 1 if tile type i can be adjacent to tile type j
         foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjecencyDictionary)
         {
-            int i = Array.IndexOf(tileTypes, outerEntry.Key);
+            int i = Array.IndexOf(SharedData.TileTypes, outerEntry.Key);
             foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 foreach (string adjacentTileType in innerEntry.Value)
                 {
-                    int j = Array.IndexOf(tileTypes, adjacentTileType);
+                    int j = Array.IndexOf(SharedData.TileTypes, adjacentTileType);
                     adjacencyMatrix[i, j] = 1;
                 }
             }
         }
+
+        // Debugging statement to print the adjacency matrix
+        Debug.Log("Adjacency Matrix: ");
+        for (int i = 0; i < tileTypeCount; i++)
+        {
+            string row = "";
+            for (int j = 0; j < tileTypeCount; j++)
+            {
+                row += adjacencyMatrix[i, j].ToString() + " ";
+            }
+            Debug.Log(row);
+        }
+
 
         return adjacencyMatrix;
     }
