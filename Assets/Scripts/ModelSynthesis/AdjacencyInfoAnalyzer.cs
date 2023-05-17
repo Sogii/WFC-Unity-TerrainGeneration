@@ -4,13 +4,6 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using System;
-
-[System.Serializable]
-public class ModelTile
-{
-    public GameObject gameObject;
-    public SharedData.TileType tileType;
-}
 public class AdjacencyInfoAnalyzer : MonoBehaviour
 {
 
@@ -132,17 +125,17 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
             }
         }
 
-        // Debugging statement to print the adjacency matrix
-        Debug.Log("Adjacency Matrix: ");
-        for (int i = 0; i < tileTypeCount; i++)
-        {
-            string row = "";
-            for (int j = 0; j < tileTypeCount; j++)
-            {
-                row += adjacencyMatrix[i, j].ToString() + " ";
-            }
-            Debug.Log(row);
-        }
+        // // Debugging statement to print the adjacency matrix
+        // Debug.Log("Adjacency Matrix: ");
+        // for (int i = 0; i < tileTypeCount; i++)
+        // {
+        //     string row = "";
+        //     for (int j = 0; j < tileTypeCount; j++)
+        //     {
+        //         row += adjacencyMatrix[i, j].ToString() + " ";
+        //     }
+        //     Debug.Log(row);
+        // }
 
         return adjacencyMatrix;
     }
