@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SharedData : ScriptableObject
 {
     public int TileSize = 1;
-    public ModelTile[] TileTypes;
+    public ModelTile[] ModelTiles;
     public enum Direction { North, East, South, West }
-    [SerializeField] public enum TileType {Water, Grass, Fencehorizontal, Streetcorner, Streethorizontal, Streetvertical};
+    [SerializeField] public enum TileType {Water, Grass, Fencehorizontal, Streetcorner, Streethorizontal, Streetvertical, None};
 }

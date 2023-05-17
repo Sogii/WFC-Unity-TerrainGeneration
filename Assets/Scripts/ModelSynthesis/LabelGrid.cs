@@ -7,7 +7,7 @@ public class LabelGrid
 {
     public int Width { get; private set; }
     public int Height { get; private set; }
-    public List<int>[,] Grid { get; private set; }
+    public List<SharedData.TileType>[,] Grid { get; private set; }
     private AdjacencyMatrix adjacencyMatrix;
 
     public LabelGrid(int width, int height, AdjacencyMatrix adjacencyMatrix)
@@ -15,7 +15,7 @@ public class LabelGrid
         Width = width;
         Height = height;
         this.adjacencyMatrix = adjacencyMatrix;
-        Grid = new List<int>[width, height];
+        Grid = new List<SharedData.TileType>[width, height];
         InitializeGrid();
     }
 
@@ -25,28 +25,26 @@ public class LabelGrid
         {
             for (int x = 0; x < Width; x++)
             {
-                Grid[x, y] = new List<int>();
+                Grid[x, y] = new List<SharedData.TileType>();
             }
         }
     }
 
-    public void AssignAllPossibleLabels(List<ModelTile> allmodelTiles)
+    public void AssignAllPossibleLabels(List<ModelTile> allModelTiles)
     {
-        int totalLabels = allmodelTiles.Count;
         for (int y = 0; y < Height; y++)
         {
             for (int x = 0; x < Width; x++)
             {
-                for (int label = 0; label < totalLabels; label++)
+                foreach (ModelTile modelTile in allModelTiles)
                 {
-                    Grid[x, y].Add(label);
+                    Grid[x, y].Add(modelTile.tileType);
                 }
             }
         }
     }
 
-
-    public int GetLabelAt(int x, int y)
+   public SharedData.TileType GetLabelAt(int x, int y)
     {
         if (x >= 0 && x < Width && y >= 0 && y < Height)
         {
@@ -55,7 +53,7 @@ public class LabelGrid
         else
         {
             Debug.LogError($"Invalid coordinates: ({x}, {y}). Grid dimensions: {Width}x{Height}.");
-            return -1;
+            return SharedData.TileType.None; // Assuming None is a valid TileType that indicates no tile
         }
     }
 
@@ -67,7 +65,7 @@ public class LabelGrid
             for (int x = 0; x < Width; x++)
             {
                 builder.Append($"({x},{y}): ");
-                foreach (int label in Grid[x, y])
+                foreach (SharedData.TileType label in Grid[x, y])
                 {
                     builder.Append($"{label}, ");
                 }
@@ -77,5 +75,4 @@ public class LabelGrid
 
         Debug.Log(builder.ToString());
     }
-
 }

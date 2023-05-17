@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 
 public class ModelSynthesis2DManager : MonoBehaviour
 {
@@ -35,6 +37,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjecencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
         LabelGrid = new LabelGrid(8, 8, AdjecencyMatrix);
+        LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
         // PropagationManager = new PropagationManager(LabelGrid, AdjecencyMatrix);
         // PropagationManager.PropagateConstraints();

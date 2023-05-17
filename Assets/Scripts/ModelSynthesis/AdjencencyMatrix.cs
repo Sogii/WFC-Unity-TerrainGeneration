@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class AdjacencyMatrix
 {
-    private int[,] matrix;
+    private Dictionary<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>> matrix;
     private SharedData sharedData;
     private Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjacencyDictionary;
 
@@ -16,66 +17,56 @@ public class AdjacencyMatrix
         matrix = ConstructAdjacencyMatrix();
     }
 
-
-    private int[,] ConstructAdjacencyMatrix()
+    private Dictionary<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>> ConstructAdjacencyMatrix()
     {
-        int tileTypeCount = sharedData.TileTypes.Length;
-        int[,] adjacencyMatrix = new int[tileTypeCount, tileTypeCount];
+        var adjacencyMatrix = new Dictionary<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>>();
 
-        // Initialize matrix with zeros
-        for (int i = 0; i < tileTypeCount; i++)
+        foreach (ModelTile modelTile in sharedData.ModelTiles)
         {
-            for (int j = 0; j < tileTypeCount; j++)
-            {
-                adjacencyMatrix[i, j] = 0;
-            }
+            adjacencyMatrix[modelTile] = new Dictionary<ModelTile, List<SharedData.Direction>>();
         }
 
-        // Populate adjacencyMatrix based on sharedData's adjacencyDictionary
         foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjacencyDictionary)
         {
-            int i = Array.FindIndex(sharedData.TileTypes, tile => tile.tileType.ToString() == outerEntry.Key);
+            ModelTile i = sharedData.ModelTiles.First(tile => tile.tileType.ToString() == outerEntry.Key);
             foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 foreach (string adjacentTileType in innerEntry.Value)
                 {
-                    int j = Array.FindIndex(sharedData.TileTypes, tile => tile.tileType.ToString() == adjacentTileType);
-                    if (i >= 0 && j >= 0)
-                        adjacencyMatrix[i, j] = 1;
+                    ModelTile j = sharedData.ModelTiles.First(tile => tile.tileType.ToString() == adjacentTileType);
+
+                    if (!adjacencyMatrix[i].ContainsKey(j))
+                    {
+                        adjacencyMatrix[i][j] = new List<SharedData.Direction>();
+                    }
+                    adjacencyMatrix[i][j].Add(innerEntry.Key);
                 }
             }
         }
 
-        // Debugging statement to print the adjacency matrix
-       // LogAdjacencyGrid(tileTypeCount, adjacencyMatrix);
+        LogAdjacencyGrid(adjacencyMatrix);
 
         return adjacencyMatrix;
     }
 
-    private static void LogAdjacencyGrid(int tileTypeCount, int[,] adjacencyMatrix)
+    private static void LogAdjacencyGrid(Dictionary<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>> adjacencyMatrix)
     {
         Debug.Log("Adjacency Matrix: ");
-        for (int i = 0; i < tileTypeCount; i++)
+        foreach (KeyValuePair<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>> outerEntry in adjacencyMatrix)
         {
-            string row = "";
-            for (int j = 0; j < tileTypeCount; j++)
+            string row = outerEntry.Key.tileType + ": ";
+            foreach (KeyValuePair<ModelTile, List<SharedData.Direction>> innerEntry in outerEntry.Value)
             {
-                row += adjacencyMatrix[i, j].ToString() + " ";
+                row += innerEntry.Key.tileType + " (" + string.Join(", ", innerEntry.Value) + "), ";
             }
             Debug.Log(row);
+
         }
     }
 
-    public bool CheckAdjacency(int label1, int label2)
+    public bool CheckAdjacency(ModelTile tileType1, ModelTile tileType2, SharedData.Direction direction)
     {
-        // Verify the labels are within bounds
-        if (label1 < 0 || label1 >= matrix.GetLength(0) || label2 < 0 || label2 >= matrix.GetLength(1))
-        {
-            return false;
-        }
-
-        return matrix[label1, label2] == 1;
+        // Check if the tile types are valid and the specified direction is possible
+        return matrix.ContainsKey(tileType1) && matrix[tileType1].ContainsKey(tileType2) && matrix[tileType1][tileType2].Contains(direction);
     }
 }
-
-

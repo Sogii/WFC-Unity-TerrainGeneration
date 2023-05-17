@@ -28,8 +28,8 @@ public class OutputMesh : MonoBehaviour
         {
             for (int y = 0; y < gridHeight; y++)
             {
-                int label = labelGrid.GetLabelAt(x, y);
-                Debug.Log(label);
+              //  int label = labelGrid.GetLabelAt(x, y);
+               // Debug.Log(label);
             //     GameObject tilePrefab = SharedData.TileTypes[label].gameObject;
             //     Vector3 worldPosition = new Vector3(x * tileSize, 0, y * tileSize);
             //     GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);

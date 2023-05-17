@@ -57,12 +57,12 @@ public class PropagationManager
                         foreach (int neighborLabel in labelGrid.Grid[nx, ny])
                         {
                             // If this label and the neighbor label are allowed to be neighbors in this direction...
-                            if (adjacencyMatrix.CheckAdjacency(label, neighborLabel))
-                            {
-                                // Then this label is consistent with its neighbors.
-                                isConsistent = true;
-                                break;
-                            }
+                            // if (adjacencyMatrix.CheckAdjacency(label, neighborLabel))
+                            // {
+                            //     // Then this label is consistent with its neighbors.
+                            //     isConsistent = true;
+                            //     break;
+                            // }
                         }
                     }
 
@@ -74,7 +74,7 @@ public class PropagationManager
                 if (!isConsistent)
                 {
                     // Remove this label from the possibilities for this cell.
-                    labelGrid.Grid[x, y].Remove(label);
+                 //   labelGrid.Grid[x, y].Remove(label);
 
                     // Add all neighbors to the queue to be checked, since they might be affected by this change.
                     foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))

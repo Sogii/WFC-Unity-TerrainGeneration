@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: SharedData
   m_EditorClassIdentifier: 
   TileSize: 1
-  TileTypes:
-  - gameObject: {fileID: 8759562423012867741, guid: 1e1dbafd1ad33d94894b919fc33d305d, type: 3}
-    tileType: 2
+  ModelTiles:
+  - gameObject: {fileID: 3346372359054876294, guid: 5ad039dd1d759a64baa27cb6dff2d06c, type: 3}
+    tileType: 0
   - gameObject: {fileID: 4518045436840867714, guid: c0ef35912b9fe844e88257678df48a18, type: 3}
     tileType: 1
+  - gameObject: {fileID: 8759562423012867741, guid: 1e1dbafd1ad33d94894b919fc33d305d, type: 3}
+    tileType: 2
   - gameObject: {fileID: 8099057844817640299, guid: a7fc9a5fce310334a84f8e4e1e34fee2, type: 3}
     tileType: 3
   - gameObject: {fileID: 5527604094314511555, guid: 3d6b330567adbef4183bb2de1935ffa2, type: 3}
     tileType: 4
-  - gameObject: {fileID: 3346372359054876294, guid: 5ad039dd1d759a64baa27cb6dff2d06c, type: 3}
-    tileType: 0
   - gameObject: {fileID: 8812440503162887277, guid: 6d83ce53de20a3a47b7ce71a21abaf3d, type: 3}
     tileType: 5
+  - gameObject: {fileID: 0}
+    tileType: 6
