@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using static SharedData;
 
 public class PropagationManager
 {
     private LabelGrid labelGrid;
     private AdjacencyMatrix adjacencyMatrix;
-    public SharedData sharedData;
 
     // Assuming that these are set up somewhere...
     public PropagationManager(LabelGrid labelGrid, AdjacencyMatrix adjacencyMatrix)
@@ -18,10 +16,10 @@ public class PropagationManager
 
     public void PropagateConstraints()
     {
-        // Create a queue to hold all labels that need to be checked.
+        // Create a queue to hold all tiles that need to be checked.
         Queue<(int x, int y)> queue = new Queue<(int x, int y)>();
 
-        // Initially, every label needs to be checked, so add them all to the queue.
+        // Initially, every tile needs to be checked, so add them all to the queue.
         for (int y = 0; y < labelGrid.Height; y++)
         {
             for (int x = 0; x < labelGrid.Width; x++)
@@ -30,18 +28,18 @@ public class PropagationManager
             }
         }
 
-        // While there are still labels to check...
+        // While there are still tiles to check...
         while (queue.Count > 0)
         {
-            // Dequeue a label to check.
+            // Dequeue a tile to check.
             (int x, int y) = queue.Dequeue();
 
-            Debug.Log($"Queue count: {queue.Count}, LabelGrid at ({x}, {y}): {labelGrid.GetLabelAt(x, y)}");
+            Debug.Log($"Queue count: {queue.Count}, LabelGrid at ({x}, {y}): {labelGrid.GetLabelsAt(x, y)}");
 
-            // For each label that this label could be...
-            foreach (int label in labelGrid.Grid[x, y])  // We create a copy of the list to avoid modifying it while iterating over it.
+            // For each tile type that this tile could be...
+            foreach (ModelTile tile in new List<ModelTile>(labelGrid.GetLabelsAt(x, y)))  // We create a copy of the list to avoid modifying it while iterating over it.
             {
-                // Assume that this label is not consistent with its neighbors.
+                // Assume that this tile is not consistent with its neighbors.
                 bool isConsistent = false;
 
                 // For each direction...
@@ -53,28 +51,28 @@ public class PropagationManager
                     // If the neighbor is within the grid...
                     if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
                     {
-                        // For each label that the neighbor could be...
-                        foreach (int neighborLabel in labelGrid.Grid[nx, ny])
+                        // For each tile type that the neighbor could be...
+                        foreach (ModelTile neighborTile in labelGrid.GetLabelsAt(nx, ny))
                         {
-                            // If this label and the neighbor label are allowed to be neighbors in this direction...
-                            // if (adjacencyMatrix.CheckAdjacency(label, neighborLabel))
-                            // {
-                            //     // Then this label is consistent with its neighbors.
-                            //     isConsistent = true;
-                            //     break;
-                            // }
+                            // If this tile type and the neighbor tile type are allowed to be neighbors in this direction...
+                            if (adjacencyMatrix.CheckAdjacency(tile, neighborTile, direction))
+                            {
+                                // Then this tile type is consistent with its neighbors.
+                                isConsistent = true;
+                                break;
+                            }
                         }
                     }
 
-                    // If we've found that this label is consistent, we can stop checking.
+                    // If we've found that this tile type is consistent, we can stop checking.
                     if (isConsistent) break;
                 }
 
-                // If this label is not consistent with its neighbors...
+                // If this tile type is not consistent with its neighbors...
                 if (!isConsistent)
                 {
-                    // Remove this label from the possibilities for this cell.
-                 //   labelGrid.Grid[x, y].Remove(label);
+                    // Remove this tile type from the possibilities for this cell.
+                    labelGrid.RemoveLabelAt(x, y, tile);
 
                     // Add all neighbors to the queue to be checked, since they might be affected by this change.
                     foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
@@ -94,17 +92,16 @@ public class PropagationManager
     {
         switch (direction)
         {
-            case Direction.North:
+            case SharedData.Direction.North:
                 return (x, y - 1);
-            case Direction.South:
+            case SharedData.Direction.South:
                 return (x, y + 1);
-            case Direction.East:
+            case SharedData.Direction.East:
                 return (x + 1, y);
-            case Direction.West:
+            case SharedData.Direction.West:
                 return (x - 1, y);
             default:
                 return (x, y);
         }
     }
-    
 }

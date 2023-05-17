@@ -169,7 +169,7 @@ MonoBehaviour:
   - gameObject: {fileID: 1762737920425471015}
     tileType: 4
   - gameObject: {fileID: 1831751597726933123}
-    tileType: 0
+    tileType: 4
   - gameObject: {fileID: 5453332150603132504}
     tileType: 5
   - gameObject: {fileID: 80119011}
@@ -647,11 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf813492e1858a45bab8b2cad41dc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  SharedData: {fileID: 0}
 --- !u!4 &1677351332
 Transform:
   m_ObjectHideFlags: 0
