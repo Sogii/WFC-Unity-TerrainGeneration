@@ -8,11 +8,8 @@ public class ModelSynthesis2DManager : MonoBehaviour
 {
     public static ModelSynthesis2DManager Instance { get; private set; }
     public int TileSize;
-    //  public int outputWidth;
-    //  public int outputHeight;
 
-    // private InputMesh inputMesh;
-    public AdjacencyMatrix AdjecencyMatrix;
+    public AdjacencyMatrix AdjacencyMatrix;
     public AdjacencyInfoAnalyzer AdjacencyInfoAnalyzer;
     public LabelGrid LabelGrid;
     public PropagationManager PropagationManager;
@@ -35,34 +32,33 @@ public class ModelSynthesis2DManager : MonoBehaviour
     void Start()
     {
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
-        AdjecencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(8, 8, AdjecencyMatrix);
+        AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
+        LabelGrid = new LabelGrid(8, 8, AdjacencyMatrix);
         LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
-        // PropagationManager = new PropagationManager(LabelGrid, AdjecencyMatrix);
-        // PropagationManager.PropagateConstraints();
-        // OutputMesh.AssignData();
-        // OutputMesh.GenerateMesh();
+        PropagationManager = new PropagationManager(LabelGrid, AdjacencyMatrix);
+        PropagationManager.PropagateConstraints();
+        OutputMesh.AssignData();
+        OutputMesh.GenerateMesh();
     }
 
     private void Initialize()
     {
-
-
+        // You can add initialization code here
     }
 
     private void RunModelSynthesis()
     {
-
+        // You can add model synthesis code here
     }
 
     private void PropagateConstraints()
     {
-
+        // You can add constraint propagation code here
     }
 
     private void DisplayOutputMesh()
     {
-        //  outputMesh.Display();
+        // outputMesh.Display();
     }
 }
