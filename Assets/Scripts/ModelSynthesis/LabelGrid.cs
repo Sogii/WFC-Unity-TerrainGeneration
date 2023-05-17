@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class LabelGrid
 {
@@ -57,4 +58,24 @@ public class LabelGrid
             return -1;
         }
     }
+
+    public void PrintGridLabels()
+    {
+        StringBuilder builder = new StringBuilder();
+        for (int y = 0; y < Height; y++)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                builder.Append($"({x},{y}): ");
+                foreach (int label in Grid[x, y])
+                {
+                    builder.Append($"{label}, ");
+                }
+                builder.AppendLine();
+            }
+        }
+
+        Debug.Log(builder.ToString());
+    }
+
 }

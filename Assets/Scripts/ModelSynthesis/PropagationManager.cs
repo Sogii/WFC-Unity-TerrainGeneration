@@ -57,7 +57,7 @@ public class PropagationManager
                         foreach (int neighborLabel in labelGrid.Grid[nx, ny])
                         {
                             // If this label and the neighbor label are allowed to be neighbors in this direction...
-                            if (adjacencyMatrix.CheckAdjacency(label, neighborLabel, direction))
+                            if (adjacencyMatrix.CheckAdjacency(label, neighborLabel))
                             {
                                 // Then this label is consistent with its neighbors.
                                 isConsistent = true;

@@ -1,31 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AdjacencyMatrix
 {
-    public bool[,] Matrix { get; private set; }
-    public SharedData sharedData;
+    private int[,] matrix;
+    private SharedData sharedData;
+    private Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjacencyDictionary;
 
-    public AdjacencyMatrix(List<Texture2D> tiles)
+    public AdjacencyMatrix(Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjacencyDictionary, SharedData sharedData)
     {
-        int numTiles = tiles.Count;
-        Matrix = new bool[numTiles, numTiles];
+        this.sharedData = sharedData;
+        this.adjacencyDictionary = adjacencyDictionary;
+        matrix = ConstructAdjacencyMatrix();
+    }
 
-        for (int i = 0; i < numTiles; i++)
+
+    private int[,] ConstructAdjacencyMatrix()
+    {
+        int tileTypeCount = sharedData.TileTypes.Length;
+        int[,] adjacencyMatrix = new int[tileTypeCount, tileTypeCount];
+
+        // Initialize matrix with zeros
+        for (int i = 0; i < tileTypeCount; i++)
         {
-            for (int j = 0; j < numTiles; j++)
+            for (int j = 0; j < tileTypeCount; j++)
             {
-             //   Matrix[i, j] = CheckAdjacency(tiles[i], tiles[j]);
+                adjacencyMatrix[i, j] = 0;
             }
+        }
+
+        // Populate adjacencyMatrix based on sharedData's adjacencyDictionary
+        foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjacencyDictionary)
+        {
+            int i = Array.FindIndex(sharedData.TileTypes, tile => tile.tileType.ToString() == outerEntry.Key);
+            foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
+            {
+                foreach (string adjacentTileType in innerEntry.Value)
+                {
+                    int j = Array.FindIndex(sharedData.TileTypes, tile => tile.tileType.ToString() == adjacentTileType);
+                    if (i >= 0 && j >= 0)
+                        adjacencyMatrix[i, j] = 1;
+                }
+            }
+        }
+
+        // Debugging statement to print the adjacency matrix
+       // LogAdjacencyGrid(tileTypeCount, adjacencyMatrix);
+
+        return adjacencyMatrix;
+    }
+
+    private static void LogAdjacencyGrid(int tileTypeCount, int[,] adjacencyMatrix)
+    {
+        Debug.Log("Adjacency Matrix: ");
+        for (int i = 0; i < tileTypeCount; i++)
+        {
+            string row = "";
+            for (int j = 0; j < tileTypeCount; j++)
+            {
+                row += adjacencyMatrix[i, j].ToString() + " ";
+            }
+            Debug.Log(row);
         }
     }
 
-    public bool CheckAdjacency(int labelA, int labelB, SharedData.Direction direction)
+    public bool CheckAdjacency(int label1, int label2)
     {
-        // Implement your adjacency check logic here.
-        // This method should return true if tileA and tileB can be adjacent, false otherwise.
+        // Verify the labels are within bounds
+        if (label1 < 0 || label1 >= matrix.GetLength(0) || label2 < 0 || label2 >= matrix.GetLength(1))
+        {
+            return false;
+        }
 
-        return false;
+        return matrix[label1, label2] == 1;
     }
 }
+
+

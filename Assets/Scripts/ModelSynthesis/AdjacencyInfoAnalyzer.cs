@@ -14,6 +14,12 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
     Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjecencyDictionary = new Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>>();
 
     string filePath;
+
+    public Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> GetAdjacencyDictionary()
+    {
+        return adjecencyDictionary;
+    }
+
     void awake()
     {
         string filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
@@ -94,49 +100,5 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
         // Write to the file
         File.WriteAllText(path, builder.ToString());
-    }
-
-    public int[,] ConstructAdjacencyMatrix()
-    {
-        int tileTypeCount = SharedData.TileTypes.Length;
-        int[,] adjacencyMatrix = new int[tileTypeCount, tileTypeCount];
-
-        // Initialize matrix with zeros
-        for (int i = 0; i < tileTypeCount; i++)
-        {
-            for (int j = 0; j < tileTypeCount; j++)
-            {
-                adjacencyMatrix[i, j] = 0;
-            }
-        }
-
-        // Iterate over adjacencyDictionary and set adjacencyMatrix[i, j] = 1 if tile type i can be adjacent to tile type j
-        foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjecencyDictionary)
-        {
-            int i = Array.FindIndex(SharedData.TileTypes, tile => tile.tileType.ToString() == outerEntry.Key);
-            foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
-            {
-                foreach (string adjacentTileType in innerEntry.Value)
-                {
-                    int j = Array.FindIndex(SharedData.TileTypes, tile => tile.tileType.ToString() == adjacentTileType);
-                    if (i >= 0 && j >= 0)
-                        adjacencyMatrix[i, j] = 1;
-                }
-            }
-        }
-
-        // // Debugging statement to print the adjacency matrix
-        // Debug.Log("Adjacency Matrix: ");
-        // for (int i = 0; i < tileTypeCount; i++)
-        // {
-        //     string row = "";
-        //     for (int j = 0; j < tileTypeCount; j++)
-        //     {
-        //         row += adjacencyMatrix[i, j].ToString() + " ";
-        //     }
-        //     Debug.Log(row);
-        // }
-
-        return adjacencyMatrix;
     }
 }
