@@ -120,13 +120,14 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         // Iterate over adjacencyDictionary and set adjacencyMatrix[i, j] = 1 if tile type i can be adjacent to tile type j
         foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjecencyDictionary)
         {
-            int i = Array.IndexOf(SharedData.TileTypes, outerEntry.Key);
+            int i = Array.FindIndex(SharedData.TileTypes, tile => tile.tileType.ToString() == outerEntry.Key);
             foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 foreach (string adjacentTileType in innerEntry.Value)
                 {
-                    int j = Array.IndexOf(SharedData.TileTypes, adjacentTileType);
-                    adjacencyMatrix[i, j] = 1;
+                    int j = Array.FindIndex(SharedData.TileTypes, tile => tile.tileType.ToString() == adjacentTileType);
+                    if (i >= 0 && j >= 0)
+                        adjacencyMatrix[i, j] = 1;
                 }
             }
         }
@@ -143,8 +144,6 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
             Debug.Log(row);
         }
 
-
         return adjacencyMatrix;
     }
-
 }
