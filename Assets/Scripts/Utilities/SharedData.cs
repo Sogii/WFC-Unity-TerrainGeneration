@@ -9,3 +9,4 @@ public class SharedData : ScriptableObject
     public enum Direction { North, East, South, West }
     [SerializeField] public enum TileType {Water, Grass, Fencehorizontal, Streetcorner, Streethorizontal, Streetvertical, None};
 }
+   

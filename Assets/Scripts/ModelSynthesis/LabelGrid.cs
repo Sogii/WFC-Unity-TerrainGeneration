@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using System;
 
 public class LabelGrid
 {
@@ -36,10 +37,24 @@ public class LabelGrid
         {
             for (int x = 0; x < Width; x++)
             {
-                Grid[x, y] = new List<ModelTile>(allModelTiles);
+                if (x == Width / 2 && y == Height / 2)
+                {
+                    // If this is the center cell, assign a single, random label
+                    ModelTile randomTile = allModelTiles[UnityEngine.Random.Range(0, allModelTiles.Count)];
+                    Grid[x, y].Add(randomTile);
+                }
+                else
+                {
+                    // Otherwise, assign all possible labels
+                    foreach (ModelTile modelTile in allModelTiles)
+                    {
+                        Grid[x, y].Add(modelTile);
+                    }
+                }
             }
         }
     }
+
 
     public List<ModelTile> GetLabelsAt(int x, int y)
     {
@@ -53,6 +68,24 @@ public class LabelGrid
             return new List<ModelTile>(); // Returning an empty list to indicate no valid tiles
         }
     }
+
+    public void SetLabelsAt(int x, int y, List<ModelTile> labels)
+{
+    if (labels == null || labels.Count == 0)
+    {
+        throw new ArgumentException("labels must not be null or empty");
+    }
+
+    // Check if the coordinates are within the grid boundaries
+    if (x >= 0 && x < Width && y >= 0 && y < Height)
+    {
+        Grid[x, y] = labels;
+    }
+    else
+    {
+        throw new ArgumentOutOfRangeException("Coordinates are outside of the grid boundaries");
+    }
+}
 
 
     public void PrintGridLabels()
@@ -82,6 +115,7 @@ public class LabelGrid
             if (Grid[x, y].Contains(modelTileToRemove))
             {
                 // If it does, remove it
+                //Debug.Log($"Removing {modelTileToRemove.tileType} at ({x},{y}).");
                 Grid[x, y].Remove(modelTileToRemove);
             }
             else

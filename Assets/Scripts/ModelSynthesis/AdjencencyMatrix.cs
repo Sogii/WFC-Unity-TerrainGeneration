@@ -49,6 +49,12 @@ public class AdjacencyMatrix
         return adjacencyMatrix;
     }
 
+    public void PublicLogAdjacencyGrid()
+    {
+        Debug.Log("Logging adjacency grid");
+        LogAdjacencyGrid(matrix);
+    }
+
     private static void LogAdjacencyGrid(Dictionary<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>> adjacencyMatrix)
     {
         Debug.Log("Adjacency Matrix: ");
@@ -66,7 +72,10 @@ public class AdjacencyMatrix
 
     public bool CheckAdjacency(ModelTile tileType1, ModelTile tileType2, SharedData.Direction direction)
     {
+       // Debug.Log($"Checking adjacency between {tileType1.tileType} and {tileType2.tileType} in {direction} direction");
         // Check if the tile types are valid and the specified direction is possible
-        return matrix.ContainsKey(tileType1) && matrix[tileType1].ContainsKey(tileType2) && matrix[tileType1][tileType2].Contains(direction);
+        bool result = matrix.ContainsKey(tileType1) && matrix[tileType1].ContainsKey(tileType2) && matrix[tileType1][tileType2].Contains(direction);
+     //   Debug.Log(result ? "The tiles can be adjacent" : "The tiles can't be adjacent");
+        return result;
     }
 }
