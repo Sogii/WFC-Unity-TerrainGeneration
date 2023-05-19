@@ -37,20 +37,13 @@ public class LabelGrid
         {
             for (int x = 0; x < Width; x++)
             {
-                if (x == Width / 2 && y == Height / 2)
+
+                // Otherwise, assign all possible labels
+                foreach (ModelTile modelTile in allModelTiles)
                 {
-                    // If this is the center cell, assign a single, random label
-                    ModelTile randomTile = allModelTiles[UnityEngine.Random.Range(0, allModelTiles.Count)];
-                    Grid[x, y].Add(randomTile);
+                    Grid[x, y].Add(modelTile);
                 }
-                else
-                {
-                    // Otherwise, assign all possible labels
-                    foreach (ModelTile modelTile in allModelTiles)
-                    {
-                        Grid[x, y].Add(modelTile);
-                    }
-                }
+
             }
         }
     }
@@ -70,22 +63,23 @@ public class LabelGrid
     }
 
     public void SetLabelsAt(int x, int y, List<ModelTile> labels)
-{
-    if (labels == null || labels.Count == 0)
     {
-        throw new ArgumentException("labels must not be null or empty");
-    }
+        if (labels == null || labels.Count == 0)
+        {
+            throw new ArgumentException("labels must not be null or empty");
+        }
 
-    // Check if the coordinates are within the grid boundaries
-    if (x >= 0 && x < Width && y >= 0 && y < Height)
-    {
-        Grid[x, y] = labels;
+        // Check if the coordinates are within the grid boundaries
+        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        {
+            Debug.Log($"Setting labels at ({x},{y}) to {labels[0].tileType}.");
+            Grid[x, y] = labels;
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException("Coordinates are outside of the grid boundaries");
+        }
     }
-    else
-    {
-        throw new ArgumentOutOfRangeException("Coordinates are outside of the grid boundaries");
-    }
-}
 
 
     public void PrintGridLabels()

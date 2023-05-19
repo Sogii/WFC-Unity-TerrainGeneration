@@ -31,6 +31,9 @@ public class PropagationManager
         while (queue.Count > 0)
         {
             (int x, int y) = queue.Dequeue();
+            if (labelGrid.GetLabelsAt(x, y).Count == 1)
+                continue;
+
 
             foreach (ModelTile tile in new List<ModelTile>(labelGrid.GetLabelsAt(x, y)))
             {
@@ -90,6 +93,7 @@ public class PropagationManager
         ModelTile chosenLabel = possibleLabels[UnityEngine.Random.Range(0, possibleLabels.Count)];
 
         labelGrid.SetLabelsAt(x, y, new List<ModelTile> { chosenLabel });
+        Debug.Log($"Collapsed ({x}, {y}) to {chosenLabel.tileType}.");
 
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
@@ -97,7 +101,10 @@ public class PropagationManager
 
             if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
             {
-                queue.Enqueue((nx, ny));
+                if (labelGrid.GetLabelsAt(nx, ny).Count > 1)
+                {
+                    queue.Enqueue((nx, ny));
+                }
             }
         }
     }
