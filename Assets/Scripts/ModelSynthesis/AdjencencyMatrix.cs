@@ -44,7 +44,7 @@ public class AdjacencyMatrix
             }
         }
 
-       // LogAdjacencyGrid(adjacencyMatrix);
+       LogAdjacencyGrid(adjacencyMatrix);
 
         return adjacencyMatrix;
     }

@@ -41,8 +41,8 @@ public class LabelGrid
                 {
                     // If this is the center cell, assign two random labels
 
-                    Grid[x,y].Add(allModelTiles[0]);
                     Grid[x,y].Add(allModelTiles[1]);
+                    Grid[x,y].Add(allModelTiles[2]);
                 }
                 // Otherwise, assign all possible labels
                 else

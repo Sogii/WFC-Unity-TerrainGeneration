@@ -74,8 +74,6 @@ public class PropagationManager
 
             if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
             {
-
-
                 Debug.Log($"Enqueuing ({nx}, {ny}).");
                 queue.Enqueue((nx, ny, x, y));
                 // if (labelGrid.GetLabelsAt(nx, ny).Count > 1)
@@ -109,35 +107,40 @@ public class PropagationManager
 
     public void CheckTileConsistancyWithOriginTile(int x, int y, int originX, int originY, ModelTile tile)
     {
-        //Check if the ModelTile of the enqueued tile is consistant with the origin tile (tile that caused this tile to be eunqued) and figure out the direction in which they need to be checked, remove the lable if they are not consistant
-        if (x == originX && y == originY + 1)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.North))
+        Debug.Log("innitiation CheckTileConsistancyWithOriginTile");
+        List<ModelTile> copiedTiles = new List<ModelTile>(labelGrid.GetLabelsAt(x, y));
+        // foreach(ModelTile modelTile in copiedTiles) 
+        // {
+            //Check if the ModelTile of the enqueued tile is consistant with the origin tile (tile that caused this tile to be enqued) and figure out the direction in which they need to be checked, remove the lable if they are not consistant
+            if (x == originX && y == originY - 1)
             {
-                labelGrid.RemoveLabelAt(x, y, tile);
+                if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.North))
+                {
+                    labelGrid.RemoveLabelAt(x, y, tile);
+                }
             }
-        }
-        else if (x == originX + 1 && y == originY)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.East))
+            else if (x == originX - 1 && y == originY)
             {
-                labelGrid.RemoveLabelAt(x, y, tile);
+                if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.East))
+                {
+                    labelGrid.RemoveLabelAt(x, y, tile);
+                }
             }
-        }
-        else if (x == originX && y == originY - 1)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.South))
+            else if (x == originX && y == originY + 1)
             {
-                labelGrid.RemoveLabelAt(x, y, tile);
+                if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.South))
+                {
+                    labelGrid.RemoveLabelAt(x, y, tile);
+                }
             }
-        }
-        else if (x == originX - 1 && y == originY)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.West))
+            else if (x == originX + 1 && y == originY)
             {
-                labelGrid.RemoveLabelAt(x, y, tile);
+                if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.West))
+                {
+                    labelGrid.RemoveLabelAt(x, y, tile);
+                }
             }
-        }
+        // }
     }
 
     public void EnqueueNeighbours(int x, int y)
