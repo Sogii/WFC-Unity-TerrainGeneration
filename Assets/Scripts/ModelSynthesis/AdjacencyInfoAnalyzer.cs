@@ -51,6 +51,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
                 }
             }
         }
+        WriteToFile(adjecencyDictionary);
     }
 
 

@@ -42,8 +42,8 @@ public class ModelSynthesis2DManager : MonoBehaviour
         // Trigger the WFC algorithm
         RunWFCAlgorithm();
 
-        //  OutputMesh.AssignData();
-        // OutputMesh.GenerateMesh();
+         OutputMesh.AssignData();
+        OutputMesh.GenerateMesh();
         //LabelGrid.PrintGridLabels();
     }
 
@@ -54,7 +54,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             // Find the cell with the least number of possible labels
             Vector2Int cellWithLeastLabels = FindCellWithLeastLabels();
-            Debug.Log($"Cell with least labels: ({cellWithLeastLabels.x}, {cellWithLeastLabels.y})");
+           
 
             // Collapse that cell
             PropagationManager.CollapseCell(cellWithLeastLabels.x, cellWithLeastLabels.y);
@@ -98,7 +98,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             for (int y = 0; y < LabelGrid.Height; y++)
             {
-                List<ModelTile> labels = LabelGrid.GetLabelsAt(x, y);
+                List<ModelTile> labels = LabelGrid.GetLabelsAt(x, y);            
                 if (labels.Count > 1 && labels.Count < leastLabels)
                 {
                     leastLabels = labels.Count;
@@ -111,12 +111,14 @@ public class ModelSynthesis2DManager : MonoBehaviour
         // If we found a cell with the least labels, return it.
         if (foundCell)
         {
+            Debug.Log("Found cell with least labels: " + cellWithLeastLabels);
             return cellWithLeastLabels;
         }
 
         // If no cell with more than 1 label was found, return a random cell.
         int randomX = UnityEngine.Random.Range(0, LabelGrid.Width);
         int randomY = UnityEngine.Random.Range(0, LabelGrid.Height);
+        Debug.Log("No cell with more than 1 label was found. Returning random cell: " + new Vector2Int(randomX, randomY));
         return new Vector2Int(randomX, randomY);
     }
 

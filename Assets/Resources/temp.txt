@@ -1,30 +1,20 @@
 Water:
-	North: Path corner, Path horizontal
-	East: Water
-	South: 
+	North: Water, Streetcorner, Streethorizontal
+	East: Water, Streetcorner, Streetvertical
+	South: Water, Streethorizontal
+	West: Water, Streetvertical
+Streetcorner:
+	North: Streetvertical
+	East: Streethorizontal
+	South: Water
 	West: Water
-Path corner:
-	North: Path vertical
-	East: Path horizontal
+Streethorizontal:
+	North: Water
+	East: Streethorizontal
 	South: Water
-	West: 
-Path horizontal:
-	North: Fence horizontal
-	East: Path horizontal
-	South: Water
-	West: Path corner, Path horizontal
-Path vertical:
-	North: Path vertical
-	East: Fence horizontal, Grass
-	South: Path corner, Path vertical
-	West: 
-Fence horizontal:
-	North: Grass
-	East: Fence horizontal
-	South: Path horizontal
-	West: Path vertical, Fence horizontal
-Grass:
-	North: 
-	East: Grass
-	South: Fence horizontal
-	West: Path vertical, Grass
+	West: Streetcorner, Streethorizontal
+Streetvertical:
+	North: Streetvertical
+	East: Water
+	South: Streetcorner, Streetvertical
+	West: Water

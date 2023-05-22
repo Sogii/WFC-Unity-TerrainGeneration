@@ -37,13 +37,21 @@ public class LabelGrid
         {
             for (int x = 0; x < Width; x++)
             {
-
-                // Otherwise, assign all possible labels
-                foreach (ModelTile modelTile in allModelTiles)
+                if (x == Width / 2 && y == Height / 2)
                 {
-                    Grid[x, y].Add(modelTile);
-                }
+                    // If this is the center cell, assign two random labels
 
+                    Grid[x,y].Add(allModelTiles[0]);
+                    Grid[x,y].Add(allModelTiles[1]);
+                }
+                // Otherwise, assign all possible labels
+                else
+                {
+                    foreach (ModelTile modelTile in allModelTiles)
+                    {
+                        Grid[x, y].Add(modelTile);
+                    }
+                }
             }
         }
     }
@@ -109,8 +117,9 @@ public class LabelGrid
             if (Grid[x, y].Contains(modelTileToRemove))
             {
                 // If it does, remove it
-                //Debug.Log($"Removing {modelTileToRemove.tileType} at ({x},{y}).");
+                Debug.Log($"Removing {modelTileToRemove.tileType} at ({x},{y}).");
                 Grid[x, y].Remove(modelTileToRemove);
+                PrintGridLabels();
             }
             else
             {
