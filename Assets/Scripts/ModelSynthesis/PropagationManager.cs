@@ -107,15 +107,17 @@ public class PropagationManager
 
     public void CheckTileConsistancyWithOriginTile(int x, int y, int originX, int originY, ModelTile tile)
     {
-        Debug.Log("innitiation CheckTileConsistancyWithOriginTile");
+        Debug.Log("innitiation CheckTileConsistancyWithOriginTile at: " + x + ", " + y + " with origin: " + originX + ", " + originY + " and tile: " + tile.tileType);
         List<ModelTile> copiedTiles = new List<ModelTile>(labelGrid.GetLabelsAt(x, y));
-        // foreach(ModelTile modelTile in copiedTiles) 
-        // {
-            //Check if the ModelTile of the enqueued tile is consistant with the origin tile (tile that caused this tile to be enqued) and figure out the direction in which they need to be checked, remove the lable if they are not consistant
+        //Check if the ModelTile of the enqueued tile is consistant with the origin tile (tile that caused this tile to be enqued) and figure out the direction in which they need to be checked, remove the lable if they are not consistant
+        if (!(x >= 0 && x < labelGrid.Width && y >= 0 && y < labelGrid.Height)) return;
+        if (!(originX >= 0 && originX < labelGrid.Width && originY >= 0 && originY < labelGrid.Height)) return;
+        
             if (x == originX && y == originY - 1)
             {
                 if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.North))
                 {
+                    Debug.Log("Removing label: " + tile.tileType + " at: " + x + ", " + y + " because it is not consistant with the origin tile: " + labelGrid.GetLabelsAt(originX, originY)[0].tileType + " at: " + originX + ", " + originY + " in direction: North");
                     labelGrid.RemoveLabelAt(x, y, tile);
                 }
             }
@@ -123,6 +125,7 @@ public class PropagationManager
             {
                 if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.East))
                 {
+                    Debug.Log("Removing label: " + tile.tileType + " at: " + x + ", " + y + " because it is not consistant with the origin tile: " + labelGrid.GetLabelsAt(originX, originY)[0].tileType + " at: " + originX + ", " + originY + " in direction: East");
                     labelGrid.RemoveLabelAt(x, y, tile);
                 }
             }
@@ -130,6 +133,7 @@ public class PropagationManager
             {
                 if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.South))
                 {
+                    Debug.Log("Removing label: " + tile.tileType + " at: " + x + ", " + y + " because it is not consistant with the origin tile: " + labelGrid.GetLabelsAt(originX, originY)[0].tileType + " at: " + originX + ", " + originY + " in direction: South");
                     labelGrid.RemoveLabelAt(x, y, tile);
                 }
             }
@@ -137,14 +141,17 @@ public class PropagationManager
             {
                 if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.West))
                 {
+                    Debug.Log("Removing label: " + tile.tileType + " at: " + x + ", " + y + " because it is not consistant with the origin tile: " + labelGrid.GetLabelsAt(originX, originY)[0].tileType + " at: " + originX + ", " + originY + " in direction: West");
                     labelGrid.RemoveLabelAt(x, y, tile);
                 }
             }
+        
         // }
     }
 
     public void EnqueueNeighbours(int x, int y)
     {
+        Debug.Log("innitiation EnqueueNeighbours");
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
             (int nx, int ny) = GetNeighbor(x, y, direction);

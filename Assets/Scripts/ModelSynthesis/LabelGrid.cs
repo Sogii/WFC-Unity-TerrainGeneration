@@ -33,16 +33,38 @@ public class LabelGrid
 
     public void AssignAllPossibleLabels(List<ModelTile> allModelTiles)
     {
+        int randomX = UnityEngine.Random.Range(0, Width);
+        int randomY = UnityEngine.Random.Range(0, Height);
+
+        int randomX2 = UnityEngine.Random.Range(0, Width);
+        int randomY2 = UnityEngine.Random.Range(0, Height);
         for (int y = 0; y < Height; y++)
         {
             for (int x = 0; x < Width; x++)
             {
-                if (x == Width / 2 && y == Height / 2)
+                if (x == randomX && y == randomY)
                 {
-                    // If this is the center cell, assign two random labels
+                    int randomIndex1 = UnityEngine.Random.Range(1, allModelTiles.Count);
+                    int randomIndex2 = UnityEngine.Random.Range(1, allModelTiles.Count);
+                    while (randomIndex2 == randomIndex1)
+                    {
+                        randomIndex2 = UnityEngine.Random.Range(0, allModelTiles.Count);
+                    }
 
-                    Grid[x,y].Add(allModelTiles[1]);
-                    Grid[x,y].Add(allModelTiles[2]);
+                    Grid[x,y].Add(allModelTiles[randomIndex1]);
+                    Grid[x,y].Add(allModelTiles[randomIndex2]);
+                }
+                else if(x == randomX2 && y == randomY2)
+                {
+                    int randomIndex1 = UnityEngine.Random.Range(1, allModelTiles.Count);
+                    int randomIndex2 = UnityEngine.Random.Range(1, allModelTiles.Count);
+                    while (randomIndex2 == randomIndex1)
+                    {
+                        randomIndex2 = UnityEngine.Random.Range(0, allModelTiles.Count);
+                    }
+
+                    Grid[x, y].Add(allModelTiles[randomIndex1]);
+                    Grid[x, y].Add(allModelTiles[randomIndex2]);
                 }
                 // Otherwise, assign all possible labels
                 else

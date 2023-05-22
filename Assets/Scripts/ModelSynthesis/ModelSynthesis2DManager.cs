@@ -34,7 +34,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
     {
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(5, 5, AdjacencyMatrix);
+        LabelGrid = new LabelGrid(6, 6, AdjacencyMatrix);
         LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
         PropagationManager = new PropagationManager(LabelGrid, AdjacencyMatrix);
@@ -42,7 +42,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         // Trigger the WFC algorithm
         RunWFCAlgorithm();
 
-         OutputMesh.AssignData();
+        OutputMesh.AssignData();
         OutputMesh.GenerateMesh();
         //LabelGrid.PrintGridLabels();
     }
