@@ -9,6 +9,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
     public static ModelSynthesis2DManager Instance { get; private set; }
     public int TileSize;
 
+    public AssignNeighBourWeights assignNeighbourWeights;
     public AdjacencyMatrix AdjacencyMatrix;
     public AdjacencyInfoAnalyzer AdjacencyInfoAnalyzer;
     public LabelGrid LabelGrid;
@@ -32,6 +33,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     void Start()
     {
+        assignNeighbourWeights.InitializeNeighbourWeights(SharedData.ModelTiles);
         AdjacencyInfoAnalyzer.FilloutExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
@@ -55,14 +57,14 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             // Find the cell with the least number of possible labels
             Vector2Int cellWithLeastLabels = FindCellWithLeastLabels();
-           
+
 
             // Collapse that cell
             PropagationManager.CollapseCell(cellWithLeastLabels.x, cellWithLeastLabels.y);
 
             // Propagate constraints
             bool success = PropagationManager.PropagateConstraints();
-           // LabelGrid.PrintGridLabels();
+            // LabelGrid.PrintGridLabels();
             if (!success)
             {
                 Debug.LogError("A cell with no possible labels was found. Aborting...");
@@ -99,7 +101,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             for (int y = 0; y < LabelGrid.Height; y++)
             {
-                List<ModelTile> labels = LabelGrid.GetLabelsAt(x, y);            
+                List<ModelTile> labels = LabelGrid.GetLabelsAt(x, y);
                 if (labels.Count > 1 && labels.Count < leastLabels)
                 {
                     leastLabels = labels.Count;
