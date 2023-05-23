@@ -54,7 +54,15 @@ public class PropagationManager
     public void CollapseCell(int x, int y)
     {
         List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(x, y);
-        ModelTile chosenLabel = possibleLabels[UnityEngine.Random.Range(0, possibleLabels.Count)];
+        List<ModelTile> weightedLabels = new List<ModelTile>();
+        foreach (ModelTile tile in possibleLabels)
+        {
+            for (int i = 0; i < tile.Weight; i++)
+            {
+                weightedLabels.Add(tile);
+            }
+        }
+        ModelTile chosenLabel = weightedLabels[UnityEngine.Random.Range(0, weightedLabels.Count)];
 
         labelGrid.SetLabelsAt(x, y, new List<ModelTile> { chosenLabel });
         Debug.Log($"Collapsed ({x}, {y}) to {chosenLabel.tileType}.");

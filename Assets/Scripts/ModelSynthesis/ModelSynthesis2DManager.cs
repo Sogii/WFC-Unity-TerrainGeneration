@@ -35,7 +35,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         AdjacencyInfoAnalyzer.FilloutExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(100, 100, AdjacencyMatrix);
+        LabelGrid = new LabelGrid(60, 60, AdjacencyMatrix);
         LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
         PropagationManager = new PropagationManager(LabelGrid, AdjacencyMatrix);
