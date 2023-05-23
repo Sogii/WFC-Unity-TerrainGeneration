@@ -2031,6 +2031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileSize: 1
+  assignNeighbourWeights: {fileID: 11400000, guid: c85977eaf0cd7914e8cd637ddcd7bf7b, type: 2}
   AdjacencyInfoAnalyzer: {fileID: 45678394}
   OutputMesh: {fileID: 1677351331}
   SharedData: {fileID: 11400000, guid: 6edb92e2adf44b34196b991e56e9acd9, type: 2}

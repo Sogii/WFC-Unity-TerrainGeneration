@@ -55,8 +55,24 @@ public class PropagationManager
     {
         List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(x, y);
         List<ModelTile> weightedLabels = new List<ModelTile>();
+
         foreach (ModelTile tile in possibleLabels)
         {
+            float weight = tile.Weight;
+            foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
+            {
+                (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
+                if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
+                {
+                    foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(nx, ny))
+                    {
+                        if (tile.Neighbourweights.ContainsKey(neighbourTile))
+                        {
+                            weight *= tile.Neighbourweights[neighbourTile];
+                        }
+                    }
+                }
+            }
             for (int i = 0; i < tile.Weight; i++)
             {
                 weightedLabels.Add(tile);

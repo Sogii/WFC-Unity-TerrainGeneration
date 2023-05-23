@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Assign Neighbour Weights")]
 public class AssignNeighBourWeights : ScriptableObject
 {
-
-    List<int> nums1 = new List<int> { 2, 4, 6, 8, 10 };
     List<SharedData.TileType> roadTiles = new List<SharedData.TileType>
         {
         SharedData.TileType.URStreetcorner,
@@ -32,14 +30,14 @@ public class AssignNeighBourWeights : ScriptableObject
                 {
                     if (neighbourTile.tileType == SharedData.TileType.Water)
                     {
-                        weight = 2.5f;
+                        weight = 1f;
                     }
                 }
                 else if (tile.tileType == SharedData.TileType.Grass)
                 {
                     if (neighbourTile.tileType == SharedData.TileType.Grass)
                     {
-                        weight = 1.5f;
+                        weight = 1f;
                     }
                 }
                 else if (roadTiles.Contains(tile.tileType))
@@ -50,7 +48,8 @@ public class AssignNeighBourWeights : ScriptableObject
                     }
                 }
 
-                tile.Neighbourweights[neighbourTile] = weight;
+                tile.Neighbourweights = new Dictionary<ModelTile, float>();
+                tile.Neighbourweights.Add(neighbourTile, weight);
             }
         }
     }
