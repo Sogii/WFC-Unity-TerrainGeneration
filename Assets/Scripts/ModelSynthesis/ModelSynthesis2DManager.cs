@@ -32,9 +32,10 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     void Start()
     {
+        AdjacencyInfoAnalyzer.FilloutExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(6, 6, AdjacencyMatrix);
+        LabelGrid = new LabelGrid(100, 100, AdjacencyMatrix);
         LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
         PropagationManager = new PropagationManager(LabelGrid, AdjacencyMatrix);
@@ -44,7 +45,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
         OutputMesh.AssignData();
         OutputMesh.GenerateMesh();
-        //LabelGrid.PrintGridLabels();
+
     }
 
     // Method that contains the main loop of the WFC algorithm
@@ -61,7 +62,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
             // Propagate constraints
             bool success = PropagationManager.PropagateConstraints();
-            LabelGrid.PrintGridLabels();
+           // LabelGrid.PrintGridLabels();
             if (!success)
             {
                 Debug.LogError("A cell with no possible labels was found. Aborting...");

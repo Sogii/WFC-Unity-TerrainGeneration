@@ -8,8 +8,10 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 {
 
     public SharedData SharedData;
-
-    public ModelTile[] tiles = new ModelTile[16];
+    public int ExampleGridWidth = 10;
+    public int ExampleGridHeight = 10;
+    public GameObject ExampleTilesHolder;
+    private SharedData.TileType[,] ExampleTiles;
 
     Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjecencyDictionary = new Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>>();
 
@@ -20,35 +22,62 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         return adjecencyDictionary;
     }
 
-    void awake()
+    void Awake()
     {
-        string filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
-    }
-    public void AnalyzeAdjacency()
-    {
-        for (int i = 0; i < tiles.Length; i++)
+        ExampleTiles = new SharedData.TileType[ExampleGridWidth, ExampleGridHeight];
+        for (int i = 0; i < ExampleGridWidth; i++)
         {
-            string tileType = tiles[i].tileType.ToString();
-
-            // Initialize the dictionaries for this tile type
-            if (!adjecencyDictionary.ContainsKey(tileType))
+            for (int j = 0; j < ExampleGridHeight; j++)
             {
-                adjecencyDictionary[tileType] = new Dictionary<SharedData.Direction, HashSet<string>>();
-                foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
-                {
-                    adjecencyDictionary[tileType][dir] = new HashSet<string>();
-                }
+                ExampleTiles[i, j] = SharedData.TileType.Water;
             }
 
-            // Check each direction
-            foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
+        }
+        filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
+    }
+
+    void Start()
+    {
+
+    }
+
+    public void FilloutExampleGrid()
+    {
+        foreach (Transform child in ExampleTilesHolder.transform)
+        {
+            ExampleGridObject EGO = child.gameObject.GetComponent<ExampleGridObject>();
+            ExampleTiles[EGO.GridX, EGO.GridY] = EGO.thisTileType;
+        }
+
+
+    }
+
+    public void AnalyzeAdjacency()
+    {
+        for (int y = 0; y < ExampleGridHeight; y++)
+        {
+            for (int x = 0; x < ExampleGridWidth; x++)
             {
-                int adjacentIndex = GetAdjacentIndex(i, dir);
-                if (adjacentIndex >= 0 && adjacentIndex < tiles.Length)
+                string AdjacencyTileType = ExampleTiles[x, y].ToString();
+                if (!adjecencyDictionary.ContainsKey(AdjacencyTileType))
                 {
-                    string adjacentTileType = tiles[adjacentIndex].tileType.ToString();
-                    adjecencyDictionary[tileType][dir].Add(adjacentTileType);
+                    adjecencyDictionary[AdjacencyTileType] = new Dictionary<SharedData.Direction, HashSet<string>>();
+                    foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
+                    {
+                        adjecencyDictionary[AdjacencyTileType][dir] = new HashSet<string>();
+                    }
                 }
+
+                foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
+                {
+                    (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
+                    if (nx >= 0 && nx < ExampleGridWidth && ny >= 0 && ny < ExampleGridHeight)
+                    {
+                        string adjacentTileType = ExampleTiles[nx, ny].ToString();
+                        adjecencyDictionary[AdjacencyTileType][direction].Add(adjacentTileType);
+                    }
+                }
+
             }
         }
         WriteToFile(adjecencyDictionary);

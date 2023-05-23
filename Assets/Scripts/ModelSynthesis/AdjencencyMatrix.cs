@@ -29,6 +29,11 @@ public class AdjacencyMatrix
         foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjacencyDictionary)
         {
             ModelTile i = sharedData.ModelTiles.First(tile => tile.tileType.ToString() == outerEntry.Key);
+            if (i == null)
+            {
+                Debug.LogError("No ModelTile found matching key: " + outerEntry.Key);
+                continue;
+            }
             foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 foreach (string adjacentTileType in innerEntry.Value)
@@ -44,7 +49,7 @@ public class AdjacencyMatrix
             }
         }
 
-       LogAdjacencyGrid(adjacencyMatrix);
+        LogAdjacencyGrid(adjacencyMatrix);
 
         return adjacencyMatrix;
     }
@@ -65,13 +70,12 @@ public class AdjacencyMatrix
     }
 
 
-/// <summary>
-/// Returns true if the two tiles are adjacent in the given direction in the adjacency matrix 
-/// </summary>
+    /// <summary>
+    /// Returns true if the two tiles are adjacent in the given direction in the adjacency matrix 
+    /// </summary>
     public bool CheckAdjacency(ModelTile tileType1, ModelTile tileType2, SharedData.Direction direction)
     {
         bool result = matrix.ContainsKey(tileType1) && matrix[tileType1].ContainsKey(tileType2) && matrix[tileType1][tileType2].Contains(direction);
-        Debug.Log("Checking adjacency between " + tileType1.tileType +  " and " + tileType2.tileType + " in direction " + direction + ": " + result);
         return result;
     }
 }

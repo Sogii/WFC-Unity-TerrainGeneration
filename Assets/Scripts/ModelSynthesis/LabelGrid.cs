@@ -139,9 +139,7 @@ public class LabelGrid
             if (Grid[x, y].Contains(modelTileToRemove))
             {
                 // If it does, remove it
-                Debug.Log($"Removing {modelTileToRemove.tileType} at ({x},{y}).");
                 Grid[x, y].Remove(modelTileToRemove);
-                PrintGridLabels();
             }
             else
             {

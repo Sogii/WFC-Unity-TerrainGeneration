@@ -14,11 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileSize: 1
   ModelTiles:
-  - gameObject: {fileID: 3346372359054876294, guid: 5ad039dd1d759a64baa27cb6dff2d06c, type: 3}
+  - gameObject: {fileID: 3426107448220674255, guid: 5ad039dd1d759a64baa27cb6dff2d06c, type: 3}
     tileType: 0
-  - gameObject: {fileID: 8099057844817640299, guid: a7fc9a5fce310334a84f8e4e1e34fee2, type: 3}
+  - gameObject: {fileID: 8654905489202671385, guid: a7fc9a5fce310334a84f8e4e1e34fee2, type: 3}
     tileType: 1
-  - gameObject: {fileID: 5527604094314511555, guid: 3d6b330567adbef4183bb2de1935ffa2, type: 3}
+  - gameObject: {fileID: 8677767984897758250, guid: 178ae674663cf004585421d072451d57, type: 3}
     tileType: 2
-  - gameObject: {fileID: 8812440503162887277, guid: 6d83ce53de20a3a47b7ce71a21abaf3d, type: 3}
+  - gameObject: {fileID: 1771711639438886876, guid: 1cb9f3013c4426140b35f6a572e4c9bf, type: 3}
     tileType: 3
+  - gameObject: {fileID: 6995844887003872831, guid: 2d3076bae5274ba44b22fcef0b39e309, type: 3}
+    tileType: 4
+  - gameObject: {fileID: 2992280790718303186, guid: 3d6b330567adbef4183bb2de1935ffa2, type: 3}
+    tileType: 5
+  - gameObject: {fileID: 2367462039990298663, guid: 6d83ce53de20a3a47b7ce71a21abaf3d, type: 3}
+    tileType: 6
+  - gameObject: {fileID: 8162249557572234393, guid: c0ef35912b9fe844e88257678df48a18, type: 3}
+    tileType: 7
