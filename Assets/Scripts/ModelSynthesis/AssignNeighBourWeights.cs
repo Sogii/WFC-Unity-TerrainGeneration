@@ -19,6 +19,8 @@ public class AssignNeighBourWeights : ScriptableObject
     {
         foreach (ModelTile tile in modelTiles)
         {
+            tile.Neighbourweights = new Dictionary<ModelTile, float>();
+
             foreach (ModelTile neighbourTile in modelTiles)
             {
                 // Assign weights according to your requirements.
@@ -28,29 +30,62 @@ public class AssignNeighBourWeights : ScriptableObject
                 // Modify this section of code to assign different weights to different tiles.
                 if (tile.tileType == SharedData.TileType.Water)
                 {
+
                     if (neighbourTile.tileType == SharedData.TileType.Water)
                     {
-                        weight = 1f;
+                        weight = 2;
                     }
                 }
                 else if (tile.tileType == SharedData.TileType.Grass)
                 {
                     if (neighbourTile.tileType == SharedData.TileType.Grass)
                     {
+                        weight = 2f;
+                    }
+                    else if (neighbourTile.tileType == SharedData.TileType.Streetvertical | neighbourTile.tileType == SharedData.TileType.Streethorizontal)
+                    {
                         weight = 1f;
+                    }
+                    else if (neighbourTile.tileType == SharedData.TileType.Water)
+                    {
+                        weight = 0.01f;
                     }
                 }
                 else if (roadTiles.Contains(tile.tileType))
                 {
                     if (roadTiles.Contains(neighbourTile.tileType))
                     {
-                        weight = 3f;
+                        if (neighbourTile.tileType == SharedData.TileType.Streethorizontal | neighbourTile.tileType == SharedData.TileType.Streetvertical)
+                        {
+                            weight = 25f;
+                        }
+                        else
+                        {
+                            weight = 0.1f;
+                        }
+                    }
+                    else if (tile.tileType == SharedData.TileType.Grass)
+                    {
+                        weight = 0.1f;
                     }
                 }
 
-                tile.Neighbourweights = new Dictionary<ModelTile, float>();
+
                 tile.Neighbourweights.Add(neighbourTile, weight);
             }
         }
     }
+
+    public void DebugPrintNeighbourWeights(ModelTile[] modelTiles)
+    {
+        foreach (ModelTile tile in modelTiles)
+        {
+            Debug.Log($"Tile {tile.tileType} neighbour weights:");
+            foreach (KeyValuePair<ModelTile, float> entry in tile.Neighbourweights)
+            {
+                Debug.Log($"Neighbour {entry.Key.tileType}, weight: {entry.Value}");
+            }
+        }
+    }
+
 }

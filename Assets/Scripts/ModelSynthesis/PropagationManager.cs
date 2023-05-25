@@ -54,35 +54,45 @@ public class PropagationManager
     public void CollapseCell(int x, int y)
     {
         List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(x, y);
-        List<ModelTile> weightedLabels = new List<ModelTile>();
+        List<int> weightedIndices = new List<int>();
 
-        foreach (ModelTile tile in possibleLabels)
+        for (int i = 0; i < possibleLabels.Count; i++)
         {
-            float weight = tile.Weight;
+            ModelTile tile = possibleLabels[i];
+            float baseWeight = tile.Weight;
+
             foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
             {
                 (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
+
                 if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
                 {
                     foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(nx, ny))
                     {
+                        float weight = baseWeight;  // Reset weight for each neighbour tile
+
                         if (tile.Neighbourweights.ContainsKey(neighbourTile))
                         {
                             weight *= tile.Neighbourweights[neighbourTile];
+                            Debug.Log($"Weight for {tile.tileType} and {neighbourTile.tileType} is {weight}.");
+                        }
+
+                        // For simplicity, ensure total weight is integer and add indices accordingly.
+                        int totalWeight = Mathf.RoundToInt(weight);
+                        for (int j = 0; j < totalWeight; j++)
+                        {
+                            weightedIndices.Add(i);
                         }
                     }
                 }
             }
-            for (int i = 0; i < tile.Weight; i++)
-            {
-                weightedLabels.Add(tile);
-            }
         }
-        ModelTile chosenLabel = weightedLabels[UnityEngine.Random.Range(0, weightedLabels.Count)];
+
+        int chosenIndex = weightedIndices[UnityEngine.Random.Range(0, weightedIndices.Count)];
+        ModelTile chosenLabel = possibleLabels[chosenIndex];
 
         labelGrid.SetLabelsAt(x, y, new List<ModelTile> { chosenLabel });
         Debug.Log($"Collapsed ({x}, {y}) to {chosenLabel.tileType}.");
-
 
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
@@ -94,6 +104,8 @@ public class PropagationManager
             }
         }
     }
+
+
     /// <summary>
     /// Checks if a tile is consistent with its neighbors in each direction and removes it if it is not.
     /// </summary>

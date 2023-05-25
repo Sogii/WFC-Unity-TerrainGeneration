@@ -34,10 +34,11 @@ public class ModelSynthesis2DManager : MonoBehaviour
     void Start()
     {
         assignNeighbourWeights.InitializeNeighbourWeights(SharedData.ModelTiles);
+        assignNeighbourWeights.DebugPrintNeighbourWeights(SharedData.ModelTiles);
         AdjacencyInfoAnalyzer.FilloutExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(60, 60, AdjacencyMatrix);
+        LabelGrid = new LabelGrid(30, 30, AdjacencyMatrix);
         LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
         PropagationManager = new PropagationManager(LabelGrid, AdjacencyMatrix);
@@ -46,6 +47,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         RunWFCAlgorithm();
 
         OutputMesh.AssignData();
+        LabelGrid.PrintGridLabels();
         OutputMesh.GenerateMesh();
 
     }
