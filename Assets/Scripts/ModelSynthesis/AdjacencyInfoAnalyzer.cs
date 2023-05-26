@@ -70,14 +70,13 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
                 foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
                 {
-                    (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
-                    if (nx >= 0 && nx < ExampleGridWidth && ny >= 0 && ny < ExampleGridHeight)
+                    Coordinate neighbor = UtilityFunctions.GetNeighbourcoordinate((new Coordinate(x, y)), direction);
+                    if (neighbor.X >= 0 && neighbor.X < ExampleGridWidth && neighbor.Y >= 0 && neighbor.Y < ExampleGridHeight)
                     {
-                        string adjacentTileType = ExampleTiles[nx, ny].ToString();
+                        string adjacentTileType = ExampleTiles[neighbor.X, neighbor.Y].ToString();
                         adjecencyDictionary[AdjacencyTileType][direction].Add(adjacentTileType);
                     }
                 }
-
             }
         }
         WriteToFile(adjecencyDictionary);

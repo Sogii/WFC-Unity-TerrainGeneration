@@ -27,7 +27,7 @@ public class OutputMesh : MonoBehaviour
         {
             for (int y = 0; y < gridHeight; y++)
             {
-                List<ModelTile> labels = labelGrid.GetLabelsAt(x, y);
+                List<ModelTile> labels = labelGrid.GetLabelsAt(new Coordinate(x, y));
 
                 if (labels.Count > 0)
                 {

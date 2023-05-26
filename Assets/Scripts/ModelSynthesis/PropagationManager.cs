@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
+public struct Coordinate
+{
+    public int X { get; }
+    public int Y { get; }
+
+    public Coordinate(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
 public class PropagationManager
 {
     private LabelGrid labelGrid;
     private AdjacencyMatrix adjacencyMatrix;
-    private Queue<(int, int, int, int)> queue = new Queue<(int, int, int, int)>();
+    private Queue<Coordinate> queue = new Queue<Coordinate>();
 
-    private HashSet<(int, int)> processed = new HashSet<(int, int)>();
+    private HashSet<Coordinate> processed = new HashSet<Coordinate>();
 
     public PropagationManager(LabelGrid labelGrid, AdjacencyMatrix adjacencyMatrix)
     {
@@ -18,42 +31,37 @@ public class PropagationManager
     }
 
 
-    public bool PropagateConstraints()
+
+
+    public bool PropagateGridConstraints()
     {
         while (queue.Count > 0)
         {
-            (int x, int y, int originX, int originY) = queue.Dequeue();
-            // Create a copy of the list to iterate over.
-            List<ModelTile> labels = new List<ModelTile>(labelGrid.GetLabelsAt(x, y));
+            Coordinate propagationCords = queue.Dequeue();
+            List<ModelTile> labels = new List<ModelTile>(labelGrid.GetLabelsAt(propagationCords));
 
-
-            if (labelGrid.GetLabelsAt(x, y).Count > 1)
+            if (labelGrid.GetLabelsAt(propagationCords).Count > 1)
             {
                 foreach (ModelTile tile in labels)
                 {
-
                     //Remove non-consistent labels based on neighbours
-                    List<ModelTile> tilesToRemove = CheckTileConsistancyInEachDirection2(x, y, tile);
-
+                    List<ModelTile> tilesToRemove = FindInconsistentTiles(propagationCords, tile);
                     foreach (ModelTile tileToRemove in tilesToRemove)
                     {
-                        labelGrid.RemoveLabelAt(x, y, tileToRemove);
-                        EnqueueNeighbours(x, y);
+                        labelGrid.RemoveLabelAt(propagationCords, tileToRemove);
+                        EnqueueNeighbourCoordinates(propagationCords);
                     }
-                    //  CheckTileConsistancyWithOriginTile(x, y, originX, originY, tile);
                 }
             }
-
         }
-
         processed.Clear();
         return true;
     }
 
 
-    public void CollapseCell(int x, int y)
+    public void CollapseGridCell(Coordinate cord)
     {
-        List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(x, y);
+        List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(cord);
         List<int> weightedIndices = new List<int>();
 
         for (int i = 0; i < possibleLabels.Count; i++)
@@ -63,11 +71,10 @@ public class PropagationManager
 
             foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
             {
-                (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
-
-                if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
+                Coordinate neighbourCord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+                if (UtilityFunctions.IsWithinGridBounds(neighbourCord, labelGrid))
                 {
-                    foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(nx, ny))
+                    foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(neighbourCord))
                     {
                         float weight = baseWeight;  // Reset weight for each neighbour tile
 
@@ -77,7 +84,6 @@ public class PropagationManager
                             Debug.Log($"Weight for {tile.tileType} and {neighbourTile.tileType} is {weight}.");
                         }
 
-                        // For simplicity, ensure total weight is integer and add indices accordingly.
                         int totalWeight = Mathf.RoundToInt(weight);
                         for (int j = 0; j < totalWeight; j++)
                         {
@@ -91,16 +97,15 @@ public class PropagationManager
         int chosenIndex = weightedIndices[UnityEngine.Random.Range(0, weightedIndices.Count)];
         ModelTile chosenLabel = possibleLabels[chosenIndex];
 
-        labelGrid.SetLabelsAt(x, y, new List<ModelTile> { chosenLabel });
-        Debug.Log($"Collapsed ({x}, {y}) to {chosenLabel.tileType}.");
+        labelGrid.SetLabelsAt(cord, new List<ModelTile> { chosenLabel });
+        Debug.Log($"Collapsed ({cord.X}, {cord.Y}) to {chosenLabel.tileType}.");
 
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
-            (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
-
-            if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
+            Coordinate neighbourCord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+            if (UtilityFunctions.IsWithinGridBounds(neighbourCord, labelGrid))
             {
-                queue.Enqueue((nx, ny, x, y));
+                queue.Enqueue((neighbourCord));
             }
         }
     }
@@ -115,21 +120,19 @@ public class PropagationManager
     //1. In each direction
     //2. Check for all labels in the tile you want to test consistency for
     //3. Get the neighbours of the tile you want to test consistency for
-    //4. 
 
-    public List<ModelTile> CheckTileConsistancyInEachDirection2(int x, int y, ModelTile tile)
+    public List<ModelTile> FindInconsistentTiles(Coordinate cord, ModelTile tile)
     {
         List<ModelTile> tilesToRemove = new List<ModelTile>();
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
-            (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
-
+            Coordinate neighBourcord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
             // Continue to next direction if neighbor is out of bounds.
-            if (!(nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height))
+            if (!(UtilityFunctions.IsWithinGridBounds(neighBourcord, labelGrid)))
                 continue;
 
             // Copy the list of labels at neighbor cell.
-            List<ModelTile> neighborTiles = new List<ModelTile>(labelGrid.GetLabelsAt(nx, ny));
+            List<ModelTile> neighborTiles = new List<ModelTile>(labelGrid.GetLabelsAt(neighBourcord));
             bool isConsistent = false;
 
             foreach (ModelTile neighborTile in neighborTiles)
@@ -152,72 +155,15 @@ public class PropagationManager
         return tilesToRemove;
     }
 
-    public void CheckTileConsistancyInEachDirection(int x, int y, ModelTile tile)
+    public void EnqueueNeighbourCoordinates(Coordinate cord)
     {
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
-            (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
-            if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height)
+            Coordinate neighBourcord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+            if (UtilityFunctions.IsWithinGridBounds(neighBourcord, labelGrid) && !processed.Contains((neighBourcord)))
             {
-                foreach (ModelTile neighborTile in labelGrid.GetLabelsAt(nx, ny))
-                {
-                    if (!adjacencyMatrix.CheckAdjacency(tile, neighborTile, direction))
-                    {
-                        labelGrid.RemoveLabelAt(x, y, tile);
-                    }
-                }
-            }
-        }
-    }
-
-    public void CheckTileConsistancyWithOriginTile(int x, int y, int originX, int originY, ModelTile tile)
-    {
-        List<ModelTile> copiedTiles = new List<ModelTile>(labelGrid.GetLabelsAt(x, y));
-        //Check if the ModelTile of the enqueued tile is consistant with the origin tile (tile that caused this tile to be enqued) and figure out the direction in which they need to be checked, remove the lable if they are not consistant
-        if (!(x >= 0 && x < labelGrid.Width && y >= 0 && y < labelGrid.Height)) return;
-        if (!(originX >= 0 && originX < labelGrid.Width && originY >= 0 && originY < labelGrid.Height)) return;
-        if (!(labelGrid.GetLabelsAt(originX, originY).Count == 1)) return;
-        if (x == originX && y == originY - 1)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.North))
-            {
-                labelGrid.RemoveLabelAt(x, y, tile);
-            }
-        }
-        else if (x == originX - 1 && y == originY)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.East))
-            {
-                labelGrid.RemoveLabelAt(x, y, tile);
-            }
-        }
-        else if (x == originX && y == originY + 1)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.South))
-            {
-                labelGrid.RemoveLabelAt(x, y, tile);
-            }
-        }
-        else if (x == originX + 1 && y == originY)
-        {
-            if (!adjacencyMatrix.CheckAdjacency(tile, labelGrid.GetLabelsAt(originX, originY)[0], SharedData.Direction.West))
-            {
-                labelGrid.RemoveLabelAt(x, y, tile);
-            }
-        }
-
-    }
-
-    public void EnqueueNeighbours(int x, int y)
-    {
-        foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
-        {
-            (int nx, int ny) = UtilityFunctions.GetNeighbor(x, y, direction);
-
-            if (nx >= 0 && nx < labelGrid.Width && ny >= 0 && ny < labelGrid.Height && !processed.Contains((nx, ny)))
-            {
-                queue.Enqueue((nx, ny, x, y));
-                processed.Add((nx, ny));
+                queue.Enqueue((neighBourcord));
+                processed.Add((neighBourcord));
             }
         }
     }

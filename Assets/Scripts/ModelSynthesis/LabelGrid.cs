@@ -51,10 +51,10 @@ public class LabelGrid
                         randomIndex2 = UnityEngine.Random.Range(0, allModelTiles.Count);
                     }
 
-                    Grid[x,y].Add(allModelTiles[randomIndex1]);
-                    Grid[x,y].Add(allModelTiles[randomIndex2]);
+                    Grid[x, y].Add(allModelTiles[randomIndex1]);
+                    Grid[x, y].Add(allModelTiles[randomIndex2]);
                 }
-                else if(x == randomX2 && y == randomY2)
+                else if (x == randomX2 && y == randomY2)
                 {
                     int randomIndex1 = UnityEngine.Random.Range(1, allModelTiles.Count);
                     int randomIndex2 = UnityEngine.Random.Range(1, allModelTiles.Count);
@@ -79,20 +79,20 @@ public class LabelGrid
     }
 
 
-    public List<ModelTile> GetLabelsAt(int x, int y)
+    public List<ModelTile> GetLabelsAt(Coordinate cord)
     {
-        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        if (UtilityFunctions.IsWithinGridBounds(cord, this))
         {
-            return Grid[x, y];
+            return Grid[cord.X, cord.Y];
         }
         else
         {
-            Debug.LogError($"Invalid coordinates: ({x}, {y}). Grid dimensions: {Width}x{Height}.");
+            Debug.LogError($"Invalid coordinates: ({cord.X}, {cord.Y}). Grid dimensions: {Width}x{Height}.");
             return new List<ModelTile>(); // Returning an empty list to indicate no valid tiles
         }
     }
 
-    public void SetLabelsAt(int x, int y, List<ModelTile> labels)
+    public void SetLabelsAt(Coordinate cords, List<ModelTile> labels)
     {
         if (labels == null || labels.Count == 0)
         {
@@ -100,11 +100,12 @@ public class LabelGrid
         }
 
         // Check if the coordinates are within the grid boundaries
-        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        if (UtilityFunctions.IsWithinGridBounds(cords, this))
         {
-            Debug.Log($"Setting labels at ({x},{y}) to {labels[0].tileType}.");
-            Grid[x, y] = labels;
+            Debug.Log($"Setting labels at ({cords.X},{cords.Y}) to {labels[0].tileType}.");
+            Grid[cords.X, cords.Y] = labels;
         }
+
         else
         {
             throw new ArgumentOutOfRangeException("Coordinates are outside of the grid boundaries");
@@ -131,24 +132,24 @@ public class LabelGrid
         Debug.Log(builder.ToString());
     }
 
-    public void RemoveLabelAt(int x, int y, ModelTile modelTileToRemove)
+    public void RemoveLabelAt(Coordinate cords, ModelTile modelTileToRemove)
     {
-        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        if (UtilityFunctions.IsWithinGridBounds(cords, this))
         {
             // Check if the list at the specified coordinates contains the ModelTile to remove
-            if (Grid[x, y].Contains(modelTileToRemove))
+            if (Grid[cords.X, cords.Y].Contains(modelTileToRemove))
             {
                 // If it does, remove it
-                Grid[x, y].Remove(modelTileToRemove);
+                Grid[cords.X, cords.Y].Remove(modelTileToRemove);
             }
             else
             {
-                Debug.LogWarning($"ModelTile to remove not found at ({x},{y}).");
+                Debug.LogWarning($"ModelTile to remove not found at ({cords.X},{cords.Y}).");
             }
         }
         else
         {
-            Debug.LogError($"Invalid coordinates: ({x}, {y}). Grid dimensions: {Width}x{Height}.");
+            Debug.LogError($"Invalid coordinates: ({cords.X}, {cords.Y}). Grid dimensions: {Width}x{Height}.");
         }
     }
 

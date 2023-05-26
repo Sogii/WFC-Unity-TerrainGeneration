@@ -1,20 +1,20 @@
 Grass:
 	North: Streethorizontal, LUStreetcorner, Grass, Water, URStreetcorner
-	East: Grass, Streetvertical, Water, URStreetcorner, Streethorizontal, DRStreetcorner
-	South: Grass, Streethorizontal, DLStreetcorner, Water, Streetvertical, DRStreetcorner
+	East: Grass, Streetvertical, Water, URStreetcorner, DRStreetcorner
+	South: Grass, Streethorizontal, DLStreetcorner, Water, DRStreetcorner
 	West: Grass, LUStreetcorner, Streetvertical, Water, DLStreetcorner
 Streethorizontal:
 	North: Grass
 	East: Streethorizontal, LUStreetcorner, DLStreetcorner
 	South: Grass
-	West: Streethorizontal, URStreetcorner, Grass, DRStreetcorner
+	West: Streethorizontal, URStreetcorner, DRStreetcorner
 LUStreetcorner:
 	North: Streetvertical
 	East: Grass
 	South: Grass
 	West: Streethorizontal
 Streetvertical:
-	North: Streetvertical, DLStreetcorner, Grass, DRStreetcorner
+	North: Streetvertical, DLStreetcorner, DRStreetcorner
 	East: Grass
 	South: LUStreetcorner, Streetvertical, URStreetcorner
 	West: Grass

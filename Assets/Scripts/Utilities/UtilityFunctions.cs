@@ -4,15 +4,26 @@ using UnityEngine;
 
 public static class UtilityFunctions
 {
-    public static (int, int) GetNeighbor(int x, int y, SharedData.Direction direction)
+   public static Coordinate GetNeighbourcoordinate(Coordinate cord, SharedData.Direction direction)
+{
+    switch (direction)
     {
-        switch (direction)
-        {
-            case SharedData.Direction.North: return (x, y + 1);
-            case SharedData.Direction.East: return (x + 1, y);
-            case SharedData.Direction.South: return (x, y - 1);
-            case SharedData.Direction.West: return (x - 1, y);
-            default: return(-1, -1);
-        }
+        case SharedData.Direction.North: return new Coordinate(cord.X, cord.Y + 1);
+        case SharedData.Direction.East: return new Coordinate(cord.X + 1, cord.Y);
+        case SharedData.Direction.South: return new Coordinate(cord.X, cord.Y - 1);
+        case SharedData.Direction.West: return new Coordinate(cord.X - 1, cord.Y);
+        default: return new Coordinate(-1, -1); //returning invalid coordinates by default
     }
+}
+
+    public static bool IsWithinGridBounds(Coordinate coordinate, LabelGrid labelGrid)
+    {
+        if (coordinate.X >= 0 && coordinate.X < labelGrid.Width && coordinate.Y >= 0 && coordinate.Y < labelGrid.Height)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+
 }

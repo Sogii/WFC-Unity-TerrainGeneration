@@ -62,10 +62,9 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
 
             // Collapse that cell
-            PropagationManager.CollapseCell(cellWithLeastLabels.x, cellWithLeastLabels.y);
-
+            PropagationManager.CollapseGridCell(new Coordinate(cellWithLeastLabels.x, cellWithLeastLabels.y));
             // Propagate constraints
-            bool success = PropagationManager.PropagateConstraints();
+            bool success = PropagationManager.PropagateGridConstraints();
             // LabelGrid.PrintGridLabels();
             if (!success)
             {
@@ -82,7 +81,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             for (int y = 0; y < LabelGrid.Height; y++)
             {
-                if (LabelGrid.GetLabelsAt(x, y).Count > 1)
+                if (LabelGrid.GetLabelsAt(new Coordinate(x,y)).Count > 1)
                 {
                     return false;
                 }
@@ -103,7 +102,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             for (int y = 0; y < LabelGrid.Height; y++)
             {
-                List<ModelTile> labels = LabelGrid.GetLabelsAt(x, y);
+                List<ModelTile> labels = LabelGrid.GetLabelsAt(new Coordinate(x,y));
                 if (labels.Count > 1 && labels.Count < leastLabels)
                 {
                     leastLabels = labels.Count;
