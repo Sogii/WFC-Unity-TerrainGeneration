@@ -71,7 +71,7 @@ public class PropagationManager
 
             foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
             {
-                Coordinate neighbourCord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+                Coordinate neighbourCord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
                 if (UtilityFunctions.IsWithinGridBounds(neighbourCord, labelGrid))
                 {
                     foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(neighbourCord))
@@ -102,7 +102,7 @@ public class PropagationManager
 
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
-            Coordinate neighbourCord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+            Coordinate neighbourCord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
             if (UtilityFunctions.IsWithinGridBounds(neighbourCord, labelGrid))
             {
                 queue.Enqueue((neighbourCord));
@@ -126,7 +126,7 @@ public class PropagationManager
         List<ModelTile> tilesToRemove = new List<ModelTile>();
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
-            Coordinate neighBourcord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+            Coordinate neighBourcord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
             // Continue to next direction if neighbor is out of bounds.
             if (!(UtilityFunctions.IsWithinGridBounds(neighBourcord, labelGrid)))
                 continue;
@@ -159,7 +159,7 @@ public class PropagationManager
     {
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
-            Coordinate neighBourcord = UtilityFunctions.GetNeighbourcoordinate(cord, direction);
+            Coordinate neighBourcord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
             if (UtilityFunctions.IsWithinGridBounds(neighBourcord, labelGrid) && !processed.Contains((neighBourcord)))
             {
                 queue.Enqueue((neighBourcord));

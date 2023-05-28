@@ -70,7 +70,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
                 foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
                 {
-                    Coordinate neighbor = UtilityFunctions.GetNeighbourcoordinate((new Coordinate(x, y)), direction);
+                    Coordinate neighbor = UtilityFunctions.GetNeighbourCoordinate((new Coordinate(x, y)), direction);
                     if (neighbor.X >= 0 && neighbor.X < ExampleGridWidth && neighbor.Y >= 0 && neighbor.Y < ExampleGridHeight)
                     {
                         string adjacentTileType = ExampleTiles[neighbor.X, neighbor.Y].ToString();

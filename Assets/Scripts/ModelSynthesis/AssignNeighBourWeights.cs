@@ -57,7 +57,7 @@ public class AssignNeighBourWeights : ScriptableObject
                     {
                         if (neighbourTile.tileType == SharedData.TileType.Streethorizontal | neighbourTile.tileType == SharedData.TileType.Streetvertical)
                         {
-                            weight = 25f;
+                            weight = 5f;
                         }
                         else
                         {
