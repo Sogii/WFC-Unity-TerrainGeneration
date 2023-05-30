@@ -17,9 +17,13 @@ public static class UtilityFunctions
         switch (direction)
         {
             case SharedData.Direction.North: return new Coordinate(cord.X, cord.Y + 1);
+            case SharedData.Direction.NorthEast: return new Coordinate(cord.X + 1, cord.Y + 1);
             case SharedData.Direction.East: return new Coordinate(cord.X + 1, cord.Y);
+            case SharedData.Direction.SouthEast: return new Coordinate(cord.X + 1, cord.Y - 1);
             case SharedData.Direction.South: return new Coordinate(cord.X, cord.Y - 1);
+            case SharedData.Direction.SouthWest: return new Coordinate(cord.X - 1, cord.Y - 1);
             case SharedData.Direction.West: return new Coordinate(cord.X - 1, cord.Y);
+            case SharedData.Direction.NorthWest: return new Coordinate(cord.X - 1, cord.Y + 1);
             default: return new Coordinate(-1, -1); //returning invalid coordinates by default
         }
     }

@@ -24,7 +24,7 @@ public class OutputMesh : MonoBehaviour
     public void GenerateMesh()
     {
         ClearMesh();
-        GenerateMesh();
+        InstantiateMeshObjects();
     }
 
     private void ClearMesh()

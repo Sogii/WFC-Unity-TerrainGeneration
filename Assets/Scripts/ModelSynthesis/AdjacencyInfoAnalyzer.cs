@@ -11,7 +11,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
     public int ExampleGridWidth = 10;
     public int ExampleGridHeight = 10;
     public GameObject ExampleTilesHolder;
-    private SharedData.TileType[,] ExampleTiles;
+    private SharedData.TileType[,] ExampleGrid;
 
     Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> adjecencyDictionary = new Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>>();
 
@@ -24,32 +24,45 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
     void Awake()
     {
-        ExampleTiles = new SharedData.TileType[ExampleGridWidth, ExampleGridHeight];
+        filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
+    }
+
+    public void InitiateExampleGrid()
+    {
+        AnalyzeExampleGridSize();
+        ExampleGrid = new SharedData.TileType[ExampleGridWidth, ExampleGridHeight];
         for (int i = 0; i < ExampleGridWidth; i++)
         {
             for (int j = 0; j < ExampleGridHeight; j++)
             {
-                ExampleTiles[i, j] = SharedData.TileType.Water;
+                ExampleGrid[i, j] = SharedData.TileType.Water;
             }
-
         }
-        filePath = Path.Combine(Application.persistentDataPath, "Resources/temp.txt");
     }
 
-    void Start()
-    {
-
-    }
-
-    public void FilloutExampleGrid()
+    private void AnalyzeExampleGridSize()
     {
         foreach (Transform child in ExampleTilesHolder.transform)
         {
             ExampleGridObject EGO = child.gameObject.GetComponent<ExampleGridObject>();
-            ExampleTiles[EGO.GridX, EGO.GridY] = EGO.thisTileType;
+            if (EGO.GridX > ExampleGridWidth)
+            {
+                ExampleGridWidth = EGO.GridX;
+            }
+            if (EGO.GridY > ExampleGridHeight)
+            {
+                ExampleGridHeight = EGO.GridY;
+            }
         }
-
-
+        Debug.Log("ExampleGridWidth: " + ExampleGridWidth + " ExampleGridHeight: " + ExampleGridHeight);
+    }
+    public void AssignTilesToExampleGrid()
+    {
+        foreach (Transform child in ExampleTilesHolder.transform)
+        {
+            ExampleGridObject EGO = child.gameObject.GetComponent<ExampleGridObject>();
+            ExampleGrid[EGO.GridX, EGO.GridY] = EGO.thisTileType;
+        }
     }
 
     public void AnalyzeAdjacency()
@@ -58,7 +71,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         {
             for (int x = 0; x < ExampleGridWidth; x++)
             {
-                string AdjacencyTileType = ExampleTiles[x, y].ToString();
+                string AdjacencyTileType = ExampleGrid[x, y].ToString();
                 if (!adjecencyDictionary.ContainsKey(AdjacencyTileType))
                 {
                     adjecencyDictionary[AdjacencyTileType] = new Dictionary<SharedData.Direction, HashSet<string>>();
@@ -73,7 +86,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
                     Coordinate neighbor = UtilityFunctions.GetNeighbourCoordinate((new Coordinate(x, y)), direction);
                     if (neighbor.X >= 0 && neighbor.X < ExampleGridWidth && neighbor.Y >= 0 && neighbor.Y < ExampleGridHeight)
                     {
-                        string adjacentTileType = ExampleTiles[neighbor.X, neighbor.Y].ToString();
+                        string adjacentTileType = ExampleGrid[neighbor.X, neighbor.Y].ToString();
                         adjecencyDictionary[AdjacencyTileType][direction].Add(adjacentTileType);
                     }
                 }
@@ -84,31 +97,6 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
 
 
     // Given an index in the 1D array and a direction, returns the index of the tile in that direction
-    int GetAdjacentIndex(int index, SharedData.Direction dir)
-    {
-        int x = index % 4;
-        int y = index / 4;
-
-        switch (dir)
-        {
-            case SharedData.Direction.North:
-                y++;
-                break;
-            case SharedData.Direction.East:
-                x++;
-                break;
-            case SharedData.Direction.South:
-                y--;
-                break;
-            case SharedData.Direction.West:
-                x--;
-                break;
-        }
-
-        if (x < 0 || x >= 4 || y < 0 || y >= 4) return -1; // out of bounds
-
-        return y * 4 + x;
-    }
 
     public void WriteToFile(Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> dict)
     {

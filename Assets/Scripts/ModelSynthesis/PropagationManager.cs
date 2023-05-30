@@ -68,7 +68,7 @@ public class PropagationManager
     /// </summary>
     public void CollapseGridCell(Coordinate cord)
     {
-        labelGrid.PrintGridLabels();
+      //  labelGrid.PrintGridLabels();
         List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(cord);
         List<int> weightedIndices = new List<int>();
 

@@ -1,40 +1,72 @@
 Grass:
 	North: Streethorizontal, LUStreetcorner, Grass, Water, URStreetcorner
+	NorthEast: Streethorizontal, LUStreetcorner, Grass, Water, Streetvertical, URStreetcorner, DLStreetcorner, DRStreetcorner
 	East: Grass, Streetvertical, Water, URStreetcorner, DRStreetcorner
+	SouthEast: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner
 	South: Grass, Streethorizontal, DLStreetcorner, Water, DRStreetcorner
+	SouthWest: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner
 	West: Grass, LUStreetcorner, Streetvertical, Water, DLStreetcorner
+	NorthWest: Streethorizontal, LUStreetcorner, Grass, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner
 Streethorizontal:
 	North: Grass
+	NorthEast: Grass, Streetvertical
 	East: Streethorizontal, LUStreetcorner, DLStreetcorner
+	SouthEast: Grass, Streetvertical
 	South: Grass
+	SouthWest: Grass, Streetvertical
 	West: Streethorizontal, URStreetcorner, DRStreetcorner
+	NorthWest: Grass, Streetvertical
 LUStreetcorner:
 	North: Streetvertical
+	NorthEast: Grass
 	East: Grass
+	SouthEast: Grass
 	South: Grass
+	SouthWest: Grass
 	West: Streethorizontal
+	NorthWest: Grass
 Streetvertical:
 	North: Streetvertical, DLStreetcorner, DRStreetcorner
+	NorthEast: Grass, Streethorizontal
 	East: Grass
+	SouthEast: Grass, Streethorizontal
 	South: LUStreetcorner, Streetvertical, URStreetcorner
+	SouthWest: Streethorizontal, Grass
 	West: Grass
+	NorthWest: Grass, Streethorizontal
 Water:
 	North: Water, Grass
+	NorthEast: Water, Grass
 	East: Water, Grass
+	SouthEast: Grass, Water
 	South: Grass, Water
+	SouthWest: Grass, Water
 	West: Grass, Water
+	NorthWest: Grass, Water
 URStreetcorner:
 	North: Streetvertical
+	NorthEast: Grass
 	East: Streethorizontal
+	SouthEast: Grass
 	South: Grass
+	SouthWest: Grass
 	West: Grass
+	NorthWest: Grass
 DLStreetcorner:
 	North: Grass
+	NorthEast: Grass
 	East: Grass
+	SouthEast: Grass
 	South: Streetvertical
+	SouthWest: Grass
 	West: Streethorizontal
+	NorthWest: Grass
 DRStreetcorner:
 	North: Grass
+	NorthEast: Grass
 	East: Streethorizontal
+	SouthEast: Grass
 	South: Streetvertical
+	SouthWest: Grass
 	West: Grass
+	NorthWest: Grass

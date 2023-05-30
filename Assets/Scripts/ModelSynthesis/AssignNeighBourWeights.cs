@@ -40,11 +40,11 @@ public class AssignNeighBourWeights : ScriptableObject
                 {
                     if (neighbourTile.tileType == SharedData.TileType.Grass)
                     {
-                        weight = 1f;
+                        weight = 2f;
                     }
                     else if (neighbourTile.tileType == SharedData.TileType.Streetvertical | neighbourTile.tileType == SharedData.TileType.Streethorizontal)
                     {
-                        weight = 0.5f;
+                        weight = 3f;
                     }
                     else if (neighbourTile.tileType == SharedData.TileType.Water)
                     {
@@ -57,7 +57,7 @@ public class AssignNeighBourWeights : ScriptableObject
                     {
                         if (neighbourTile.tileType == SharedData.TileType.Streethorizontal | neighbourTile.tileType == SharedData.TileType.Streetvertical)
                         {
-                            weight = 5f;
+                            weight = 10f;
                         }
                         else
                         {

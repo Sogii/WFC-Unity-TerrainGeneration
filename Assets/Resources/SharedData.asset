@@ -16,7 +16,7 @@ MonoBehaviour:
   ModelTiles:
   - gameObject: {fileID: 3426107448220674255, guid: 5ad039dd1d759a64baa27cb6dff2d06c, type: 3}
     tileType: 0
-    Weight: 0.8
+    Weight: 0.5
   - gameObject: {fileID: 8654905489202671385, guid: a7fc9a5fce310334a84f8e4e1e34fee2, type: 3}
     tileType: 1
     Weight: 0.5
@@ -31,7 +31,7 @@ MonoBehaviour:
     Weight: 0.5
   - gameObject: {fileID: 2992280790718303186, guid: 3d6b330567adbef4183bb2de1935ffa2, type: 3}
     tileType: 5
-    Weight: 0.5
+    Weight: 1
   - gameObject: {fileID: 2367462039990298663, guid: 6d83ce53de20a3a47b7ce71a21abaf3d, type: 3}
     tileType: 6
     Weight: 0.5
