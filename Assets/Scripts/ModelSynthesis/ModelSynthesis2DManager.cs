@@ -33,46 +33,73 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     void Start()
     {
+
         assignNeighbourWeights.InitializeNeighbourWeights(SharedData.ModelTiles);
         assignNeighbourWeights.DebugPrintNeighbourWeights(SharedData.ModelTiles);
         AdjacencyInfoAnalyzer.FilloutExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(30, 30, AdjacencyMatrix);
+        LabelGrid = new LabelGrid(15, 15, AdjacencyMatrix);
         LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();
         PropagationManager = new PropagationManager(LabelGrid, AdjacencyMatrix);
 
         // Trigger the WFC algorithm
-        RunWFCAlgorithm();
-
         OutputMesh.AssignData();
+        StartCoroutine(RunWFCAlgorithmCoroutine());
+        //RunWFCAlgorithm();
+
+
         LabelGrid.PrintGridLabels();
-        OutputMesh.GenerateMesh();
+        // OutputMesh.GenerateMesh();
 
     }
 
-    // Method that contains the main loop of the WFC algorithm
-    void RunWFCAlgorithm()
+    IEnumerator RunWFCAlgorithmCoroutine()
     {
         while (!IsFullyCollapsed())
         {
             // Find the cell with the least number of possible labels
             Vector2Int cellWithLeastLabels = FindCellWithLeastLabels();
 
-
             // Collapse that cell
             PropagationManager.CollapseGridCell(new Coordinate(cellWithLeastLabels.x, cellWithLeastLabels.y));
+
             // Propagate constraints
             bool success = PropagationManager.PropagateGridConstraints();
-            // LabelGrid.PrintGridLabels();
+
             if (!success)
             {
                 Debug.LogError("A cell with no possible labels was found. Aborting...");
                 break;
             }
+
+            // Wait for a short duration before running the next iteration
+            yield return new WaitForSeconds(0.05f);  // adjust delay time as needed
         }
     }
+
+    // Method that contains the main loop of the WFC algorithm
+    // void RunWFCAlgorithm()
+    // {
+    //     while (!IsFullyCollapsed())
+    //     {
+    //         // Find the cell with the least number of possible labels
+    //         Vector2Int cellWithLeastLabels = FindCellWithLeastLabels();
+
+
+    //         // Collapse that cell
+    //         PropagationManager.CollapseGridCell(new Coordinate(cellWithLeastLabels.x, cellWithLeastLabels.y));
+    //         // Propagate constraints
+    //         bool success = PropagationManager.PropagateGridConstraints();
+    //         // LabelGrid.PrintGridLabels();
+    //         if (!success)
+    //         {
+    //             Debug.LogError("A cell with no possible labels was found. Aborting...");
+    //             break;
+    //         }
+    //     }
+    // }
 
     // Determine if every cell in the label grid has been fully collapsed (only one label remains)
     bool IsFullyCollapsed()
@@ -81,7 +108,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             for (int y = 0; y < LabelGrid.Height; y++)
             {
-                if (LabelGrid.GetLabelsAt(new Coordinate(x,y)).Count > 1)
+                if (LabelGrid.GetLabelsAt(new Coordinate(x, y)).Count > 1)
                 {
                     return false;
                 }
@@ -102,7 +129,7 @@ public class ModelSynthesis2DManager : MonoBehaviour
         {
             for (int y = 0; y < LabelGrid.Height; y++)
             {
-                List<ModelTile> labels = LabelGrid.GetLabelsAt(new Coordinate(x,y));
+                List<ModelTile> labels = LabelGrid.GetLabelsAt(new Coordinate(x, y));
                 if (labels.Count > 1 && labels.Count < leastLabels)
                 {
                     leastLabels = labels.Count;

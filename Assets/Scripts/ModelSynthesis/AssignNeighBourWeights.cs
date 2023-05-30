@@ -33,22 +33,22 @@ public class AssignNeighBourWeights : ScriptableObject
 
                     if (neighbourTile.tileType == SharedData.TileType.Water)
                     {
-                        weight = 2;
+                        weight = 16;
                     }
                 }
                 else if (tile.tileType == SharedData.TileType.Grass)
                 {
                     if (neighbourTile.tileType == SharedData.TileType.Grass)
                     {
-                        weight = 2f;
+                        weight = 1f;
                     }
                     else if (neighbourTile.tileType == SharedData.TileType.Streetvertical | neighbourTile.tileType == SharedData.TileType.Streethorizontal)
                     {
-                        weight = 1f;
+                        weight = 0.5f;
                     }
                     else if (neighbourTile.tileType == SharedData.TileType.Water)
                     {
-                        weight = 0.01f;
+                        weight = 0.1f;
                     }
                 }
                 else if (roadTiles.Contains(tile.tileType))

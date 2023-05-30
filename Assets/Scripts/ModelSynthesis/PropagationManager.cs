@@ -21,7 +21,6 @@ public class PropagationManager
     private LabelGrid labelGrid;
     private AdjacencyMatrix adjacencyMatrix;
     private Queue<Coordinate> queue = new Queue<Coordinate>();
-
     private HashSet<Coordinate> processed = new HashSet<Coordinate>();
 
     public PropagationManager(LabelGrid labelGrid, AdjacencyMatrix adjacencyMatrix)
@@ -30,26 +29,32 @@ public class PropagationManager
         this.adjacencyMatrix = adjacencyMatrix;
     }
 
-
-
-
     public bool PropagateGridConstraints()
     {
         while (queue.Count > 0)
         {
+            
             Coordinate propagationCords = queue.Dequeue();
             List<ModelTile> labels = new List<ModelTile>(labelGrid.GetLabelsAt(propagationCords));
-
+            //Prevents propagation of labels if there is only one label in the cell
             if (labelGrid.GetLabelsAt(propagationCords).Count > 1)
             {
+                //Loops trough each label in the cell
                 foreach (ModelTile tile in labels)
                 {
-                    //Remove non-consistent labels based on neighbours
+                    //Checks if the label is consistent with its neighbours & adds it to the tilestoremove list if it is not
                     List<ModelTile> tilesToRemove = FindInconsistentTiles(propagationCords, tile);
+
+                    //removes all wrong labels in one go & enqueues the neighbours of the cell
                     foreach (ModelTile tileToRemove in tilesToRemove)
                     {
                         labelGrid.RemoveLabelAt(propagationCords, tileToRemove);
                         EnqueueNeighbourCoordinates(propagationCords);
+                        if (labelGrid.GetLabelsAt(propagationCords).Count == 1)
+                        {
+                            OutputMesh outputMesh = ModelSynthesis2DManager.Instance.OutputMesh;
+                            outputMesh.SpawnCollapsedLabel(propagationCords, labelGrid.GetLabelsAt(propagationCords)[0]);
+                        }
                     }
                 }
             }
@@ -58,33 +63,46 @@ public class PropagationManager
         return true;
     }
 
-
+    /// <summary>
+    /// Collapses a cell in the grid to a single label by 
+    /// </summary>
     public void CollapseGridCell(Coordinate cord)
     {
+        labelGrid.PrintGridLabels();
         List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(cord);
         List<int> weightedIndices = new List<int>();
 
+        //Loop trough each possible label at the cell
         for (int i = 0; i < possibleLabels.Count; i++)
         {
+            //Grabs tile and baseweight of the tile (baseweight can be adjusted in the shared data script)
             ModelTile tile = possibleLabels[i];
             float baseWeight = tile.Weight;
 
+            //Loops trough each neighbour of the tile and adjusts the weight based on the neighbourweights
             foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
             {
+                //Grabs the neighbour of the tile
                 Coordinate neighbourCord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
                 if (UtilityFunctions.IsWithinGridBounds(neighbourCord, labelGrid))
                 {
                     foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(neighbourCord))
                     {
-                        float weight = baseWeight;  // Reset weight for each neighbour tile
+                        float weight = baseWeight;
 
+                        //If the neighbourweight dictionary contains the neighbour, multiply the weight by the neighbourweight
                         if (tile.Neighbourweights.ContainsKey(neighbourTile))
                         {
+                   //         Debug.Log($"Weight of {tile.tileType} is {weight} and neighbourweight of {neighbourTile.tileType} is {tile.Neighbourweights[neighbourTile]}.");
                             weight *= tile.Neighbourweights[neighbourTile];
-                            Debug.Log($"Weight for {tile.tileType} and {neighbourTile.tileType} is {weight}.");
+
+
                         }
 
                         int totalWeight = Mathf.RoundToInt(weight);
+                   //     Debug.Log($"Total weight is {totalWeight}.");
+
+                        //Adds the index of the tile to the weightedindices list an equal amount of times as the totalWeight of the tile. 
                         for (int j = 0; j < totalWeight; j++)
                         {
                             weightedIndices.Add(i);
@@ -93,12 +111,15 @@ public class PropagationManager
                 }
             }
         }
-
+     //   Debug.Log($"Weighted indices are {string.Join(", ", weightedIndices)}.");
         int chosenIndex = weightedIndices[UnityEngine.Random.Range(0, weightedIndices.Count)];
+      //  Debug.Log($"Chosen index is {chosenIndex}.");
         ModelTile chosenLabel = possibleLabels[chosenIndex];
 
         labelGrid.SetLabelsAt(cord, new List<ModelTile> { chosenLabel });
-        Debug.Log($"Collapsed ({cord.X}, {cord.Y}) to {chosenLabel.tileType}.");
+        OutputMesh outputMesh = ModelSynthesis2DManager.Instance.OutputMesh;
+        outputMesh.SpawnCollapsedLabel(cord, chosenLabel);
+     //   Debug.Log($"Collapsed ({cord.X}, {cord.Y}) to {chosenLabel.tileType}.");
 
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
@@ -112,14 +133,8 @@ public class PropagationManager
 
 
     /// <summary>
-    /// Checks if a tile is consistent with its neighbors in each direction and removes it if it is not.
+    /// Returns a list of neighbour tiles that are inconsistent with the given tile.
     /// </summary>
-
-
-    //check tile against all neighbours and remove all labels that are not consistent with labels 
-    //1. In each direction
-    //2. Check for all labels in the tile you want to test consistency for
-    //3. Get the neighbours of the tile you want to test consistency for
 
     public List<ModelTile> FindInconsistentTiles(Coordinate cord, ModelTile tile)
     {

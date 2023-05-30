@@ -23,6 +23,20 @@ public class OutputMesh : MonoBehaviour
 
     public void GenerateMesh()
     {
+        ClearMesh();
+        GenerateMesh();
+    }
+
+    private void ClearMesh()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    private void InstantiateMeshObjects()
+    {
         for (int x = 0; x < gridWidth; x++)
         {
             for (int y = 0; y < gridHeight; y++)
@@ -42,5 +56,13 @@ public class OutputMesh : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SpawnCollapsedLabel(Coordinate coordinate, ModelTile modelTile)
+    {
+        GameObject tilePrefab = modelTile.gameObject;
+        Vector3 worldPosition = new Vector3(coordinate.X * tileSize, 0, coordinate.Y * tileSize);
+        GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
+        instance.transform.parent = transform;
     }
 }
