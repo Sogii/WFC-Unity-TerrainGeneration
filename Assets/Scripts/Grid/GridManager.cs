@@ -56,6 +56,7 @@ public class GridManager : MonoBehaviour
         objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Ground);
         //  objectToGridConverter.IntegrateMeshByName("Greenery", Tile.TileType.Forest);
         objectToGridConverter.IntegrateMeshByName("Traintracks", Tile.TileType.Mountain);
+        objectToGridConverter.IntegrateMeshByName("Road", Tile.TileType.Mountain);
         objectToGridConverter.IntegrateMeshByName("Urban", Tile.TileType.Mountain);
         //  objectToGridConverter.IntegrateMeshByName("Walkingarea", Tile.TileType.Ground);
     }

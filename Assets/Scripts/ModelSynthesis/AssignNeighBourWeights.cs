@@ -33,7 +33,7 @@ public class AssignNeighBourWeights : ScriptableObject
 
                     if (neighbourTile.tileType == SharedData.TileType.Water)
                     {
-                        weight = 16;
+                        weight = 9;
                     }
                 }
                 else if (tile.tileType == SharedData.TileType.Grass)
