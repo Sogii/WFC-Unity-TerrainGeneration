@@ -164,6 +164,7 @@ MonoBehaviour:
   WaterPrefab: {fileID: 3326118740871146785, guid: 7c61393c72343f742906fd9876b9554e, type: 3}
   ForestPrefab: {fileID: 5624583712772160604, guid: c7f1163d4cfaa914dae6c16343319b21, type: 3}
   MountainPrefab: {fileID: 4607061939710478667, guid: f733597c1fbdc544884a36442872333a, type: 3}
+  BrickPrefab: {fileID: 3326118740871146785, guid: 9fc2f858542fa8a4eba409b37980da3b, type: 3}
   sharedData: {fileID: 11400000, guid: 6edb92e2adf44b34196b991e56e9acd9, type: 2}
 --- !u!4 &408296470
 Transform:
@@ -277,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -327,10 +328,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: City model simplified
       objectReference: {fileID: 0}
+    - target: {fileID: 6099135959303080388, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6824241290725859361, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7f249791ddf25d24b83e959c65601118, type: 2}
+    - target: {fileID: 8244340130998777442, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.066
+      objectReference: {fileID: 0}
     - target: {fileID: 8333630404140201079, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -369,9 +378,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 1430570516}
-  _stepCount: 200
-  _riverWidth: 1.8
-  _riverSidesWidth: 1
+  _stepCount: 20
+  _riverWidth: 3
+  _riverSidesWidth: 6
   _riverMaterial: {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
   _riverSideMaterial: {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
   RiverMesh: {fileID: 0}
@@ -391,24 +400,28 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -1.421629, y: 0, z: 79.55315}
-      - {x: 4.2974777, y: 0, z: 19.944635}
-      - {x: 13.404812, y: 0, z: 6.6104155}
-      - {x: 11.37677, y: 0, z: 3.1653545}
+      - {x: 66.70508, y: -3.547656, z: -2.7575047}
+      - {x: 49.785156, y: -2.6374998, z: 32.941715}
+      - {x: 36.605247, y: -0.36873645, z: 53.326057}
+      - {x: 29.117958, y: 0.3000002, z: 127.95206}
+      - {x: 26.677542, y: 0.51796913, z: 152.27577}
+      - {x: 13.709061, y: 2.5500002, z: 165.59995}
+      - {x: 9.78009, y: 2.5812502, z: 174.74171}
       isClosed: 0
       space: 0
       controlMode: 0
       autoControlLength: 0.3
       boundsUpToDate: 0
       bounds:
-        m_Center: {x: 61.700493, y: -0.07109374, z: 28.551582}
-        m_Extent: {x: 50.323723, y: 0.07109374, z: 25.386227}
+        m_Center: {x: 7.2277217, y: -7.8802733, z: 19.410591}
+        m_Extent: {x: 4.6370997, y: 7.8802733, z: 16.245235}
       perAnchorNormalsAngle:
+      - 0
       - 0
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -437,7 +450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430570516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.6, y: -0.8, z: -3.6096828}
+  m_LocalPosition: {x: -6.5, y: -13.8, z: -3.6096828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

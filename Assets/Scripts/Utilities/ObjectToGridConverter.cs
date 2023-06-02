@@ -26,7 +26,7 @@ public class ObjectToGridConverter : MonoBehaviour
     }
     void Start()
     {
-        AssignComponents();
+        
     }
 
     private void AssignComponents()
@@ -41,15 +41,24 @@ public class ObjectToGridConverter : MonoBehaviour
         _leftRiverBankMeshFilter = _leftRiverBank.GetComponent<MeshFilter>();
     }
 
+    public void IntegrateRiverMesh()
+    {
+        AssignComponents();
+       
+        IntegrateMesh(_leftRiverBankMeshFilter, Tile.TileType.Ground, _leftRiverBank);
+        IntegrateMesh(_rightRiverBankMeshFilter, Tile.TileType.Ground, _rightRiverBank);
+         IntegrateMesh(_riverMeshFilter, Tile.TileType.Water, _river);
+    }
+
     public void IntegrateMeshByName(string targetMeshName, Tile.TileType tileType)
     {
         foreach (MeshObject meshObject in MeshObjects)
-        {    
+        {
             if (meshObject.MeshName == targetMeshName)
             {
                 MeshFilter meshFilter = meshObject.MeshHolder.GetComponent<MeshFilter>();
                 GameObject meshHolder = meshObject.MeshHolder;
-        
+
                 if (meshFilter != null)
                 {
                     IntegrateMesh(meshFilter, tileType, meshHolder);
@@ -87,7 +96,7 @@ public class ObjectToGridConverter : MonoBehaviour
         }
 
         // Remove the temporary mesh collider
-       Destroy(meshCollider);
+        Destroy(meshCollider);
     }
 
 
@@ -102,7 +111,7 @@ public class ObjectToGridConverter : MonoBehaviour
         {
             if (hit.collider == meshCollider)
             {
-                
+
                 intersectionCount++;
                 rayDistance = hit.distance + 0.01f;
             }

@@ -1,6 +1,6 @@
 public class Tile
 {
-    public enum TileType { Ground, Water, Forest, Mountain }
+    public enum TileType { Ground, Water, Forest, Mountain, Brick }
     public TileType type;
     public int rotation;
 

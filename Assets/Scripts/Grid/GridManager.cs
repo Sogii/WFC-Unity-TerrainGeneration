@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
     public GameObject WaterPrefab;
     public GameObject ForestPrefab;
     public GameObject MountainPrefab;
+    public GameObject BrickPrefab;
 
     [Header("SharedData")]
     public SharedData sharedData;
@@ -53,12 +54,11 @@ public class GridManager : MonoBehaviour
     {
         ObjectToGridConverter objectToGridConverter = this.gameObject.GetComponent<ObjectToGridConverter>();
         objectToGridConverter.IntegrateMeshByName("Water", Tile.TileType.Water);
-        objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Ground);
-        //  objectToGridConverter.IntegrateMeshByName("Greenery", Tile.TileType.Forest);
+        objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Brick);
         objectToGridConverter.IntegrateMeshByName("Traintracks", Tile.TileType.Mountain);
         objectToGridConverter.IntegrateMeshByName("Road", Tile.TileType.Mountain);
-        objectToGridConverter.IntegrateMeshByName("Urban", Tile.TileType.Mountain);
-        //  objectToGridConverter.IntegrateMeshByName("Walkingarea", Tile.TileType.Ground);
+        objectToGridConverter.IntegrateMeshByName("Urban", Tile.TileType.Brick);
+        objectToGridConverter.IntegrateRiverMesh();
     }
 
     public Vector3 GridToWorldSpace(int x, int y)
@@ -129,6 +129,9 @@ public class GridManager : MonoBehaviour
                         break;
                     case Tile.TileType.Mountain:
                         tilePrefab = MountainPrefab;
+                        break;
+                    case Tile.TileType.Brick:
+                        tilePrefab = BrickPrefab;
                         break;
                 }
 
