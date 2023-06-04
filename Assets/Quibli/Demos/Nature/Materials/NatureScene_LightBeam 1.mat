@@ -15,14 +15,16 @@ MonoBehaviour:
   version: 4
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NatureScene_LightBeam 1
   m_Shader: {fileID: 4800000, guid: bf111c139329647fdba0284d3bad8836, type: 3}
-  m_ShaderKeywords: _ALLOWALPHAOVERFLOW_OFF
+  m_ValidKeywords:
+  - _ALLOWALPHAOVERFLOW_OFF
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -95,12 +97,12 @@ Material:
     - _Blend: 0
     - _BumpScale: 1
     - _CameraDistanceFadeClose: 8
-    - _CameraDistanceFadeFar: 32
+    - _CameraDistanceFadeFar: -5.17
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 36
+    - _Depth: 41
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
