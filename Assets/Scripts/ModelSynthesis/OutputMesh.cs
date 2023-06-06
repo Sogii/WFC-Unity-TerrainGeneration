@@ -7,6 +7,7 @@ public class OutputMesh : MonoBehaviour
     public SharedData SharedData;
     private ModelSynthesis2DManager modelSynthesis2DManager;
     private LabelGrid labelGrid;
+    public GameObject[] GrassTilePrefabs;
     private int gridWidth;
     private int gridHeight;
     private float tileSize;
@@ -45,17 +46,47 @@ public class OutputMesh : MonoBehaviour
 
                 if (labels.Count > 0)
                 {
-                    // For the sake of simplicity, we're only taking the first label. 
-                    // You might want to update this to choose a label in a different way.
                     ModelTile modelTile = labels[0];
-
-                    GameObject tilePrefab = modelTile.gameObject;
-                    Vector3 worldPosition = new Vector3(x * tileSize, 0, y * tileSize);
-                    GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
-                    instance.transform.parent = transform;
+                    GameObject tilePrefab = selectPrefabToSpawn(modelTile);
+                   
+                    Vector3 worldPosition = new Vector3(x * tileSize, tilePrefab.transform.position.y, y * tileSize);
+                     if(modelTile.tileType == SharedData.TileType.Grass)
+                    {
+                        GameObject instance = Instantiate(tilePrefab, worldPosition, ReturnRandom90degreeAngle());
+                        instance.transform.parent = transform;
+                    }
+                    else
+                    {
+                        GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
+                        instance.transform.parent = transform;
+                    }
+                              
                 }
             }
         }
+    }
+
+    private GameObject selectPrefabToSpawn(ModelTile modelTile)
+    {
+        GameObject prefabToSpawn;
+        if (modelTile.tileType == SharedData.TileType.Grass)
+        {
+           prefabToSpawn = GrassTilePrefabs[Random.Range(0, GrassTilePrefabs.Length)];
+        }
+        else
+        {
+             prefabToSpawn = modelTile.gameObject;
+        }
+
+
+        return prefabToSpawn;
+    }
+
+    private Quaternion ReturnRandom90degreeAngle()
+    {
+        int random = Random.Range(0, 4);
+        Quaternion rotation = Quaternion.Euler(0, random * 90, 0);
+        return rotation;
     }
 
     public void SpawnCollapsedLabel(Coordinate coordinate, ModelTile modelTile)
