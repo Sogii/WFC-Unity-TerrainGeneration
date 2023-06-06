@@ -8,10 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NatureScene_Grass_Long
-  m_Shader: {fileID: -6465566751694194690, guid: 55d33328ab3ba4efca3c7706d97d8ee8,
-    type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
+  m_Shader: {fileID: -6465566751694194690, guid: 55d33328ab3ba4efca3c7706d97d8ee8, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ALPHATEST_ON
@@ -22,7 +19,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -60,22 +56,22 @@ Material:
     - Vector1_9b8301ee900843cabb760acbaf52c930: 0
     - _54ef369afb0741ac878c5a407a2c0130_1: 0
     - _54ef369afb0741ac878c5a407a2c0130_2: 0
-    - _AlphaClipThreshold: 0.624
+    - _AlphaClipThreshold: 0.88
     - _GustEnabled: 1
     - _GustFrequency: 0.5
     - _GustIntensity: 0.25
     - _GustSpeed: 0.5
     - _PatchesAmount: 0.25
-    - _PatchesBluriness: 0.04
+    - _PatchesBluriness: 0.08
     - _PatchesEnabled: 1
     - _PatchesFrequency: 0.05
-    - _PatchesScale: 0.202
+    - _PatchesScale: 0.11
     - _PatchesSharpness: 1
     - _PatchesSize: 0.722
-    - _PatchesThreshold: 0.478
+    - _PatchesThreshold: 0.39
     - _QueueControl: -1
     - _QueueOffset: 0
-    - _ShadowStrength: 0.056
+    - _ShadowStrength: 0
     - _WindDirection: -1
     - _WindEnabled: 1
     - _WindFrequency: 1

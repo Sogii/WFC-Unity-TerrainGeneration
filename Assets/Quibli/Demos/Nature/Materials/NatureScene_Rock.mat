@@ -49,15 +49,20 @@ Texture2D:
     path: 
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NatureScene_Rock
   m_Shader: {fileID: 4800000, guid: 2a230514c860643f69b6a4d1871d3825, type: 3}
-  m_ShaderKeywords: DR_LIGHT_ATTENUATION DR_RIM_ON _ALPHATEST_ON _DETAILMAPBLENDINGMODE_MULTIPLY
-    _TEXTUREBLENDINGMODE_MULTIPLY
+  m_ValidKeywords:
+  - DR_LIGHT_ATTENUATION
+  - DR_RIM_ON
+  - _ALPHATEST_ON
+  - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _TEXTUREBLENDINGMODE_MULTIPLY
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -164,13 +169,13 @@ Material:
     - _Cutoff: 0.106
     - _DetailAlbedoMapScale: 1
     - _DetailMapBlendingMode: 0
-    - _DetailMapImpact: 1
+    - _DetailMapImpact: 0.79
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FlatRimEdgeSmoothness: 0
-    - _FlatRimLightAlign: 0.107
-    - _FlatRimSize: 0.047
+    - _FlatRimLightAlign: 0.26
+    - _FlatRimSize: 0.16
     - _FlatSpecularEdgeSmoothness: 0
     - _FlatSpecularSize: 0
     - _Flatness: 1
@@ -183,7 +188,7 @@ Material:
     - _GradientCenterY: 0
     - _GradientEnabled: 0
     - _GradientSize: 10
-    - _LightContribution: 0
+    - _LightContribution: 0.43
     - _LightFalloffSize: 0.0001
     - _LightmapDirectionPitch: 360
     - _LightmapDirectionYaw: 16
@@ -191,7 +196,8 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineDepthOffset: 0
     - _OutlineEnabled: 0
-    - _OutlineWidth: 0
+    - _OutlineScale: 1.14
+    - _OutlineWidth: -1.23
     - _OverrideBakedGi: 0
     - _OverrideLightAttenuation: 1
     - _OverrideLightmapDir: 0
@@ -210,7 +216,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TextureBlendingMode: 0
-    - _TextureImpact: 0.15
+    - _TextureImpact: 0.57
     - _UnityShadowMode: 0
     - _UnityShadowOcclusion: 0
     - _UnityShadowPower: 0.341
@@ -236,9 +242,9 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.45368627, g: 0.4716981, b: 0.43387327, a: 1}
     - _FlatSpecularColor: {r: 3.7735848, g: 3.4495332, b: 0.9433962, a: 1}
-    - _LightAttenuation: {r: 0.12908272, g: 0.15509489, b: 0, a: 0}
+    - _LightAttenuation: {r: 0.19852716, g: 0.22453934, b: 0, a: 0}
     - _LightmapDirection: {r: 0.000000048193968, g: 1, b: 0.00000016807233, a: 0}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.2735849, g: 0.23043168, b: 0.18712175, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
