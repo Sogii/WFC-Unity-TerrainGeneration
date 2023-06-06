@@ -122,8 +122,8 @@ Material:
     - BILLBOARD_ROTATION: 1
     - Billboard_Scale: 0.85
     - Clip_Threshold: 0.89
-    - Fill_Impact: 0.22
-    - Fill_Scale: 2.67
+    - Fill_Impact: 0.65
+    - Fill_Scale: 1.38
     - Fresnel_Power: 0
     - Fresnel_Sharpness: 0.901
     - Header_Fresnel: 0

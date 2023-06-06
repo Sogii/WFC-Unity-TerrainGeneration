@@ -22,10 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 2
   m_Shader: {fileID: -6465566751694194690, guid: 28375c8afd8fa4900b90e1d5a4b6d88c, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - BILLBOARD_ROTATION_NOTHING
+  - BILLBOARD_ROTATION_WHOLE_OBJECT
   - _USE_FILL_TEXTURE
   - _WIND
   m_InvalidKeywords: []
@@ -35,7 +33,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -122,15 +119,15 @@ Material:
     m_Ints: []
     m_Floats:
     - BILLBOARD_FACE_CAMERA_POSITION: 0
-    - BILLBOARD_ROTATION: 0
-    - Billboard_Scale: 1.22
-    - Clip_Threshold: 0.662
-    - Fill_Impact: 0.412
+    - BILLBOARD_ROTATION: 2
+    - Billboard_Scale: 1
+    - Clip_Threshold: 0.68
+    - Fill_Impact: 0.68
     - Fill_Scale: 0.17
     - Fresnel_Power: 0
-    - Fresnel_Sharpness: 0.811
+    - Fresnel_Sharpness: 0.81
     - Header_Fresnel: 0
-    - Offset_Along_Normal: 0
+    - Offset_Along_Normal: 0.1
     - Smoothness: 0
     - Space_0: 0
     - Space_1: 0
@@ -235,8 +232,7 @@ Texture2D:
   m_MipCount: 1
   m_IsReadable: 1
   m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 0
-  m_MipmapLimitGroupName: 
+  m_IgnoreMasterTextureLimit: 0
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_VTOnly: 0
