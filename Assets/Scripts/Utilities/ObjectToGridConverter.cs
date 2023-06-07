@@ -24,11 +24,6 @@ public class ObjectToGridConverter : MonoBehaviour
             MeshName = meshName;
         }
     }
-    void Start()
-    {
-        
-    }
-
     private void AssignComponents()
     {
         _river = GameObject.Find("River");
@@ -124,11 +119,6 @@ public class ObjectToGridConverter : MonoBehaviour
         }
 
         return intersectionCount % 2 == 1;
-
-    }
-
-    void Update()
-    {
 
     }
 

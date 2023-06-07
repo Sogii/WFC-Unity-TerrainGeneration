@@ -699,7 +699,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": 0.05000000074505806,
+    "m_Value": 0.6000000238418579,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -797,7 +797,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 0.05000000074505806,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -1588,8 +1588,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1124.800048828125,
-            "y": -541.5999145507813,
+            "x": -1232.800048828125,
+            "y": -552.0,
             "width": 125.5999755859375,
             "height": 76.79998779296875
         }
@@ -1673,7 +1673,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"fd7b7c4407e13ef4cb4db6b8fe734bc8\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"89b9b1ac9b0de486fa2d56bea6f1e5ee\",\"type\":3}}",
         "m_Guid": ""
     },
     "isMainTexture": false,

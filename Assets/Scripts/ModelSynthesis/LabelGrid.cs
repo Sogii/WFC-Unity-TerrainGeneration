@@ -32,9 +32,9 @@ public class LabelGrid
     }
 
 
-/// <summary>
-/// Assigns all possible labels to the grid, used to initialize the grid before the propagation process
-/// </summary>
+    /// <summary>
+    /// Assigns all possible labels to the grid, used to initialize the grid before the propagation process
+    /// </summary>
     public void AssignAllPossibleLabels(List<ModelTile> allModelTiles)
     {
         int randomX = UnityEngine.Random.Range(0, Width);
@@ -82,10 +82,10 @@ public class LabelGrid
         }
     }
 
-/// <summary>
-/// Returns a ModelTile List with all the labels at the input coordinate. 
-/// Returns an empty list if the coordinate is outside of the grid boundaries.
-/// </summary> 
+    /// <summary>
+    /// Returns a ModelTile List with all the labels at the input coordinate. 
+    /// Returns an empty list if the coordinate is outside of the grid boundaries.
+    /// </summary> 
     public List<ModelTile> GetLabelsAt(Coordinate cord)
     {
         if (UtilityFunctions.IsWithinGridBounds(cord, this))
@@ -99,9 +99,9 @@ public class LabelGrid
         }
     }
 
-/// <summary>
-///Replaces the list of labels in the LabelGrid at the given coordinates with the given List of labels
-/// </summary>
+    /// <summary>
+    ///Replaces the list of labels in the LabelGrid at the given coordinates with the given List of labels
+    /// </summary>
     public void SetLabelsAt(Coordinate cords, List<ModelTile> labels)
     {
         if (labels == null || labels.Count == 0)
@@ -111,7 +111,7 @@ public class LabelGrid
 
         if (UtilityFunctions.IsWithinGridBounds(cords, this))
         {
-            Debug.Log($"Setting labels at ({cords.X},{cords.Y}) to {labels[0].tileType}.");
+            //  Debug.Log($"Setting labels at ({cords.X},{cords.Y}) to {labels[0].tileType}.");
             Grid[cords.X, cords.Y] = labels;
         }
 
@@ -121,9 +121,9 @@ public class LabelGrid
         }
     }
 
-/// <summary>
-///Prints out comprehensive list of all labels to the debug window
-/// </summary>
+    /// <summary>
+    ///Prints out comprehensive list of all labels to the debug window
+    /// </summary>
     public void PrintGridLabels()
     {
         StringBuilder builder = new StringBuilder();
@@ -143,9 +143,9 @@ public class LabelGrid
         Debug.Log(builder.ToString());
     }
 
-/// <summary>
-///Removes the given label at the given coordinates
-/// </summary>
+    /// <summary>
+    ///Removes the given label at the given coordinates
+    /// </summary>
     public void RemoveLabelAt(Coordinate cords, ModelTile modelTileToRemove)
     {
         if (UtilityFunctions.IsWithinGridBounds(cords, this))

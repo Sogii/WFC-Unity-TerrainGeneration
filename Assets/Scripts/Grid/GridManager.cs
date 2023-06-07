@@ -34,15 +34,13 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void CreateCatagoryGridFromExampleMesh()
     {
         InnitializeGrid();
-        //FillGridWithRandomTiles();
         FillGridWithFillerTiles(Tile.TileType.Forest);
         ConvertObjectsToGrid();
         InstantiateTiles();
     }
-
 
     private void InnitializeGrid()
     {
@@ -77,9 +75,7 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-    
 
-    
     void FillGridWithRandomTiles()
     {
         for (int x = 0; x < GridWidth; x++)

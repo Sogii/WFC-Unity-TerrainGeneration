@@ -50,7 +50,7 @@ public class OutputMesh : MonoBehaviour
                     GameObject tilePrefab = selectPrefabToSpawn(modelTile);
                    
                     Vector3 worldPosition = new Vector3(x * tileSize, tilePrefab.transform.position.y, y * tileSize);
-                     if(modelTile.tileType == SharedData.TileType.Grass)
+                    if(modelTile.tileType == SharedData.TileType.Grass)
                     {
                         GameObject instance = Instantiate(tilePrefab, worldPosition, ReturnRandom90degreeAngle());
                         instance.transform.parent = transform;
