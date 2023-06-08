@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System;
+using System.Linq;
 
 public class LabelGrid
 {
@@ -10,9 +11,11 @@ public class LabelGrid
     public int Height { get; private set; }
     public List<ModelTile>[,] Grid { get; private set; }
     private AdjacencyMatrix adjacencyMatrix;
+    public SharedData sharedData;
 
-    public LabelGrid(int width, int height, AdjacencyMatrix adjacencyMatrix)
+    public LabelGrid(int width, int height, AdjacencyMatrix adjacencyMatrix, SharedData sharedData)
     {
+        this.sharedData = sharedData;
         Width = width;
         Height = height;
         this.adjacencyMatrix = adjacencyMatrix;
@@ -82,6 +85,51 @@ public class LabelGrid
         }
     }
 
+    public void AssignLabelsBasedOnTerrainTypeGrid(TerrainTypeGrid terrainTypeGrid)
+    {
+        //Loop trough each gridcell
+        for (int y = 0; y < Height; y++)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                Coordinate cord = new Coordinate(x, y);
+                SharedData.TerrainType terrainType = terrainTypeGrid.GetTerrainTypeAt(cord);
+                switch (terrainType)
+                {
+                    case SharedData.TerrainType.GreeneryTerrain:
+                        //0 = Nature
+                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.TerrainTileSets[0].TerrainModelTiles.ToList());
+                        break;
+
+                    case SharedData.TerrainType.WaterTerrain:
+                        //1 = Filler
+                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.TerrainTileSets[1].TerrainModelTiles.ToList());
+                        break;
+
+                    case SharedData.TerrainType.RiverSide:
+                        //1 = Filler
+                        break;
+
+                    case SharedData.TerrainType.BufferTerrain:
+                        //1 = Filler
+                        break;
+
+                    default:
+                        throw new ArgumentException("Invalid terrain type");
+                }
+
+            }
+        }
+    }
+
+    public void AssignLabelsFromTerrainGroupAtCoordinate(Coordinate cord, List<ModelTile> modelTilesToAsign)
+    {
+        foreach (ModelTile modelTile in modelTilesToAsign)
+        {
+            Grid[cord.X, cord.Y].Add(modelTile);
+        }
+    }
+
     /// <summary>
     /// Returns a ModelTile List with all the labels at the input coordinate. 
     /// Returns an empty list if the coordinate is outside of the grid boundaries.
@@ -134,7 +182,8 @@ public class LabelGrid
                 builder.Append($"({x},{y}): ");
                 foreach (ModelTile modelTile in Grid[x, y])
                 {
-                    builder.Append($"{modelTile.tileType}, ");
+                    string tileTypeChar = TileTypeToCharacter(modelTile);
+                    builder.Append($"{tileTypeChar}, ");
                 }
                 builder.AppendLine();
             }
@@ -142,6 +191,7 @@ public class LabelGrid
 
         Debug.Log(builder.ToString());
     }
+
 
     /// <summary>
     ///Removes the given label at the given coordinates
@@ -164,6 +214,23 @@ public class LabelGrid
         else
         {
             Debug.LogError($"Invalid coordinates: ({cords.X}, {cords.Y}). Grid dimensions: {Width}x{Height}.");
+        }
+    }
+
+    private string TileTypeToCharacter(ModelTile modelTile)
+    {
+        switch (modelTile.tileType)
+        {
+            case SharedData.TileType.Water: return "W";
+            case SharedData.TileType.URStreetcorner: return "UR";
+            case SharedData.TileType.DRStreetcorner: return "DR";
+            case SharedData.TileType.DLStreetcorner: return "DL";
+            case SharedData.TileType.LUStreetcorner: return "L";
+            case SharedData.TileType.Streethorizontal: return "-";
+            case SharedData.TileType.Streetvertical: return "|";
+            case SharedData.TileType.Grass: return "G";
+            case SharedData.TileType.FillerTile: return "X";
+            default: return "?";
         }
     }
 

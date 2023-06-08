@@ -34,6 +34,7 @@ public class AdjacencyMatrix
                 Debug.LogError("No ModelTile found matching key: " + outerEntry.Key);
                 continue;
             }
+
             foreach (KeyValuePair<SharedData.Direction, HashSet<string>> innerEntry in outerEntry.Value)
             {
                 foreach (string adjacentTileType in innerEntry.Value)

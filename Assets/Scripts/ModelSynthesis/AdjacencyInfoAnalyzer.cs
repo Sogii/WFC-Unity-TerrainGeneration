@@ -96,8 +96,6 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
     }
 
 
-    // Given an index in the 1D array and a direction, returns the index of the tile in that direction
-
     public void WriteToFile(Dictionary<string, Dictionary<SharedData.Direction, HashSet<string>>> dict)
     {
         // Create file path
@@ -118,4 +116,40 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
         // Write to the file
         File.WriteAllText(path, builder.ToString());
     }
+
+    public void AddCustomTilesToLibrary(ModelTile tileToAdd)
+    {
+        // Get the name of the tile to add
+        string tileToAddName = tileToAdd.gameObject.name;
+
+        // If this tile doesn't exist in our adjacency dictionary, add it
+        if (!adjecencyDictionary.ContainsKey(tileToAddName))
+        {
+            adjecencyDictionary[tileToAddName] = new Dictionary<SharedData.Direction, HashSet<string>>();
+            foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
+            {
+                adjecencyDictionary[tileToAddName][dir] = new HashSet<string>();
+            }
+        }
+
+        // Now, let's make sure that every tile can be adjacent to this tile
+        foreach (var outerEntry in adjecencyDictionary)
+        {
+            // Get the name of the current tile
+            string currentTileName = outerEntry.Key;
+
+            // Add the current tile as an adjacent tile to the tileToAdd
+            foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
+            {
+                adjecencyDictionary[tileToAddName][dir].Add(currentTileName);
+            }
+
+            // Also add the tileToAdd as an adjacent tile to the current tile
+            foreach (SharedData.Direction dir in System.Enum.GetValues(typeof(SharedData.Direction)))
+            {
+                adjecencyDictionary[currentTileName][dir].Add(tileToAddName);
+            }
+        }
+    }
+
 }

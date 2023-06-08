@@ -12,6 +12,7 @@ public class ObjectToGridConverter : MonoBehaviour
     private GameObject _rightRiverBank;
     private MeshFilter _rightRiverBankMeshFilter;
     public MeshObject[] MeshObjects;
+    public GridManager GridManager;
 
     [System.Serializable]
     public struct MeshObject
@@ -39,13 +40,13 @@ public class ObjectToGridConverter : MonoBehaviour
     public void IntegrateRiverMesh()
     {
         AssignComponents();
-       
-        IntegrateMesh(_leftRiverBankMeshFilter, Tile.TileType.Ground, _leftRiverBank);
-        IntegrateMesh(_rightRiverBankMeshFilter, Tile.TileType.Ground, _rightRiverBank);
-         IntegrateMesh(_riverMeshFilter, Tile.TileType.Water, _river);
+
+        IntegrateMesh(_leftRiverBankMeshFilter, SharedData.TerrainType.RiverSide, _leftRiverBank);
+        IntegrateMesh(_rightRiverBankMeshFilter, SharedData.TerrainType.RiverSide, _rightRiverBank);
+        IntegrateMesh(_riverMeshFilter, SharedData.TerrainType.WaterTerrain, _river);
     }
 
-    public void IntegrateMeshByName(string targetMeshName, Tile.TileType tileType)
+    public void IntegrateMeshByName(string targetMeshName, SharedData.TerrainType terrainType)
     {
         foreach (MeshObject meshObject in MeshObjects)
         {
@@ -56,7 +57,7 @@ public class ObjectToGridConverter : MonoBehaviour
 
                 if (meshFilter != null)
                 {
-                    IntegrateMesh(meshFilter, tileType, meshHolder);
+                    IntegrateMesh(meshFilter, terrainType, meshHolder);
                 }
                 else
                 {
@@ -69,23 +70,23 @@ public class ObjectToGridConverter : MonoBehaviour
         }
     }
 
-    public void IntegrateMesh(MeshFilter meshFilter, Tile.TileType tileType, GameObject meshHolder)
+    public void IntegrateMesh(MeshFilter meshFilter, SharedData.TerrainType terrainType, GameObject meshHolder)
     {
         // Create a temporary mesh collider for intersection tests
         MeshCollider meshCollider = meshHolder.AddComponent<MeshCollider>();
         meshCollider.sharedMesh = meshFilter.sharedMesh;
 
         // Iterate through grid cells
-        for (int x = 0; x < GridManager.Instance.GridWidth; x++)
+        for (int x = 0; x < GridManager.GridWidth; x++)
         {
-            for (int y = 0; y < GridManager.Instance.GridHeight; y++)
+            for (int y = 0; y < GridManager.GridHeight; y++)
             {
                 Vector3 gridWorldPos = GridSpaceToWorldSpace(new Vector2Int(x, y));
 
                 // Check if the grid cell is inside the mesh using a mesh collider intersection test
                 if (IsPointInsideMesh(gridWorldPos, meshCollider))
                 {
-                    GridManager.Instance.TileGrid[x, y] = new Tile(tileType, 0);
+                    GridManager.SetTerrainTypeAt(new Coordinate(x, y), terrainType);
                 }
             }
         }

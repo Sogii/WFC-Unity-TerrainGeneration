@@ -3831,7 +3831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 815078715}
   - component: {fileID: 815078714}
-  - component: {fileID: 815078713}
+  - component: {fileID: 815078716}
   m_Layer: 0
   m_Name: Tilegeneration
   m_TagString: Untagged
@@ -3839,27 +3839,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &815078713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815078712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cd4305815511e248abf53d5661d08e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MeshObjects:
-  - MeshHolder: {fileID: 1659295391}
-    MeshName: Water
-  - MeshHolder: {fileID: 1659295390}
-    MeshName: Road
-  - MeshHolder: {fileID: 1659295392}
-    MeshName: Buildings
-  - MeshHolder: {fileID: 1659295389}
-    MeshName: Traintracks
 --- !u!114 &815078714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3895,6 +3874,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815078716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815078712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9915501d86d26e94e89431183bfd61ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeshObjects:
+  - MeshHolder: {fileID: 1659295392}
+    MeshName: Urban
+  - MeshHolder: {fileID: 2101665626}
+    MeshName: Grass
+  - MeshHolder: {fileID: 1659295390}
+    MeshName: Road
+  - MeshHolder: {fileID: 1659295389}
+    MeshName: Traintracks
+  GridManager: {fileID: 815078714}
 --- !u!1001 &818466379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4184,7 +4185,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 1000
-  field of view: 19
+  field of view: 37
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4210,7 +4211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919631497}
   m_LocalRotation: {x: 0.5000007, y: -0.49999928, z: 0.49999928, w: 0.5000007}
-  m_LocalPosition: {x: 40, y: 255, z: 80}
+  m_LocalPosition: {x: 40, y: 91.9, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6417,11 +6418,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1378922297957006227, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
   m_PrefabInstance: {fileID: 1659295387}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1659295391 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6099135959303080388, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-  m_PrefabInstance: {fileID: 1659295387}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1659295392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8531084230230199607, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
@@ -6706,8 +6702,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileSize: 1
-  XCord: 20
-  YCord: 20
+  XCord: 40
+  YCord: 80
   InstantlyGenerate: 1
   assignNeighbourWeights: {fileID: 11400000, guid: c85977eaf0cd7914e8cd637ddcd7bf7b, type: 2}
   AdjacencyInfoAnalyzer: {fileID: 1601699517}
@@ -8161,6 +8157,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6459911256297147331, guid: c0ef35912b9fe844e88257678df48a18, type: 3}
   m_PrefabInstance: {fileID: 2081387734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2101665626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1695386897620489773, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+  m_PrefabInstance: {fileID: 1659295387}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2102445626
 PrefabInstance:

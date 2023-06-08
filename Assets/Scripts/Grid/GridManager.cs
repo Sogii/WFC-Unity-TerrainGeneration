@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public static GridManager Instance { get; private set; }
-
     [Header("Gridinfo")]
     public int GridWidth = 50;
     public int GridHeight = 50;
-    public Tile[,] TileGrid;
+    // public SharedData.TerrainType[,] TileGrid;
 
     [Header("TilePrefabs")]
     public GameObject GroundPrefab;
@@ -20,42 +18,32 @@ public class GridManager : MonoBehaviour
 
     [Header("SharedData")]
     public SharedData sharedData;
+    private TerrainTypeGrid ModelTerrainTypeGrid;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void CreateCatagoryGridFromExampleMesh()
+    public TerrainTypeGrid CreateCatagoryGridFromExampleMesh()
     {
         InnitializeGrid();
-        FillGridWithFillerTiles(Tile.TileType.Forest);
+        FillGridWithFillerTiles(SharedData.TerrainType.GreeneryTerrain);
         ConvertObjectsToGrid();
-        InstantiateTiles();
+       // DebugPrintTerrainTypeGrid();
+        return ModelTerrainTypeGrid;
+        //Send tiles to propagationmanagerscript       
     }
 
     private void InnitializeGrid()
     {
-        TileGrid = new Tile[GridWidth, GridHeight];
+        ModelTerrainTypeGrid = new TerrainTypeGrid(GridWidth, GridHeight);
     }
 
 
     private void ConvertObjectsToGrid()
     {
         ObjectToGridConverter objectToGridConverter = this.gameObject.GetComponent<ObjectToGridConverter>();
-        objectToGridConverter.IntegrateMeshByName("Water", Tile.TileType.Water);
-        objectToGridConverter.IntegrateMeshByName("Buildings", Tile.TileType.Brick);
-        objectToGridConverter.IntegrateMeshByName("Traintracks", Tile.TileType.Mountain);
-        objectToGridConverter.IntegrateMeshByName("Road", Tile.TileType.Mountain);
-        objectToGridConverter.IntegrateMeshByName("Urban", Tile.TileType.Brick);
+        objectToGridConverter.IntegrateMeshByName("Water", SharedData.TerrainType.WaterTerrain);
+        objectToGridConverter.IntegrateMeshByName("Buildings", SharedData.TerrainType.BufferTerrain);
+        objectToGridConverter.IntegrateMeshByName("Traintracks", SharedData.TerrainType.BufferTerrain);
+        objectToGridConverter.IntegrateMeshByName("Road", SharedData.TerrainType.BufferTerrain);
+        objectToGridConverter.IntegrateMeshByName("Urban", SharedData.TerrainType.BufferTerrain);
         objectToGridConverter.IntegrateRiverMesh();
     }
 
@@ -65,82 +53,99 @@ public class GridManager : MonoBehaviour
     }
 
 
-    void FillGridWithFillerTiles(Tile.TileType tileType)
+    void FillGridWithFillerTiles(SharedData.TerrainType fillerTile)
     {
         for (int x = 0; x < GridWidth; x++)
         {
             for (int y = 0; y < GridHeight; y++)
             {
-                TileGrid[x, y] = new Tile(tileType, 0);
+                ModelTerrainTypeGrid.SetTerrainTypeAt(new Coordinate(x, y), fillerTile);
             }
         }
     }
 
-    void FillGridWithRandomTiles()
+    public void SetTerrainTypeAt(Coordinate cords, SharedData.TerrainType terrainType)
     {
-        for (int x = 0; x < GridWidth; x++)
+        ModelTerrainTypeGrid.SetTerrainTypeAt(cords, terrainType);
+    }
+
+    public void DebugPrintTerrainTypeGrid()
+    {
+        Debug.Log("Printing TerrainTypeGrid:");
+
+        string gridString = "";
+        for (int y = GridHeight - 1; y >= 0; y--)  // Changed to reverse order to represent top-to-bottom
         {
-            for (int y = 0; y < GridHeight; y++)
+            string rowString = "";
+            for (int x = 0; x < GridWidth; x++)
             {
-                Tile.TileType randomType = GetRandomTileType();
-                int randomRotation = GetRandomRotation();
-                TileGrid[x, y] = new Tile(randomType, randomRotation);
+                // Getting terrain type at given coordinates
+                SharedData.TerrainType terrainType = ModelTerrainTypeGrid.GetTerrainTypeAt(new Coordinate(x, y));
+
+                // Convert this terrain type to a character and add it to the row string
+                rowString += TerrainTypeToCharacter(terrainType);
             }
+            // Append this row to the grid string with a newline
+            gridString += rowString + "\n";
         }
+        // Print the whole grid
+        Debug.Log(gridString);
     }
 
-    Tile.TileType GetRandomTileType()
-    {
-        int tileTypeCount = System.Enum.GetValues(typeof(Tile.TileType)).Length;
-        int randomIndex = Random.Range(0, tileTypeCount);
-        return (Tile.TileType)randomIndex;
-    }
 
-    int GetRandomRotation()
+    private string TerrainTypeToCharacter(SharedData.TerrainType terrainType)
     {
-        int angleIndex = Random.Range(0, 4); // There are 8 possible 45-degree rotations
-        return angleIndex * 90;
-    }
-
-    void InstantiateTiles()
-    {
-        for (int x = 0; x < GridWidth; x++)
+        switch (terrainType)
         {
-            for (int y = 0; y < GridHeight; y++)
-            {
-                Tile currentTile = TileGrid[x, y];
-                GameObject tilePrefab = null;
-
-                // Choose the appropriate prefab based on the tile type
-                switch (currentTile.type)
-                {
-                    case Tile.TileType.Ground:
-                        tilePrefab = GroundPrefab;
-                        break;
-                    case Tile.TileType.Water:
-                        tilePrefab = WaterPrefab;
-                        break;
-                    case Tile.TileType.Forest:
-                        tilePrefab = ForestPrefab;
-                        break;
-                    case Tile.TileType.Mountain:
-                        tilePrefab = MountainPrefab;
-                        break;
-                    case Tile.TileType.Brick:
-                        tilePrefab = BrickPrefab;
-                        break;
-                }
-
-                // Instantiate the prefab and set its position
-                if (tilePrefab != null)
-                {
-                    Vector3 worldPosition = GridToWorldSpace(x, y);
-                    GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
-                    instance.transform.parent = transform;
-                }
-            }
+            case SharedData.TerrainType.GreeneryTerrain: return "G";
+            case SharedData.TerrainType.WaterTerrain: return "W";
+            case SharedData.TerrainType.BufferTerrain: return "B";
+            case SharedData.TerrainType.RiverSide: return "R";
+            default: return "?";
         }
     }
+
+
+
+    // void InstantiateTiles()
+    // {
+    //     for (int x = 0; x < GridWidth; x++)
+    //     {
+    //         for (int y = 0; y < GridHeight; y++)
+    //         {
+    //             TerrainTile currentTile = TileGrid[x, y];
+    //             GameObject tilePrefab = null;
+
+    //             // Choose the appropriate prefab based on the tile type
+    //             switch (currentTile.type)
+    //             {
+    //                 case TerrainTile.TileType.Ground:
+    //                     tilePrefab = GroundPrefab;
+    //                     break;
+    //                 case TerrainTile.TileType.Water:
+    //                     tilePrefab = WaterPrefab;
+    //                     break;
+    //                 case TerrainTile.TileType.Forest:
+    //                     tilePrefab = ForestPrefab;
+    //                     break;
+    //                 case TerrainTile.TileType.Mountain:
+    //                     tilePrefab = MountainPrefab;
+    //                     break;
+    //                 case TerrainTile.TileType.Brick:
+    //                     tilePrefab = BrickPrefab;
+    //                     break;
+    //             }
+
+    //             // Instantiate the prefab and set its position
+    //             if (tilePrefab != null)
+    //             {
+    //                 Vector3 worldPosition = GridToWorldSpace(x, y);
+    //                 GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
+    //                 instance.transform.parent = transform;
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 
