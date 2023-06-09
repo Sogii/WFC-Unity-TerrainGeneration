@@ -150,6 +150,7 @@ public class AdjacencyInfoAnalyzer : MonoBehaviour
                 adjecencyDictionary[currentTileName][dir].Add(tileToAddName);
             }
         }
+        WriteToFile(adjecencyDictionary);
     }
 
 }

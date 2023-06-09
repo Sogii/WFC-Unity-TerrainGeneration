@@ -21,14 +21,14 @@ public class AdjacencyMatrix
     {
         var adjacencyMatrix = new Dictionary<ModelTile, Dictionary<ModelTile, List<SharedData.Direction>>>();
 
-        foreach (ModelTile modelTile in sharedData.ModelTiles)
+        foreach (ModelTile modelTile in sharedData.AllModelTiles)
         {
             adjacencyMatrix[modelTile] = new Dictionary<ModelTile, List<SharedData.Direction>>();
         }
 
         foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjacencyDictionary)
         {
-            ModelTile i = sharedData.ModelTiles.First(tile => tile.tileType.ToString() == outerEntry.Key);
+            ModelTile i = sharedData.AllModelTiles.First(tile => tile.tileType.ToString() == outerEntry.Key);
             if (i == null)
             {
                 Debug.LogError("No ModelTile found matching key: " + outerEntry.Key);
@@ -39,7 +39,7 @@ public class AdjacencyMatrix
             {
                 foreach (string adjacentTileType in innerEntry.Value)
                 {
-                    ModelTile j = sharedData.ModelTiles.First(tile => tile.tileType.ToString() == adjacentTileType);
+                    ModelTile j = sharedData.AllModelTiles.First(tile => tile.tileType.ToString() == adjacentTileType);
 
                     if (!adjacencyMatrix[i].ContainsKey(j))
                     {
@@ -50,7 +50,7 @@ public class AdjacencyMatrix
             }
         }
 
-      //  LogAdjacencyGrid(adjacencyMatrix);
+        //  LogAdjacencyGrid(adjacencyMatrix);
 
         return adjacencyMatrix;
     }
@@ -76,7 +76,24 @@ public class AdjacencyMatrix
     /// </summary>
     public bool CheckAdjacency(ModelTile tileType1, ModelTile tileType2, SharedData.Direction direction)
     {
-        bool result = matrix.ContainsKey(tileType1) && matrix[tileType1].ContainsKey(tileType2) && matrix[tileType1][tileType2].Contains(direction);
-        return result;
+        if (!matrix.ContainsKey(tileType1))
+        {
+         //   Debug.Log($"Matrix does not contain key for tile type: {tileType1.tileType}.");
+            return false;
+        }
+        if (!matrix[tileType1].ContainsKey(tileType2))
+        {
+          //  Debug.Log($"Matrix does not contain key for tile type: {tileType2.tileType} in the adjacency list of {tileType1.tileType}.");
+            return false;
+        }
+        if (!matrix[tileType1][tileType2].Contains(direction))
+        {
+          //  Debug.Log($"{tileType1.tileType} and {tileType2.tileType} are not adjacent in the direction: {direction.ToString()}.");
+            return false;
+        }
+
+       // Debug.Log($"{tileType1.tileType} and {tileType2.tileType} are adjacent in the direction: {direction.ToString()}.");
+        return true;
     }
+
 }

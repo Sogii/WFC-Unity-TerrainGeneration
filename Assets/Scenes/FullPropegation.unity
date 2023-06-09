@@ -6702,8 +6702,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileSize: 1
-  XCord: 40
-  YCord: 80
+  XCord: 80
+  YCord: 160
   InstantlyGenerate: 1
   assignNeighbourWeights: {fileID: 11400000, guid: c85977eaf0cd7914e8cd637ddcd7bf7b, type: 2}
   AdjacencyInfoAnalyzer: {fileID: 1601699517}

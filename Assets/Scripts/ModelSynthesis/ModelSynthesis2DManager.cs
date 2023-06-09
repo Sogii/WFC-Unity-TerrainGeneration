@@ -53,19 +53,21 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     private void AnalyzeWFCExampleGrid()
     {
-        assignNeighbourWeights.InitializeNeighbourWeights(SharedData.ModelTiles);
+        assignNeighbourWeights.InitializeNeighbourWeights(SharedData.AllModelTiles);
+         assignNeighbourWeights.InitializeNeighbourWeights(SharedData.GetModelTilesArrayByTerrainType(SharedData.TerrainType.GreeneryTerrain));
+        assignNeighbourWeights.InitializeNeighbourWeights(SharedData.GetModelTilesArrayByTerrainType(SharedData.TerrainType.BufferTerrain));
         //  assignNeighbourWeights.DebugPrintNeighbourWeights(SharedData.ModelTiles);
         AdjacencyInfoAnalyzer.InitiateExampleGrid();
         AdjacencyInfoAnalyzer.AssignTilesToExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
-        AdjacencyInfoAnalyzer.AddCustomTilesToLibrary(SharedData.TerrainTileSets[1].TerrainModelTiles[0]);
+        AdjacencyInfoAnalyzer.AddCustomTilesToLibrary(SharedData.AllModelTiles[8]);
     }
 
     private void SetupWFCGrids()
     {
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
         LabelGrid = new LabelGrid(XCord, YCord, AdjacencyMatrix, SharedData);
-        
+
         LabelGrid.AssignLabelsBasedOnTerrainTypeGrid(GridManager.CreateCatagoryGridFromExampleMesh());
         //   LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());
         LabelGrid.PrintGridLabels();

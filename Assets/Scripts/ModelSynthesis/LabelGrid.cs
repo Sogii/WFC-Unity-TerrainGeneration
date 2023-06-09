@@ -87,36 +87,51 @@ public class LabelGrid
 
     public void AssignLabelsBasedOnTerrainTypeGrid(TerrainTypeGrid terrainTypeGrid)
     {
-        //Loop trough each gridcell
+        // int randomIndex1 = UnityEngine.Random.Range(1, Height);
+        // int randomIndex2 = UnityEngine.Random.Range(1, Height);
+        // //Loop trough each gridcell
         for (int y = 0; y < Height; y++)
         {
             for (int x = 0; x < Width; x++)
             {
-                Coordinate cord = new Coordinate(x, y);
-                SharedData.TerrainType terrainType = terrainTypeGrid.GetTerrainTypeAt(cord);
-                switch (terrainType)
-                {
-                    case SharedData.TerrainType.GreeneryTerrain:
-                        //0 = Nature
-                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.TerrainTileSets[0].TerrainModelTiles.ToList());
-                        break;
 
-                    case SharedData.TerrainType.WaterTerrain:
-                        //1 = Filler
-                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.TerrainTileSets[1].TerrainModelTiles.ToList());
-                        break;
+                // if (x == randomIndex1 && y == randomIndex2)
+                // {
+                //     List<ModelTile> modelTilesToAssign = new List<ModelTile>();
+                //     modelTilesToAssign.Add(sharedData.ModelTiles[0]);
+                //     AssignLabelsFromTerrainGroupAtCoordinate(new Coordinate(x, y),modelTilesToAssign);
+                // }
+                // else
+                // {
+                    Coordinate cord = new Coordinate(x, y);
+                    SharedData.TerrainType terrainType = terrainTypeGrid.GetTerrainTypeAt(cord);
+                    switch (terrainType)
+                    {
+                        case SharedData.TerrainType.GreeneryTerrain:
+                            //0 = Nature
+                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.GreeneryTerrain));
+                            
+                            break;
 
-                    case SharedData.TerrainType.RiverSide:
-                        //1 = Filler
-                        break;
+                        case SharedData.TerrainType.WaterTerrain:
+                            //1 = Filler
+                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.WaterTerrain));
+                            break;
 
-                    case SharedData.TerrainType.BufferTerrain:
-                        //1 = Filler
-                        break;
+                        case SharedData.TerrainType.RiverSide:
+                            //1 = Filler
+                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.RiverSide));
+                            break;
 
-                    default:
-                        throw new ArgumentException("Invalid terrain type");
-                }
+                        case SharedData.TerrainType.BufferTerrain:
+                            //1 = Filler
+                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.BufferTerrain));
+                            break;
+
+                        default:
+                            throw new ArgumentException("Invalid terrain type");
+                    }
+                // }
 
             }
         }

@@ -33,7 +33,6 @@ public class PropagationManager
     {
         while (queue.Count > 0)
         {
-            
             Coordinate propagationCords = queue.Dequeue();
             List<ModelTile> labels = new List<ModelTile>(labelGrid.GetLabelsAt(propagationCords));
             //Prevents propagation of labels if there is only one label in the cell
@@ -49,6 +48,7 @@ public class PropagationManager
                     foreach (ModelTile tileToRemove in tilesToRemove)
                     {
                         labelGrid.RemoveLabelAt(propagationCords, tileToRemove);
+                     //   labelGrid.PrintGridLabels();
                         EnqueueNeighbourCoordinates(propagationCords);
                         if (labelGrid.GetLabelsAt(propagationCords).Count == 1)
                         {
@@ -68,7 +68,7 @@ public class PropagationManager
     /// </summary>
     public void CollapseGridCell(Coordinate cord)
     {
-      //  labelGrid.PrintGridLabels();
+       // labelGrid.PrintGridLabels();
         List<ModelTile> possibleLabels = labelGrid.GetLabelsAt(cord);
         List<int> weightedIndices = new List<int>();
 
@@ -76,8 +76,9 @@ public class PropagationManager
         for (int i = 0; i < possibleLabels.Count; i++)
         {
             //Grabs tile and baseweight of the tile (baseweight can be adjusted in the shared data script)
-            ModelTile tile = possibleLabels[i];
-            float baseWeight = tile.Weight;
+            ModelTile modelTile = possibleLabels[i];
+
+            float baseWeight = modelTile.Weight;
 
             //Loops trough each neighbour of the tile and adjusts the weight based on the neighbourweights
             foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
@@ -89,38 +90,47 @@ public class PropagationManager
                     foreach (ModelTile neighbourTile in labelGrid.GetLabelsAt(neighbourCord))
                     {
                         float weight = baseWeight;
-
                         //If the neighbourweight dictionary contains the neighbour, multiply the weight by the neighbourweight
-                        if (tile.Neighbourweights.ContainsKey(neighbourTile))
+                        if (modelTile != null && modelTile.Neighbourweights != null)
                         {
-                   //         Debug.Log($"Weight of {tile.tileType} is {weight} and neighbourweight of {neighbourTile.tileType} is {tile.Neighbourweights[neighbourTile]}.");
-                            weight *= tile.Neighbourweights[neighbourTile];
 
+                            if (modelTile.Neighbourweights.ContainsKey(neighbourTile))
+                            {
+                                weight *= modelTile.Neighbourweights[neighbourTile];
 
+                            }
+                            else
+                            {
+                                // neighbourTile key is not present in the dictionary. Handle this case appropriately.
+                             //  Debug.Log($"Key {neighbourTile.tileType} not found in Neighbourweights dictionary");
+                            }
+
+                            int totalWeight = Mathf.RoundToInt(weight);
+
+                            //Adds the index of the tile to the weightedindices list an equal amount of times as the totalWeight of the tile. 
+                            for (int j = 0; j < totalWeight; j++)
+                            {
+                                weightedIndices.Add(i);
+                            }
                         }
-
-                        int totalWeight = Mathf.RoundToInt(weight);
-                   //     Debug.Log($"Total weight is {totalWeight}.");
-
-                        //Adds the index of the tile to the weightedindices list an equal amount of times as the totalWeight of the tile. 
-                        for (int j = 0; j < totalWeight; j++)
+                        else if (modelTile == null)
                         {
-                            weightedIndices.Add(i);
+                            Debug.Log("Tile is null");
+                        }
+                        else if (modelTile.Neighbourweights == null)
+                        {
+                            Debug.Log("Neighbourweights is null");
                         }
                     }
                 }
             }
         }
-     //   Debug.Log($"Weighted indices are {string.Join(", ", weightedIndices)}.");
         int chosenIndex = weightedIndices[UnityEngine.Random.Range(0, weightedIndices.Count)];
-      //  Debug.Log($"Chosen index is {chosenIndex}.");
         ModelTile chosenLabel = possibleLabels[chosenIndex];
 
         labelGrid.SetLabelsAt(cord, new List<ModelTile> { chosenLabel });
         OutputMesh outputMesh = ModelSynthesis2DManager.Instance.OutputMesh;
         outputMesh.SpawnCollapsedLabel(cord, chosenLabel);
-     //   Debug.Log($"Collapsed ({cord.X}, {cord.Y}) to {chosenLabel.tileType}.");
-
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
             Coordinate neighbourCord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
@@ -167,6 +177,7 @@ public class PropagationManager
                 break;
             }
         }
+
         return tilesToRemove;
     }
 

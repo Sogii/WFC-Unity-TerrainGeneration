@@ -1,72 +1,81 @@
 Grass:
-	North: Streethorizontal, LUStreetcorner, Grass, Water, URStreetcorner
-	NorthEast: Streethorizontal, LUStreetcorner, Grass, Water, Streetvertical, URStreetcorner, DLStreetcorner, DRStreetcorner
-	East: Grass, Streetvertical, Water, URStreetcorner, DRStreetcorner
-	SouthEast: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner
-	South: Grass, Streethorizontal, DLStreetcorner, Water, DRStreetcorner
-	SouthWest: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner
-	West: Grass, LUStreetcorner, Streetvertical, Water, DLStreetcorner
-	NorthWest: Streethorizontal, LUStreetcorner, Grass, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner
+	North: Streethorizontal, LUStreetcorner, Grass, Water, URStreetcorner, FillerTile
+	NorthEast: Streethorizontal, LUStreetcorner, Grass, Water, Streetvertical, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	East: Grass, Streetvertical, Water, URStreetcorner, DRStreetcorner, FillerTile
+	SouthEast: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	South: Grass, Streethorizontal, DLStreetcorner, Water, DRStreetcorner, FillerTile
+	SouthWest: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	West: Grass, LUStreetcorner, Streetvertical, Water, DLStreetcorner, FillerTile
+	NorthWest: Streethorizontal, LUStreetcorner, Grass, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
 Streethorizontal:
-	North: Grass
-	NorthEast: Grass, Streetvertical
-	East: Streethorizontal, LUStreetcorner, DLStreetcorner
-	SouthEast: Grass, Streetvertical
-	South: Grass
-	SouthWest: Grass, Streetvertical
-	West: Streethorizontal, URStreetcorner, DRStreetcorner
-	NorthWest: Grass, Streetvertical
+	North: Grass, FillerTile
+	NorthEast: Grass, Streetvertical, FillerTile
+	East: Streethorizontal, LUStreetcorner, DLStreetcorner, FillerTile
+	SouthEast: Grass, Streetvertical, FillerTile
+	South: Grass, FillerTile
+	SouthWest: Grass, Streetvertical, FillerTile
+	West: Streethorizontal, URStreetcorner, DRStreetcorner, FillerTile
+	NorthWest: Grass, Streetvertical, FillerTile
 LUStreetcorner:
-	North: Streetvertical
-	NorthEast: Grass
-	East: Grass
-	SouthEast: Grass
-	South: Grass
-	SouthWest: Grass
-	West: Streethorizontal
-	NorthWest: Grass
+	North: Streetvertical, FillerTile
+	NorthEast: Grass, FillerTile
+	East: Grass, FillerTile
+	SouthEast: Grass, FillerTile
+	South: Grass, FillerTile
+	SouthWest: Grass, FillerTile
+	West: Streethorizontal, FillerTile
+	NorthWest: Grass, FillerTile
 Streetvertical:
-	North: Streetvertical, DLStreetcorner, DRStreetcorner
-	NorthEast: Grass, Streethorizontal
-	East: Grass
-	SouthEast: Grass, Streethorizontal
-	South: LUStreetcorner, Streetvertical, URStreetcorner
-	SouthWest: Streethorizontal, Grass
-	West: Grass
-	NorthWest: Grass, Streethorizontal
+	North: Streetvertical, DLStreetcorner, DRStreetcorner, FillerTile
+	NorthEast: Grass, Streethorizontal, FillerTile
+	East: Grass, FillerTile
+	SouthEast: Grass, Streethorizontal, FillerTile
+	South: LUStreetcorner, Streetvertical, URStreetcorner, FillerTile
+	SouthWest: Streethorizontal, Grass, FillerTile
+	West: Grass, FillerTile
+	NorthWest: Grass, Streethorizontal, FillerTile
 Water:
-	North: Water, Grass
-	NorthEast: Water, Grass
-	East: Water, Grass
-	SouthEast: Grass, Water
-	South: Grass, Water
-	SouthWest: Grass, Water
-	West: Grass, Water
-	NorthWest: Grass, Water
+	North: Water, Grass, FillerTile
+	NorthEast: Water, Grass, FillerTile
+	East: Water, Grass, FillerTile
+	SouthEast: Grass, Water, FillerTile
+	South: Grass, Water, FillerTile
+	SouthWest: Grass, Water, FillerTile
+	West: Grass, Water, FillerTile
+	NorthWest: Grass, Water, FillerTile
 URStreetcorner:
-	North: Streetvertical
-	NorthEast: Grass
-	East: Streethorizontal
-	SouthEast: Grass
-	South: Grass
-	SouthWest: Grass
-	West: Grass
-	NorthWest: Grass
+	North: Streetvertical, FillerTile
+	NorthEast: Grass, FillerTile
+	East: Streethorizontal, FillerTile
+	SouthEast: Grass, FillerTile
+	South: Grass, FillerTile
+	SouthWest: Grass, FillerTile
+	West: Grass, FillerTile
+	NorthWest: Grass, FillerTile
 DLStreetcorner:
-	North: Grass
-	NorthEast: Grass
-	East: Grass
-	SouthEast: Grass
-	South: Streetvertical
-	SouthWest: Grass
-	West: Streethorizontal
-	NorthWest: Grass
+	North: Grass, FillerTile
+	NorthEast: Grass, FillerTile
+	East: Grass, FillerTile
+	SouthEast: Grass, FillerTile
+	South: Streetvertical, FillerTile
+	SouthWest: Grass, FillerTile
+	West: Streethorizontal, FillerTile
+	NorthWest: Grass, FillerTile
 DRStreetcorner:
-	North: Grass
-	NorthEast: Grass
-	East: Streethorizontal
-	SouthEast: Grass
-	South: Streetvertical
-	SouthWest: Grass
-	West: Grass
-	NorthWest: Grass
+	North: Grass, FillerTile
+	NorthEast: Grass, FillerTile
+	East: Streethorizontal, FillerTile
+	SouthEast: Grass, FillerTile
+	South: Streetvertical, FillerTile
+	SouthWest: Grass, FillerTile
+	West: Grass, FillerTile
+	NorthWest: Grass, FillerTile
+FillerTile:
+	North: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	NorthEast: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	East: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	SouthEast: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	South: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	SouthWest: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	West: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
+	NorthWest: Grass, Streethorizontal, LUStreetcorner, Streetvertical, Water, URStreetcorner, DLStreetcorner, DRStreetcorner, FillerTile
