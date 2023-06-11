@@ -48,13 +48,13 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     private void GenerateLayoutGrid()
     {
-        GridManager.CreateCatagoryGridFromExampleMesh();
+       // GridManager.CreateCatagoryGridFromExampleMesh();
     }
 
     private void AnalyzeWFCExampleGrid()
     {
         assignNeighbourWeights.InitializeNeighbourWeights(SharedData.AllModelTiles);
-         assignNeighbourWeights.InitializeNeighbourWeights(SharedData.GetModelTilesArrayByTerrainType(SharedData.TerrainType.GreeneryTerrain));
+        assignNeighbourWeights.InitializeNeighbourWeights(SharedData.GetModelTilesArrayByTerrainType(SharedData.TerrainType.GreeneryTerrain));
         assignNeighbourWeights.InitializeNeighbourWeights(SharedData.GetModelTilesArrayByTerrainType(SharedData.TerrainType.BufferTerrain));
         //  assignNeighbourWeights.DebugPrintNeighbourWeights(SharedData.ModelTiles);
         AdjacencyInfoAnalyzer.InitiateExampleGrid();

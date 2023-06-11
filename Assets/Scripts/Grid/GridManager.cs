@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
         InnitializeGrid();
         FillGridWithFillerTiles(SharedData.TerrainType.GreeneryTerrain);
         ConvertObjectsToGrid();
-       // DebugPrintTerrainTypeGrid();
+       DebugPrintTerrainTypeGrid();
         return ModelTerrainTypeGrid;
         //Send tiles to propagationmanagerscript       
     }

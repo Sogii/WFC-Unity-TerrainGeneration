@@ -3681,8 +3681,8 @@ MonoBehaviour:
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 799387938}
   _stepCount: 20
-  _riverWidth: 3
-  _riverSidesWidth: 6
+  _riverWidth: 2
+  _riverSidesWidth: 2
   _riverMaterial: {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
   _riverSideMaterial: {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
   RiverMesh: {fileID: 0}
@@ -3703,12 +3703,12 @@ MonoBehaviour:
     _bezierPath:
       points:
       - {x: 66.70508, y: -3.547656, z: -2.7575047}
-      - {x: 49.785156, y: -2.6374998, z: 32.941715}
-      - {x: 36.605247, y: -0.36873645, z: 53.326057}
-      - {x: 29.117958, y: 0.3000002, z: 127.95206}
-      - {x: 26.677542, y: 0.51796913, z: 152.27577}
-      - {x: 13.709061, y: 2.5500002, z: 165.59995}
-      - {x: 9.78009, y: 2.5812502, z: 174.74171}
+      - {x: 50.058716, y: -2.6453123, z: 29.593624}
+      - {x: 36.375137, y: -0.47893393, z: 51.826874}
+      - {x: 29.611206, y: 0.2843752, z: 126.521}
+      - {x: 27.949707, y: 0.4718752, z: 144.86894}
+      - {x: 13.69191, y: 2.5343752, z: 167.27525}
+      - {x: 9.762939, y: 2.5656252, z: 176.41702}
       isClosed: 0
       space: 0
       controlMode: 0
