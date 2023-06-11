@@ -26,14 +26,20 @@ public class SharedData : ScriptableObject
     public enum TileType
     {
         Water = 0,
-        URStreetcorner = 1,
-        DRStreetcorner = 2,
-        DLStreetcorner = 3,
-        LUStreetcorner = 4,
-        Streethorizontal = 5,
-        Streetvertical = 6,
+        PathUR = 1,
+        PathRD = 2,
+        PathDL = 3,
+        PathUL = 4,
+        PathRL = 5,
+        PathUD = 6,
         Grass = 7,
-        FillerTile = 8
+        FillerTile = 8,
+        PathX = 9,
+        PathRDL = 10,
+        PathUDL = 11,
+        PathURD = 12,
+        PathURL = 13,
+
     };
 
     public enum TerrainType

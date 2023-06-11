@@ -79,6 +79,7 @@ public class LabelGrid
                     foreach (ModelTile modelTile in allModelTiles)
                     {
                         Grid[x, y].Add(modelTile);
+                        Debug.Log("Added modelTile + " + modelTile.tileType.ToString() + " to grid at coordinate " + x + "," + y);
                     }
                 }
             }
@@ -237,14 +238,20 @@ public class LabelGrid
         switch (modelTile.tileType)
         {
             case SharedData.TileType.Water: return "W";
-            case SharedData.TileType.URStreetcorner: return "UR";
-            case SharedData.TileType.DRStreetcorner: return "DR";
-            case SharedData.TileType.DLStreetcorner: return "DL";
-            case SharedData.TileType.LUStreetcorner: return "L";
-            case SharedData.TileType.Streethorizontal: return "-";
-            case SharedData.TileType.Streetvertical: return "|";
+            case SharedData.TileType.PathUR: return "UR";
+            case SharedData.TileType.PathRD: return "DR";
+            case SharedData.TileType.PathDL: return "DL";
+            case SharedData.TileType.PathUL: return "L";
+            case SharedData.TileType.PathRL: return "-";
+            case SharedData.TileType.PathUD: return "|";
             case SharedData.TileType.Grass: return "G";
-            case SharedData.TileType.FillerTile: return "X";
+            case SharedData.TileType.FillerTile: return "Fill";
+            case SharedData.TileType.PathURD: return "URD";
+            case SharedData.TileType.PathRDL: return "RDL";
+            case SharedData.TileType.PathURL: return "URL";
+            case SharedData.TileType.PathUDL: return "UDL";
+            case SharedData.TileType.PathX: return "X";
+
             default: return "?";
         }
     }

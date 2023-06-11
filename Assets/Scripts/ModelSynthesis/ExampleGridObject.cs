@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExampleGridObject : MonoBehaviour
 {
-    public SharedData SharedData;
+   // public SharedData SharedData;
     public SharedData.TileType thisTileType;
     public int GridX;
     public int GridY;

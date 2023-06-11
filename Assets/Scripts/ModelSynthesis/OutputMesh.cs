@@ -14,12 +14,12 @@ public class OutputMesh : MonoBehaviour
     public VotingResults votingResults;
     List<SharedData.TileType> roadTiles = new List<SharedData.TileType>
         {
-        SharedData.TileType.URStreetcorner,
-        SharedData.TileType.DRStreetcorner,
-        SharedData.TileType.DLStreetcorner,
-        SharedData.TileType.LUStreetcorner,
-        SharedData.TileType.Streethorizontal,
-        SharedData.TileType.Streetvertical
+        SharedData.TileType.PathUR,
+        SharedData.TileType.PathRD,
+        SharedData.TileType.PathDL,
+        SharedData.TileType.PathUL,
+        SharedData.TileType.PathRL,
+        SharedData.TileType.PathUD
         };
 
     public void AssignData()

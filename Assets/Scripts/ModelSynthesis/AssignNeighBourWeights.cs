@@ -8,12 +8,12 @@ public class AssignNeighBourWeights : ScriptableObject
 {
     List<SharedData.TileType> roadTiles = new List<SharedData.TileType>
         {
-        SharedData.TileType.URStreetcorner,
-        SharedData.TileType.DRStreetcorner,
-        SharedData.TileType.DLStreetcorner,
-        SharedData.TileType.LUStreetcorner,
-        SharedData.TileType.Streethorizontal,
-        SharedData.TileType.Streetvertical
+        SharedData.TileType.PathUR,
+        SharedData.TileType.PathRD,
+        SharedData.TileType.PathDL,
+        SharedData.TileType.PathUL,
+        SharedData.TileType.PathRL,
+        SharedData.TileType.PathUD
         };
     public void InitializeNeighbourWeights(ModelTile[] modelTiles)
     {
@@ -42,7 +42,7 @@ public class AssignNeighBourWeights : ScriptableObject
                     {
                         weight = 2f;
                     }
-                    else if (neighbourTile.tileType == SharedData.TileType.Streetvertical | neighbourTile.tileType == SharedData.TileType.Streethorizontal)
+                    else if (neighbourTile.tileType == SharedData.TileType.PathUD | neighbourTile.tileType == SharedData.TileType.PathRL)
                     {
                         weight = 3f;
                     }
@@ -55,7 +55,7 @@ public class AssignNeighBourWeights : ScriptableObject
                 {
                     if (roadTiles.Contains(neighbourTile.tileType))
                     {
-                        if (neighbourTile.tileType == SharedData.TileType.Streethorizontal | neighbourTile.tileType == SharedData.TileType.Streetvertical)
+                        if (neighbourTile.tileType == SharedData.TileType.PathRL | neighbourTile.tileType == SharedData.TileType.PathUD)
                         {
                             weight = 10f;
                         }
