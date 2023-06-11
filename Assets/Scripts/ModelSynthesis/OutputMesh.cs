@@ -11,7 +11,16 @@ public class OutputMesh : MonoBehaviour
     private int gridWidth;
     private int gridHeight;
     private float tileSize;
-
+    public VotingResults votingResults;
+    List<SharedData.TileType> roadTiles = new List<SharedData.TileType>
+        {
+        SharedData.TileType.URStreetcorner,
+        SharedData.TileType.DRStreetcorner,
+        SharedData.TileType.DLStreetcorner,
+        SharedData.TileType.LUStreetcorner,
+        SharedData.TileType.Streethorizontal,
+        SharedData.TileType.Streetvertical
+        };
 
     public void AssignData()
     {
@@ -48,9 +57,9 @@ public class OutputMesh : MonoBehaviour
                 {
                     ModelTile modelTile = labels[0];
                     GameObject tilePrefab = selectPrefabToSpawn(modelTile);
-                   
+
                     Vector3 worldPosition = new Vector3(x * tileSize, tilePrefab.transform.position.y, y * tileSize);
-                    if(modelTile.tileType == SharedData.TileType.Grass)
+                    if (modelTile.tileType == SharedData.TileType.Grass)
                     {
                         GameObject instance = Instantiate(tilePrefab, worldPosition, ReturnRandom90degreeAngle());
                         instance.transform.parent = transform;
@@ -60,7 +69,7 @@ public class OutputMesh : MonoBehaviour
                         GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
                         instance.transform.parent = transform;
                     }
-                              
+
                 }
             }
         }
@@ -71,11 +80,15 @@ public class OutputMesh : MonoBehaviour
         GameObject prefabToSpawn;
         if (modelTile.tileType == SharedData.TileType.Grass)
         {
-           prefabToSpawn = GrassTilePrefabs[Random.Range(0, GrassTilePrefabs.Length)];
+            prefabToSpawn = GrassTilePrefabs[Random.Range(0, GrassTilePrefabs.Length)];
+        }
+        if (roadTiles.Contains(modelTile.tileType))
+        {
+            prefabToSpawn = modelTile.gameObject;
         }
         else
         {
-             prefabToSpawn = modelTile.gameObject;
+            prefabToSpawn = modelTile.gameObject;
         }
 
 
