@@ -24,14 +24,8 @@ public class TileVariants : ScriptableObject
     [System.Serializable]
     public struct PathTiles
     {
-        public  PathTerrainVariant pathTerrainVariant;
+        public PathTerrainVariant pathTerrainVariant;
         public PathSizeVariants[] pathSizeVariants;
-    }
-    [System.Serializable]
-    public struct PathTerrainVariants
-    {
-        public SharedData.TileType tileType;
-        public GameObject pathTerrainVariant;
     }
     [System.Serializable]
     public struct PathSizeVariants
@@ -39,8 +33,12 @@ public class TileVariants : ScriptableObject
         public PathSizeVariant pathSizeVariant;
         public PathTerrainVariants[] pathTerrainVariants;
     }
-
-
+     [System.Serializable]
+    public struct PathTerrainVariants
+    {
+        public SharedData.TileType tileType;
+        public GameObject pathTerrainVariant;
+    }
 }
 
 

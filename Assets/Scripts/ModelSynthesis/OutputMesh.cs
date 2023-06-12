@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class OutputMesh : MonoBehaviour
 {
+    public TileVariants tileVariants;
     public SharedData SharedData;
     private ModelSynthesis2DManager modelSynthesis2DManager;
     private LabelGrid labelGrid;
@@ -53,38 +55,32 @@ public class OutputMesh : MonoBehaviour
             {
                 List<ModelTile> labels = labelGrid.GetLabelsAt(new Coordinate(x, y));
 
-                if (labels.Count > 0)
+                if (labels.Count == 1)
                 {
                     ModelTile modelTile = labels[0];
-                    GameObject tilePrefab = selectPrefabToSpawn(modelTile);
+                    GameObject tilePrefab = SelectPrefabToSpawn(modelTile);
 
                     Vector3 worldPosition = new Vector3(x * tileSize, tilePrefab.transform.position.y, y * tileSize);
-                    if (modelTile.tileType == SharedData.TileType.Grass)
-                    {
-                        GameObject instance = Instantiate(tilePrefab, worldPosition, ReturnRandom90degreeAngle());
-                        instance.transform.parent = transform;
-                    }
-                    else
-                    {
-                        GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
-                        instance.transform.parent = transform;
-                    }
 
+                    GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
+                    instance.transform.parent = transform;
                 }
             }
         }
     }
 
-    private GameObject selectPrefabToSpawn(ModelTile modelTile)
+    private GameObject SelectPrefabToSpawn(ModelTile modelTile)
     {
         GameObject prefabToSpawn;
         if (modelTile.tileType == SharedData.TileType.Grass)
         {
             prefabToSpawn = GrassTilePrefabs[Random.Range(0, GrassTilePrefabs.Length)];
         }
-        if (roadTiles.Contains(modelTile.tileType))
+        else if (roadTiles.Contains(modelTile.tileType))
         {
-            prefabToSpawn = modelTile.gameObject;
+            int PathTypeVariantIndex = votingResults.RoundToInt(votingResults.PathType);
+            int PathWidthVariantIndex = votingResults.RoundToInt(votingResults.PathWidth);
+            prefabToSpawn = LoadPathType(PathTypeVariantIndex, PathWidthVariantIndex, modelTile);
         }
         else
         {
@@ -93,6 +89,12 @@ public class OutputMesh : MonoBehaviour
 
 
         return prefabToSpawn;
+    }
+
+    private GameObject LoadPathType(int PathTypeVariantIndex, int PathWidthVariantIndex, ModelTile modelTile)
+    {
+        GameObject gameObjectToLoad = tileVariants.PathTilesVariants[PathTypeVariantIndex].pathSizeVariants[PathWidthVariantIndex].pathTerrainVariants[(int)modelTile.tileType].pathTerrainVariant;
+        return gameObjectToLoad;
     }
 
     private Quaternion ReturnRandom90degreeAngle()

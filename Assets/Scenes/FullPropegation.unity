@@ -918,6 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf813492e1858a45bab8b2cad41dc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileVariants: {fileID: 11400000, guid: 6de862d1bc752964ebaf1780561a04ea, type: 2}
   SharedData: {fileID: 11400000, guid: 6edb92e2adf44b34196b991e56e9acd9, type: 2}
   GrassTilePrefabs:
   - {fileID: 4357792471307611916, guid: 1ba4536becc5cb943af000f5142b921d, type: 3}
@@ -927,7 +928,7 @@ MonoBehaviour:
   - {fileID: 8947600130388150973, guid: 252a46aa4e279644f9d1ba46af0b275b, type: 3}
   - {fileID: 4357792471307611916, guid: fc138eff0f6bcc1429274a235fd189b6, type: 3}
   - {fileID: 4357792471307611916, guid: a8b893ebbc789b840be8223cd530fcf7, type: 3}
-  votingResults: {fileID: 0}
+  votingResults: {fileID: 11400000, guid: bc4fa0b7564bfd24c8c74f7e41dbfdd2, type: 2}
 --- !u!4 &1789307233
 Transform:
   m_ObjectHideFlags: 0

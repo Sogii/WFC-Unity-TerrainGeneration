@@ -1,21 +1,21 @@
 Grass:
-	North: PathRL, Grass, Water, PathRDL, PathRD, PathDL, FillerTile
-	NorthEast: PathRL, PathURD, Grass, PathUD, Water, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, PathUL, FillerTile
-	East: Grass, PathUD, Water, PathUL, PathDL, PathUDL, FillerTile
-	SouthEast: Water, Grass, PathUD, PathRL, PathURD, PathUL, PathRDL, PathRD, PathX, PathUDL, PathUR, PathURL, FillerTile
-	South: Grass, Water, PathRL, PathUL, PathURL, PathUR, FillerTile
-	SouthWest: PathUD, Grass, Water, PathRL, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathURD, PathUR, FillerTile
-	West: Grass, PathUD, Water, PathURD, PathRD, PathUR, FillerTile
-	NorthWest: PathRL, PathURD, Grass, PathUD, Water, PathUL, PathURL, PathRD, PathDL, PathX, PathUDL, PathRDL, PathUR, FillerTile
-PathUD:
-	North: PathURD, PathUD, PathURL, PathX, PathUDL, PathUL, PathUR, FillerTile
-	NorthEast: Grass, PathRL, FillerTile
+	North: PathUD, Grass, Water, PathURD, PathUR, PathRD, FillerTile
+	NorthEast: PathUD, PathURL, Grass, PathRL, Water, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, PathDL, FillerTile
+	East: Grass, PathRL, Water, PathDL, PathRD, PathRDL, FillerTile
+	SouthEast: Water, Grass, PathRL, PathUD, PathURL, PathDL, PathURD, PathUR, PathX, PathRDL, PathUL, PathUDL, FillerTile
+	South: Grass, Water, PathUD, PathDL, PathUDL, PathUL, FillerTile
+	SouthWest: PathRL, Grass, Water, PathUD, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathURL, PathUL, FillerTile
+	West: Grass, PathRL, Water, PathURL, PathUR, PathUL, FillerTile
+	NorthWest: PathUD, PathURL, Grass, PathRL, Water, PathDL, PathUDL, PathUR, PathRD, PathX, PathRDL, PathURD, PathUL, FillerTile
+PathRL:
+	North: PathURL, PathRL, PathUDL, PathX, PathRDL, PathDL, PathUL, FillerTile
+	NorthEast: Grass, PathUD, FillerTile
 	East: Grass, FillerTile
-	SouthEast: Grass, PathURL, PathRL, FillerTile
-	South: PathUD, PathRDL, PathRD, PathX, PathURD, PathUDL, FillerTile
-	SouthWest: Grass, PathRL, FillerTile
+	SouthEast: Grass, PathUDL, PathUD, FillerTile
+	South: PathRL, PathURD, PathUR, PathX, PathURL, PathRDL, FillerTile
+	SouthWest: Grass, PathUD, FillerTile
 	West: Grass, FillerTile
-	NorthWest: PathRL, Grass, PathRDL, FillerTile
+	NorthWest: PathUD, Grass, PathURD, FillerTile
 Water:
 	North: Grass, Water, FillerTile
 	NorthEast: Grass, Water, FillerTile
@@ -25,102 +25,102 @@ Water:
 	SouthWest: Grass, Water, FillerTile
 	West: Grass, Water, FillerTile
 	NorthWest: Grass, Water, FillerTile
-PathRL:
+PathUD:
 	North: Grass, FillerTile
-	NorthEast: Grass, PathUL, PathUD, PathUDL, FillerTile
-	East: PathRL, PathURD, PathRDL, PathRD, PathX, PathUR, PathURL, FillerTile
-	SouthEast: Grass, PathUD, PathDL, PathUDL, FillerTile
+	NorthEast: Grass, PathDL, PathRL, PathRDL, FillerTile
+	East: PathUD, PathURL, PathURD, PathUR, PathX, PathUL, PathUDL, FillerTile
+	SouthEast: Grass, PathRL, PathRD, PathRDL, FillerTile
 	South: Grass, FillerTile
-	SouthWest: Grass, PathURD, PathUD, PathRD, FillerTile
-	West: PathRL, PathUL, PathURL, PathDL, PathX, PathUDL, PathRDL, FillerTile
-	NorthWest: Grass, PathURD, PathUD, PathUR, FillerTile
-PathURD:
-	North: PathUL, PathUD, FillerTile
-	NorthEast: PathRL, Grass, FillerTile
+	SouthWest: Grass, PathURL, PathRL, PathUR, FillerTile
+	West: PathUD, PathDL, PathUDL, PathRD, PathX, PathRDL, PathURD, FillerTile
+	NorthWest: Grass, PathURL, PathRL, PathUL, FillerTile
+PathURL:
+	North: PathDL, PathRL, FillerTile
+	NorthEast: PathUD, Grass, FillerTile
 	East: Grass, FillerTile
-	SouthEast: Grass, PathRL, FillerTile
-	South: PathUD, PathDL, FillerTile
+	SouthEast: Grass, PathUD, FillerTile
+	South: PathRL, PathRD, FillerTile
 	SouthWest: Grass, FillerTile
-	West: PathRL, FillerTile
+	West: PathUD, FillerTile
 	NorthWest: Grass, FillerTile
+PathDL:
+	North: Grass, FillerTile
+	NorthEast: Grass, FillerTile
+	East: PathUD, FillerTile
+	SouthEast: Grass, FillerTile
+	South: PathURL, PathRL, PathUR, FillerTile
+	SouthWest: PathUD, Grass, FillerTile
+	West: Grass, FillerTile
+	NorthWest: Grass, FillerTile
+PathURD:
+	North: PathRL, FillerTile
+	NorthEast: Grass, FillerTile
+	East: PathUDL, PathUD, FillerTile
+	SouthEast: PathRL, Grass, FillerTile
+	South: Grass, FillerTile
+	SouthWest: Grass, FillerTile
+	West: PathUD, FillerTile
+	NorthWest: Grass, FillerTile
+PathUDL:
+	North: Grass, FillerTile
+	NorthEast: Grass, FillerTile
+	East: PathUD, FillerTile
+	SouthEast: Grass, FillerTile
+	South: PathRL, FillerTile
+	SouthWest: Grass, FillerTile
+	West: PathURD, PathUD, FillerTile
+	NorthWest: PathRL, Grass, FillerTile
+PathUR:
+	North: PathRL, PathRDL, PathDL, FillerTile
+	NorthEast: Grass, PathUD, FillerTile
+	East: Grass, FillerTile
+	SouthEast: Grass, FillerTile
+	South: Grass, FillerTile
+	SouthWest: Grass, FillerTile
+	West: PathUD, FillerTile
+	NorthWest: Grass, FillerTile
+PathRD:
+	North: PathURL, FillerTile
+	NorthEast: Grass, FillerTile
+	East: PathUD, FillerTile
+	SouthEast: Grass, FillerTile
+	South: Grass, FillerTile
+	SouthWest: Grass, FillerTile
+	West: Grass, FillerTile
+	NorthWest: PathUD, FillerTile
+PathX:
+	North: PathRL, FillerTile
+	NorthEast: Grass, FillerTile
+	East: PathUD, FillerTile
+	SouthEast: Grass, FillerTile
+	South: PathRL, FillerTile
+	SouthWest: Grass, FillerTile
+	West: PathUD, FillerTile
+	NorthWest: Grass, FillerTile
+PathRDL:
+	North: PathUL, PathRL, FillerTile
+	NorthEast: Grass, FillerTile
+	East: PathUD, FillerTile
+	SouthEast: Grass, FillerTile
+	South: PathRL, PathUR, FillerTile
+	SouthWest: Grass, PathUD, FillerTile
+	West: Grass, FillerTile
+	NorthWest: PathUD, Grass, FillerTile
 PathUL:
 	North: Grass, FillerTile
 	NorthEast: Grass, FillerTile
-	East: PathRL, FillerTile
-	SouthEast: Grass, FillerTile
-	South: PathURD, PathUD, PathRD, FillerTile
-	SouthWest: PathRL, Grass, FillerTile
-	West: Grass, FillerTile
-	NorthWest: Grass, FillerTile
-PathRDL:
-	North: PathUD, FillerTile
-	NorthEast: Grass, FillerTile
-	East: PathURL, PathRL, FillerTile
+	East: Grass, FillerTile
 	SouthEast: PathUD, Grass, FillerTile
-	South: Grass, FillerTile
+	South: PathRDL, PathRL, FillerTile
 	SouthWest: Grass, FillerTile
-	West: PathRL, FillerTile
-	NorthWest: Grass, FillerTile
-PathURL:
-	North: Grass, FillerTile
-	NorthEast: Grass, FillerTile
-	East: PathRL, FillerTile
-	SouthEast: Grass, FillerTile
-	South: PathUD, FillerTile
-	SouthWest: Grass, FillerTile
-	West: PathRDL, PathRL, FillerTile
-	NorthWest: PathUD, Grass, FillerTile
-PathRD:
-	North: PathUD, PathUDL, PathUL, FillerTile
-	NorthEast: Grass, PathRL, FillerTile
-	East: Grass, FillerTile
-	SouthEast: Grass, FillerTile
-	South: Grass, FillerTile
-	SouthWest: Grass, FillerTile
-	West: PathRL, FillerTile
-	NorthWest: Grass, FillerTile
-PathDL:
-	North: PathURD, FillerTile
-	NorthEast: Grass, FillerTile
-	East: PathRL, FillerTile
-	SouthEast: Grass, FillerTile
-	South: Grass, FillerTile
-	SouthWest: Grass, FillerTile
-	West: Grass, FillerTile
-	NorthWest: PathRL, FillerTile
-PathX:
-	North: PathUD, FillerTile
-	NorthEast: Grass, FillerTile
-	East: PathRL, FillerTile
-	SouthEast: Grass, FillerTile
-	South: PathUD, FillerTile
-	SouthWest: Grass, FillerTile
-	West: PathRL, FillerTile
-	NorthWest: Grass, FillerTile
-PathUDL:
-	North: PathUR, PathUD, FillerTile
-	NorthEast: Grass, FillerTile
-	East: PathRL, FillerTile
-	SouthEast: Grass, FillerTile
-	South: PathUD, PathRD, FillerTile
-	SouthWest: Grass, PathRL, FillerTile
-	West: Grass, FillerTile
-	NorthWest: PathRL, Grass, FillerTile
-PathUR:
-	North: Grass, FillerTile
-	NorthEast: Grass, FillerTile
-	East: Grass, FillerTile
-	SouthEast: PathRL, Grass, FillerTile
-	South: PathUDL, PathUD, FillerTile
-	SouthWest: Grass, FillerTile
-	West: PathRL, FillerTile
+	West: PathUD, FillerTile
 	NorthWest: Grass, FillerTile
 FillerTile:
-	North: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	NorthEast: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	East: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	SouthEast: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	South: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	SouthWest: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	West: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
-	NorthWest: Grass, PathUD, Water, PathRL, PathURD, PathUL, PathRDL, PathURL, PathRD, PathDL, PathX, PathUDL, PathUR, FillerTile
+	North: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	NorthEast: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	East: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	SouthEast: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	South: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	SouthWest: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	West: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile
+	NorthWest: Grass, PathRL, Water, PathUD, PathURL, PathDL, PathURD, PathUDL, PathUR, PathRD, PathX, PathRDL, PathUL, FillerTile

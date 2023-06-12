@@ -14,21 +14,187 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrassTilesVariants: []
   PathTilesVariants:
-  - tileType: 1
-    pathTerrainVariants:
-    - pathTerrainVariant: 0
-      pathSizeVariants:
-      - pathSizeVariant: 0
-        pathSizeVariantModels: {fileID: 0}
-      - pathSizeVariant: 1
-        pathSizeVariantModels: {fileID: 0}
-      - pathSizeVariant: 2
-        pathSizeVariantModels: {fileID: 0}
-    - pathTerrainVariant: 1
-      pathSizeVariants:
-      - pathSizeVariant: 0
-        pathSizeVariantModels: {fileID: 0}
-      - pathSizeVariant: 1
-        pathSizeVariantModels: {fileID: 0}
-      - pathSizeVariant: 2
-        pathSizeVariantModels: {fileID: 0}
+  - pathTerrainVariant: 0
+    pathSizeVariants:
+    - pathSizeVariant: 0
+      pathTerrainVariants:
+      - tileType: 0
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 1
+        pathTerrainVariant: {fileID: 4904977749978474692, guid: 12cff9ed7beb2f54da0a9c885dc7c0c5, type: 3}
+      - tileType: 2
+        pathTerrainVariant: {fileID: 4904977749978474692, guid: add93da826b9ef645b8da7077e5e9ed6, type: 3}
+      - tileType: 3
+        pathTerrainVariant: {fileID: 4904977749978474692, guid: ba4615f494252034b87dcebbbcbbf4c0, type: 3}
+      - tileType: 4
+        pathTerrainVariant: {fileID: 4904977749978474692, guid: 06e77d4717bb89c4493ef5bdc2617b49, type: 3}
+      - tileType: 5
+        pathTerrainVariant: {fileID: 124724953285142677, guid: 3bc7118b26523084bbafa1d65158496e, type: 3}
+      - tileType: 6
+        pathTerrainVariant: {fileID: 124724953285142677, guid: 937904035cfe14e4f93533312354fb2b, type: 3}
+      - tileType: 7
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 8
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 9
+        pathTerrainVariant: {fileID: 2586108924682640633, guid: c19cb5ff330c03e4db3766d197e3f0ad, type: 3}
+      - tileType: 10
+        pathTerrainVariant: {fileID: 4851316587690810357, guid: 64d708ffce5dccc44b41faa8c488f5f4, type: 3}
+      - tileType: 11
+        pathTerrainVariant: {fileID: 4851316587690810357, guid: 72e33345549692f4696d816edcb75848, type: 3}
+      - tileType: 12
+        pathTerrainVariant: {fileID: 4851316587690810357, guid: 6de7a30e90139114ab98a6bec6aba2e8, type: 3}
+      - tileType: 13
+        pathTerrainVariant: {fileID: 4851316587690810357, guid: 5515126b37884664aa97897cc25cb7df, type: 3}
+    - pathSizeVariant: 1
+      pathTerrainVariants:
+      - tileType: 0
+        pathTerrainVariant: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
+      - tileType: 1
+        pathTerrainVariant: {fileID: 2799759050331693827, guid: 71713f6be17597b4fa98bbfd8e6ec65c, type: 3}
+      - tileType: 2
+        pathTerrainVariant: {fileID: 2799759050331693827, guid: 1b9f1a561fdcc7b42b7ca7a3ebb34762, type: 3}
+      - tileType: 3
+        pathTerrainVariant: {fileID: 2799759050331693827, guid: 701e0b7d9d720c84f9a042a610860270, type: 3}
+      - tileType: 4
+        pathTerrainVariant: {fileID: 2799759050331693827, guid: 1c1a27b6e50e3f24ba965d3ee4ce1871, type: 3}
+      - tileType: 5
+        pathTerrainVariant: {fileID: 4207446151441002324, guid: f7a468ad68fa6e046a861bd8631bab31, type: 3}
+      - tileType: 6
+        pathTerrainVariant: {fileID: 4207446151441002324, guid: 8ee20e53941eb2d4db64ddcb3ee7bf69, type: 3}
+      - tileType: 7
+        pathTerrainVariant: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
+      - tileType: 8
+        pathTerrainVariant: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
+      - tileType: 9
+        pathTerrainVariant: {fileID: 8453673262146662313, guid: 87ef726e086372b48a46f7f3ceebac33, type: 3}
+      - tileType: 10
+        pathTerrainVariant: {fileID: 2505138098568387982, guid: d1df41af54061ed43b6ea103cbbe86ad, type: 3}
+      - tileType: 11
+        pathTerrainVariant: {fileID: 2505138098568387982, guid: 7e1316e34c8df5247ae3b19e3e9ff522, type: 3}
+      - tileType: 12
+        pathTerrainVariant: {fileID: 2505138098568387982, guid: 492cc2d5a9c779c4fb01c71eb4647333, type: 3}
+      - tileType: 13
+        pathTerrainVariant: {fileID: 2505138098568387982, guid: 6176cc475ace92c43ba87ae5a1a6e778, type: 3}
+    - pathSizeVariant: 2
+      pathTerrainVariants:
+      - tileType: 0
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 1
+        pathTerrainVariant: {fileID: 3114963521794054359, guid: f480e03e4b52b224cbdac30a57f40d8d, type: 3}
+      - tileType: 2
+        pathTerrainVariant: {fileID: 3114963521794054359, guid: be717ca4a3d4c5a4294f12b8cc9915f1, type: 3}
+      - tileType: 3
+        pathTerrainVariant: {fileID: 3114963521794054359, guid: c38c91e8372e56f428252a10aee3fa12, type: 3}
+      - tileType: 4
+        pathTerrainVariant: {fileID: 3114963521794054359, guid: fda05107f8afa6b46b57a689019a2bbb, type: 3}
+      - tileType: 5
+        pathTerrainVariant: {fileID: 5824330077283564879, guid: ca31f61088513ca478cd4b467f26b1e4, type: 3}
+      - tileType: 6
+        pathTerrainVariant: {fileID: 5824330077283564879, guid: 3d1ef6fd1baba14449e9c6cbc0d27d11, type: 3}
+      - tileType: 7
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 8
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 9
+        pathTerrainVariant: {fileID: 7617288944424860228, guid: 4a69738db549b274db2ad4440c848b4f, type: 3}
+      - tileType: 10
+        pathTerrainVariant: {fileID: 1601850995799870603, guid: e392adc6702db3243ba13b0d548f1a48, type: 3}
+      - tileType: 11
+        pathTerrainVariant: {fileID: 1601850995799870603, guid: 463e6f657491352438db16fd60fad7dd, type: 3}
+      - tileType: 12
+        pathTerrainVariant: {fileID: 1601850995799870603, guid: e9bb97a3b69222d4287cada662bd3a9a, type: 3}
+      - tileType: 13
+        pathTerrainVariant: {fileID: 1601850995799870603, guid: 34e750262fea5d04ba85ebb4c7e82660, type: 3}
+  - pathTerrainVariant: 1
+    pathSizeVariants:
+    - pathSizeVariant: 0
+      pathTerrainVariants:
+      - tileType: 0
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 1
+        pathTerrainVariant: {fileID: 1370660170805282018, guid: 1de86571af7665b469c9d17a85b32bed, type: 3}
+      - tileType: 2
+        pathTerrainVariant: {fileID: 1370660170805282018, guid: 4dfadab90a2b4f745a003725ff329e4f, type: 3}
+      - tileType: 3
+        pathTerrainVariant: {fileID: 1370660170805282018, guid: 60da2f42a5a20694fa5ed2a0e778f2de, type: 3}
+      - tileType: 4
+        pathTerrainVariant: {fileID: 1370660170805282018, guid: bed0585a7f7a668439ccc2dd05238d74, type: 3}
+      - tileType: 5
+        pathTerrainVariant: {fileID: 3630240036501643632, guid: 04882d4d684656f46bfda7f8878cd4d8, type: 3}
+      - tileType: 6
+        pathTerrainVariant: {fileID: 3630240036501643632, guid: 502e4dd1fdfffe941b31d18f3a1c5a79, type: 3}
+      - tileType: 7
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 8
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 9
+        pathTerrainVariant: {fileID: 8936299758971439144, guid: e222c5008b5f1134eb78d8129ba86c3d, type: 3}
+      - tileType: 10
+        pathTerrainVariant: {fileID: 481506673668910349, guid: baeddf18d8599994db647b4123f6c2bb, type: 3}
+      - tileType: 11
+        pathTerrainVariant: {fileID: 481506673668910349, guid: 15a94d8f2f3ff1a4fb353648afd1b1fe, type: 3}
+      - tileType: 12
+        pathTerrainVariant: {fileID: 481506673668910349, guid: 0428273d35880fd4e8e773c256963d81, type: 3}
+      - tileType: 13
+        pathTerrainVariant: {fileID: 481506673668910349, guid: 0da3787adcd81994191d80d8de3c5447, type: 3}
+    - pathSizeVariant: 1
+      pathTerrainVariants:
+      - tileType: 0
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 1
+        pathTerrainVariant: {fileID: 1398670349094644954, guid: e9f72a04b86f50d42b6c414b41a6e807, type: 3}
+      - tileType: 2
+        pathTerrainVariant: {fileID: 1398670349094644954, guid: 5ac761fabe752f54a91ce4eca1c8b3cc, type: 3}
+      - tileType: 3
+        pathTerrainVariant: {fileID: 1398670349094644954, guid: d5a6c37b215fdc44dbf7674a6e0147d9, type: 3}
+      - tileType: 4
+        pathTerrainVariant: {fileID: 1398670349094644954, guid: fa4d700abb972124f972778748f8daa1, type: 3}
+      - tileType: 5
+        pathTerrainVariant: {fileID: 2852598810771611651, guid: bdf3c8fa313f4ed4796e567ffe112c90, type: 3}
+      - tileType: 6
+        pathTerrainVariant: {fileID: 2852598810771611651, guid: 70b69b8a1461fc1478bb28c3b2a7fb5a, type: 3}
+      - tileType: 7
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 8
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 9
+        pathTerrainVariant: {fileID: 3922601091279571131, guid: 904c499b7c246ad43ac4ee154b668163, type: 3}
+      - tileType: 10
+        pathTerrainVariant: {fileID: 2361376856520343364, guid: 6833be11981995b44aa9b948a2723470, type: 3}
+      - tileType: 11
+        pathTerrainVariant: {fileID: 2361376856520343364, guid: 2996f7d3b2a59c9439591e9e697a82f1, type: 3}
+      - tileType: 12
+        pathTerrainVariant: {fileID: 2361376856520343364, guid: cfebee1dfea289c45852e2b28e98bdcd, type: 3}
+      - tileType: 13
+        pathTerrainVariant: {fileID: 2361376856520343364, guid: 63af1c9bd844f2f42b221fd73464b8d6, type: 3}
+    - pathSizeVariant: 2
+      pathTerrainVariants:
+      - tileType: 0
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 1
+        pathTerrainVariant: {fileID: 508161582431490671, guid: 0a4febfc6653c7b43906384676574540, type: 3}
+      - tileType: 2
+        pathTerrainVariant: {fileID: 508161582431490671, guid: 8b5cf809a8edc4048ac21a9986cfcf21, type: 3}
+      - tileType: 3
+        pathTerrainVariant: {fileID: 508161582431490671, guid: 287697150583d2443b532c9adb57c38e, type: 3}
+      - tileType: 4
+        pathTerrainVariant: {fileID: 508161582431490671, guid: 40bae3e677b0f9f408fe2280faa797cf, type: 3}
+      - tileType: 5
+        pathTerrainVariant: {fileID: 1802082682486797627, guid: 637f938c9279d624ab4cd43359f4065f, type: 3}
+      - tileType: 6
+        pathTerrainVariant: {fileID: 1802082682486797627, guid: 481c1377fb7724b46be4a80a3f9b4490, type: 3}
+      - tileType: 7
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 8
+        pathTerrainVariant: {fileID: 2706662583158592610, guid: e93939511f5989241ab4050f095af669, type: 3}
+      - tileType: 9
+        pathTerrainVariant: {fileID: 1711398493121068624, guid: 325bd518453ab6b42b68b9c01d73850b, type: 3}
+      - tileType: 10
+        pathTerrainVariant: {fileID: 784619799847796613, guid: ff67581bd8ccd0641bae1bd0484842dd, type: 3}
+      - tileType: 11
+        pathTerrainVariant: {fileID: 784619799847796613, guid: a88e62860f875d443b27f94c3f56d8c5, type: 3}
+      - tileType: 12
+        pathTerrainVariant: {fileID: 784619799847796613, guid: 1162b62c55e814843aac680d8c34d72c, type: 3}
+      - tileType: 13
+        pathTerrainVariant: {fileID: 784619799847796613, guid: abe6efd7f5a286d4da525df3e791b10f, type: 3}
