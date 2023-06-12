@@ -16,8 +16,8 @@ MonoBehaviour:
   RiverWidth: 0
   WaterFormationGeneral: 0
   RiverSideWaterGeneration: 0
-  PathWidth: 2
-  PathType: 2
+  PathWidth: -1
+  PathType: -1
   WaterColor: 0
   WaterTransparency: 0
   WaterAnimals: 0
