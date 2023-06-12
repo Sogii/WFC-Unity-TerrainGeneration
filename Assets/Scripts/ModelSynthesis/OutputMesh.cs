@@ -21,7 +21,12 @@ public class OutputMesh : MonoBehaviour
         SharedData.TileType.PathDL,
         SharedData.TileType.PathUL,
         SharedData.TileType.PathRL,
-        SharedData.TileType.PathUD
+        SharedData.TileType.PathUD,
+        SharedData.TileType.PathRDL,
+        SharedData.TileType.PathUDL,
+        SharedData.TileType.PathURD,
+        SharedData.TileType.PathURL,
+        SharedData.TileType.PathX
         };
 
     public void AssignData()
@@ -59,9 +64,7 @@ public class OutputMesh : MonoBehaviour
                 {
                     ModelTile modelTile = labels[0];
                     GameObject tilePrefab = SelectPrefabToSpawn(modelTile);
-
                     Vector3 worldPosition = new Vector3(x * tileSize, tilePrefab.transform.position.y, y * tileSize);
-
                     GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
                     instance.transform.parent = transform;
                 }
@@ -87,12 +90,12 @@ public class OutputMesh : MonoBehaviour
             prefabToSpawn = modelTile.gameObject;
         }
 
-
         return prefabToSpawn;
     }
 
     private GameObject LoadPathType(int PathTypeVariantIndex, int PathWidthVariantIndex, ModelTile modelTile)
     {
+       // Debug.Log("PathTypeVariantIndex: " + PathTypeVariantIndex + " PathWidthVariantIndex: " + PathWidthVariantIndex + " modelTile.tileType: " + modelTile.tileType);
         GameObject gameObjectToLoad = tileVariants.PathTilesVariants[PathTypeVariantIndex].pathSizeVariants[PathWidthVariantIndex].pathTerrainVariants[(int)modelTile.tileType].pathTerrainVariant;
         return gameObjectToLoad;
     }
