@@ -8,14 +8,39 @@ public class TileVariants : ScriptableObject
 {
     public GameObject[] GrassTilesVariants;
     public PathTiles[] PathTilesVariants;
+    public enum PathTerrainVariant
+    {
+        GreenPath,
+        RockPath
+    }
+
+    public enum PathSizeVariant
+    {
+        Small,
+        Medium,
+        Wide
+    }
+
+    [System.Serializable]
+    public struct PathTiles
+    {
+        public  PathTerrainVariant pathTerrainVariant;
+        public PathSizeVariants[] pathSizeVariants;
+    }
+    [System.Serializable]
+    public struct PathTerrainVariants
+    {
+        public SharedData.TileType tileType;
+        public GameObject pathTerrainVariant;
+    }
+    [System.Serializable]
+    public struct PathSizeVariants
+    {
+        public PathSizeVariant pathSizeVariant;
+        public PathTerrainVariants[] pathTerrainVariants;
+    }
 
 
-[System.Serializable]
-public struct PathTiles
-{
-    public SharedData.TileType tileType;
-    public GameObject[] VariantModels; 
-}
 }
 
 

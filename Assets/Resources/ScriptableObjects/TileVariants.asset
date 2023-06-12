@@ -15,4 +15,20 @@ MonoBehaviour:
   GrassTilesVariants: []
   PathTilesVariants:
   - tileType: 1
-    VariantModels: []
+    pathTerrainVariants:
+    - pathTerrainVariant: 0
+      pathSizeVariants:
+      - pathSizeVariant: 0
+        pathSizeVariantModels: {fileID: 0}
+      - pathSizeVariant: 1
+        pathSizeVariantModels: {fileID: 0}
+      - pathSizeVariant: 2
+        pathSizeVariantModels: {fileID: 0}
+    - pathTerrainVariant: 1
+      pathSizeVariants:
+      - pathSizeVariant: 0
+        pathSizeVariantModels: {fileID: 0}
+      - pathSizeVariant: 1
+        pathSizeVariantModels: {fileID: 0}
+      - pathSizeVariant: 2
+        pathSizeVariantModels: {fileID: 0}
