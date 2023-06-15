@@ -89,7 +89,7 @@ public class OutputMesh : MonoBehaviour
             int PathTypeVariantIndex = votingResults.RoundToInt(votingResults.PathType);
             int PathWidthVariantIndex = votingResults.RoundToInt(votingResults.PathWidth);
             //prefabToSpawn = LoadPathType(PathTypeVariantIndex, PathWidthVariantIndex, modelTile);
-            prefabToSpawn = LoadPathType(0, 0, modelTile);
+            prefabToSpawn = LoadPathType(0, 2, modelTile);
         }
         else
         {

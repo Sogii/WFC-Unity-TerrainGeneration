@@ -48,7 +48,7 @@ MonoBehaviour:
     Weight: 1
   - gameObject: {fileID: 8162249557572234393, guid: c0ef35912b9fe844e88257678df48a18, type: 3}
     tileType: 7
-    Weight: 3
+    Weight: 10
   - gameObject: {fileID: 8162249557572234393, guid: 000e9f11497ec0f49a337cf1a45c852e, type: 3}
     tileType: 8
     Weight: 1

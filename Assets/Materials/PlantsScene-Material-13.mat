@@ -136,9 +136,9 @@ Material:
     - Space_4: 0
     - Space_5: 0
     - Wind: 0
-    - Wind_Speed: 0.1
-    - Wind_Strength: 0.631
-    - Wind_Turbulence: 1
+    - Wind_Speed: 0.04
+    - Wind_Strength: 0.421
+    - Wind_Turbulence: 0.58
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
