@@ -30,52 +30,52 @@ MonoBehaviour:
     Weight: 1
   - gameObject: {fileID: 508161582431490671, guid: 287697150583d2443b532c9adb57c38e, type: 3}
     tileType: 1
-    Weight: 1
+    Weight: 3
   - gameObject: {fileID: 508161582431490671, guid: 40bae3e677b0f9f408fe2280faa797cf, type: 3}
     tileType: 2
-    Weight: 1
+    Weight: 3
   - gameObject: {fileID: 508161582431490671, guid: 0a4febfc6653c7b43906384676574540, type: 3}
     tileType: 3
-    Weight: 1
+    Weight: 3
   - gameObject: {fileID: 508161582431490671, guid: 8b5cf809a8edc4048ac21a9986cfcf21, type: 3}
     tileType: 4
-    Weight: 1
+    Weight: 3
   - gameObject: {fileID: 1802082682486797627, guid: 66cc4b75bac93f04ab273b65efef6e0f, type: 3}
     tileType: 5
-    Weight: 1
+    Weight: 3
   - gameObject: {fileID: 1802082682486797627, guid: 481c1377fb7724b46be4a80a3f9b4490, type: 3}
     tileType: 6
-    Weight: 1
+    Weight: 3
   - gameObject: {fileID: 8162249557572234393, guid: c0ef35912b9fe844e88257678df48a18, type: 3}
     tileType: 7
-    Weight: 3
+    Weight: 1
   - gameObject: {fileID: 8162249557572234393, guid: 000e9f11497ec0f49a337cf1a45c852e, type: 3}
     tileType: 8
     Weight: 1
   - gameObject: {fileID: 1711398493121068624, guid: 325bd518453ab6b42b68b9c01d73850b, type: 3}
     tileType: 9
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 784619799847796613, guid: abe6efd7f5a286d4da525df3e791b10f, type: 3}
     tileType: 10
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 784619799847796613, guid: 1162b62c55e814843aac680d8c34d72c, type: 3}
     tileType: 11
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 784619799847796613, guid: a88e62860f875d443b27f94c3f56d8c5, type: 3}
     tileType: 12
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 784619799847796613, guid: ff67581bd8ccd0641bae1bd0484842dd, type: 3}
     tileType: 13
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 1802082682486797627, guid: dcd0522562e1bd24dae37d28ca68a737, type: 3}
     tileType: 14
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 1802082682486797627, guid: ca65195cae8e51946b9788c7c997c5a5, type: 3}
     tileType: 15
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 1802082682486797627, guid: 6731fab5635e3ae4986bb1831740693c, type: 3}
     tileType: 16
-    Weight: 1
+    Weight: 2
   - gameObject: {fileID: 1802082682486797627, guid: 637f938c9279d624ab4cd43359f4065f, type: 3}
     tileType: 17
-    Weight: 1
+    Weight: 2

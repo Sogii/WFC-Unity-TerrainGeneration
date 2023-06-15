@@ -333,7 +333,7 @@ MonoBehaviour:
   Prefab: {fileID: 4078342350636781082, guid: feb4abaced9e0b84cb2a0f7cecce28ff, type: 3}
   SplineHolder: {fileID: 799387938}
   _stepCount: 20
-  _riverWidth: 5
+  _riverWidth: 3
   _riverSidesWidth: 0
   _riverMaterial: {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
   _riverSideMaterial: {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
@@ -375,7 +375,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
