@@ -131,7 +131,7 @@ Material:
     - Smoothness: 0
     - Wind: 0
     - Wind_Speed: 0.1
-    - Wind_Strength: 0.2
+    - Wind_Strength: 0.67
     - Wind_Turbulence: 1
     - _AlphaClip: 0
     - _Blend: 0
