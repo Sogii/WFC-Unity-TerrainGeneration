@@ -43,8 +43,8 @@ public class GridManager : MonoBehaviour
         ObjectToGridConverter objectToGridConverter = this.gameObject.GetComponent<ObjectToGridConverter>();
 
         objectToGridConverter.IntegrateMeshByName("Buildings", SharedData.TerrainType.BufferTerrain);
-        objectToGridConverter.IntegrateMeshByName("Traintracks", SharedData.TerrainType.BufferTerrain);
-        objectToGridConverter.IntegrateMeshByName("Road", SharedData.TerrainType.BufferTerrain);
+        objectToGridConverter.IntegrateMeshByName("Traintracks", SharedData.TerrainType.GreeneryTerrain);
+        objectToGridConverter.IntegrateMeshByName("Road", SharedData.TerrainType.GreeneryTerrain);
         objectToGridConverter.IntegrateMeshByName("Urban", SharedData.TerrainType.BufferTerrain);
         objectToGridConverter.IntegrateMeshByName("Water", SharedData.TerrainType.WaterTerrain);
         objectToGridConverter.IntegrateRiverMesh();
