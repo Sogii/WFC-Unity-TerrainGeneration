@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9163970075746433036}
   - component: {fileID: 3197010626432423988}
   - component: {fileID: 8296464311681850533}
-  - component: {fileID: 3124536420710485379}
+  - component: {fileID: 1895118664710628242}
   m_Layer: 0
-  m_Name: RockW-URD
+  m_Name: PathUDL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,15 +27,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784619799847796613}
-  m_LocalRotation: {x: -0, y: -0.70710605, z: -0, w: 0.7071076}
-  m_LocalPosition: {x: -2, y: -0.5, z: -0.0000000073347515}
+  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: -2, y: -0.5, z: -0.000000005596881}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4543083079260836123}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &9163970075746433036
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3124536420710485379
+--- !u!114 &1895118664710628242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9894ce26d45144d47a10d9b310b54846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisTileType: 12
+  thisTileType: 11
   GridX: 0
   GridY: 0
 --- !u!1 &7855481709091803285

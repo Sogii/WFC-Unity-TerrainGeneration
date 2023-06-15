@@ -104,34 +104,34 @@ public class LabelGrid
                 // }
                 // else
                 // {
-                    Coordinate cord = new Coordinate(x, y);
-                    SharedData.TerrainType terrainType = terrainTypeGrid.GetTerrainTypeAt(cord);
-                    switch (terrainType)
-                    {
-                        case SharedData.TerrainType.GreeneryTerrain:
-                            //0 = Nature
-                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.GreeneryTerrain));
-                            
-                            break;
+                Coordinate cord = new Coordinate(x, y);
+                SharedData.TerrainType terrainType = terrainTypeGrid.GetTerrainTypeAt(cord);
+                switch (terrainType)
+                {
+                    case SharedData.TerrainType.GreeneryTerrain:
+                        //0 = Nature
+                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.GreeneryTerrain));
 
-                        case SharedData.TerrainType.WaterTerrain:
-                            //1 = Filler
-                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.WaterTerrain));
-                            break;
+                        break;
 
-                        case SharedData.TerrainType.RiverSide:
-                            //1 = Filler
-                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.RiverSide));
-                            break;
+                    case SharedData.TerrainType.WaterTerrain:
+                        //1 = Filler
+                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.WaterTerrain));
+                        break;
 
-                        case SharedData.TerrainType.BufferTerrain:
-                            //1 = Filler
-                            AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.BufferTerrain));
-                            break;
+                    case SharedData.TerrainType.RiverSide:
+                        //1 = Filler
+                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.RiverSide));
+                        break;
 
-                        default:
-                            throw new ArgumentException("Invalid terrain type");
-                    }
+                    case SharedData.TerrainType.BufferTerrain:
+                        //1 = Filler
+                        AssignLabelsFromTerrainGroupAtCoordinate(cord, sharedData.GetModelTilesListByTerrainType(SharedData.TerrainType.BufferTerrain));
+                        break;
+
+                    default:
+                        throw new ArgumentException("Invalid terrain type");
+                }
                 // }
 
             }
@@ -216,21 +216,30 @@ public class LabelGrid
     {
         if (UtilityFunctions.IsWithinGridBounds(cords, this))
         {
-            // Check if the list at the specified coordinates contains the ModelTile to remove
-            if (Grid[cords.X, cords.Y].Contains(modelTileToRemove))
+            if (Grid[cords.X, cords.Y].Count == 1)
             {
-                // If it does, remove it
-                Grid[cords.X, cords.Y].Remove(modelTileToRemove);
+                Debug.LogWarning($"Removing the last label at ({cords.X},{cords.Y}).");
+                SetLabelsAt(cords, new List<ModelTile>{sharedData.AllModelTiles[7]});
             }
             else
             {
-                Debug.LogWarning($"ModelTile to remove not found at ({cords.X},{cords.Y}).");
+                // Check if the list at the specified coordinates contains the ModelTile to remove
+                if (Grid[cords.X, cords.Y].Contains(modelTileToRemove))
+                {
+                    // If it does, remove it
+                    Grid[cords.X, cords.Y].Remove(modelTileToRemove);
+                }
+                else
+                {
+                    Debug.LogWarning($"ModelTile to remove not found at ({cords.X},{cords.Y}).");
+                }
             }
         }
         else
         {
             Debug.LogError($"Invalid coordinates: ({cords.X}, {cords.Y}). Grid dimensions: {Width}x{Height}.");
         }
+       // PrintGridLabels();
     }
 
     private string TileTypeToCharacter(ModelTile modelTile)
@@ -241,9 +250,9 @@ public class LabelGrid
             case SharedData.TileType.PathUR: return "UR";
             case SharedData.TileType.PathRD: return "DR";
             case SharedData.TileType.PathDL: return "DL";
-            case SharedData.TileType.PathUL: return "L";
-            case SharedData.TileType.PathRL: return "-";
-            case SharedData.TileType.PathUD: return "|";
+            case SharedData.TileType.PathUL: return "UL";
+            case SharedData.TileType.PathRL: return "RL";
+            case SharedData.TileType.PathUD: return "UD";
             case SharedData.TileType.Grass: return "G";
             case SharedData.TileType.FillerTile: return "Fill";
             case SharedData.TileType.PathURD: return "URD";
@@ -251,6 +260,11 @@ public class LabelGrid
             case SharedData.TileType.PathURL: return "URL";
             case SharedData.TileType.PathUDL: return "UDL";
             case SharedData.TileType.PathX: return "X";
+            case SharedData.TileType.PathL: return "L";
+            case SharedData.TileType.PathU: return "U";
+            case SharedData.TileType.PathR: return "R";
+            case SharedData.TileType.PathD: return "D";
+
 
             default: return "?";
         }

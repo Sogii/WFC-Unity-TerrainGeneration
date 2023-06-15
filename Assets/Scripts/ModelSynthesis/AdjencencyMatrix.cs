@@ -28,7 +28,7 @@ public class AdjacencyMatrix
 
         foreach (KeyValuePair<string, Dictionary<SharedData.Direction, HashSet<string>>> outerEntry in adjacencyDictionary)
         {
-            ModelTile i = sharedData.AllModelTiles.First(tile => tile.tileType.ToString() == outerEntry.Key);
+            ModelTile i = sharedData.AllModelTiles.FirstOrDefault(tile => tile.tileType.ToString() == outerEntry.Key);
             if (i == null)
             {
                 Debug.LogError("No ModelTile found matching key: " + outerEntry.Key);

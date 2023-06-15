@@ -6,9 +6,9 @@ using System.Linq;
 public class ModelSynthesis2DManager : MonoBehaviour
 {
     public static ModelSynthesis2DManager Instance { get; private set; }
-    public int TileSize;
-    [SerializeField] private int XCord = 0;
-    [SerializeField] private int YCord = 0;
+    private int tileSize;
+    private int XCordWidth = 0;
+    private int YCordWidth = 0;
     [SerializeField] private bool InstantlyGenerate = false;
 
     public AssignNeighBourWeights assignNeighbourWeights;
@@ -37,6 +37,9 @@ public class ModelSynthesis2DManager : MonoBehaviour
 
     void Start()
     {
+        XCordWidth = SharedData.XGridSize;
+        YCordWidth = SharedData.YGridSize;
+        tileSize = SharedData.TileSize;
         GenerateLayoutGrid();
         //Analyzes the neighbourweight libary and prints them, asigns the tiles to the example grid and analyzes the adjacency of all the tiles
         AnalyzeWFCExampleGrid();
@@ -60,13 +63,13 @@ public class ModelSynthesis2DManager : MonoBehaviour
         AdjacencyInfoAnalyzer.InitiateExampleGrid();
         AdjacencyInfoAnalyzer.AssignTilesToExampleGrid();
         AdjacencyInfoAnalyzer.AnalyzeAdjacency();
-        AdjacencyInfoAnalyzer.AddCustomTilesToLibrary(SharedData.AllModelTiles[8]);
+        AdjacencyInfoAnalyzer.AddCustomAdjacencyData();
     }
 
     private void SetupWFCGrids()
     {
         AdjacencyMatrix = new AdjacencyMatrix(AdjacencyInfoAnalyzer.GetAdjacencyDictionary(), SharedData);
-        LabelGrid = new LabelGrid(XCord, YCord, AdjacencyMatrix, SharedData);
+        LabelGrid = new LabelGrid(XCordWidth, YCordWidth, AdjacencyMatrix, SharedData);
 
         LabelGrid.AssignLabelsBasedOnTerrainTypeGrid(GridManager.CreateCatagoryGridFromExampleMesh());
         //   LabelGrid.AssignAllPossibleLabels(SharedData.ModelTiles.ToList());

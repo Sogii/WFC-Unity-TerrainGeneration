@@ -6,7 +6,7 @@ public class ObjectToGridConverter : MonoBehaviour
 {
     private GameObject _river;
     private MeshFilter _riverMeshFilter;
-
+    public SharedData SharedData;
     private GameObject _leftRiverBank;
     private MeshFilter _leftRiverBankMeshFilter;
     private GameObject _rightRiverBank;
@@ -77,9 +77,9 @@ public class ObjectToGridConverter : MonoBehaviour
         meshCollider.sharedMesh = meshFilter.sharedMesh;
 
         // Iterate through grid cells
-        for (int x = 0; x < GridManager.GridWidth; x++)
+        for (int x = 0; x < GridManager.sharedData.XGridSize; x++)
         {
-            for (int y = 0; y < GridManager.GridHeight; y++)
+            for (int y = 0; y < GridManager.sharedData.YGridSize; y++)
             {
                 Vector3 gridWorldPos = GridSpaceToWorldSpace(new Vector2Int(x, y));
 
@@ -125,7 +125,7 @@ public class ObjectToGridConverter : MonoBehaviour
 
     Vector2Int WorldSpaceToGridSpace(Vector3 worldPosition)
     {
-        float tileSize = 1.0f; // Adjust this value based on the size of your tiles
+        float tileSize = SharedData.TileSize;
         int x = Mathf.RoundToInt(worldPosition.x / tileSize);
         int y = Mathf.RoundToInt(worldPosition.z / tileSize);
         return new Vector2Int(x, y);
@@ -133,7 +133,7 @@ public class ObjectToGridConverter : MonoBehaviour
 
     Vector3 GridSpaceToWorldSpace(Vector2Int gridPosition)
     {
-        float tileSize = 1.0f;
+        float tileSize = SharedData.TileSize;
         return new Vector3(gridPosition.x * tileSize, 0, gridPosition.y * tileSize);
     }
 }

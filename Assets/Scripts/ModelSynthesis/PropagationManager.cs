@@ -33,6 +33,7 @@ public class PropagationManager
     {
         while (queue.Count > 0)
         {
+            labelGrid.PrintGridLabels();
             Coordinate propagationCords = queue.Dequeue();
             List<ModelTile> labels = new List<ModelTile>(labelGrid.GetLabelsAt(propagationCords));
             //Prevents propagation of labels if there is only one label in the cell

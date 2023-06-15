@@ -11,6 +11,7 @@ public class VotingResults : ScriptableObject
     public float RiverSideWaterGeneration;
     public float PathWidth;
     public float PathType;
+    public float PathQuality;
     public float WaterColor;
     public float WaterTransparency;
     public float WaterAnimals;
@@ -21,17 +22,16 @@ public class VotingResults : ScriptableObject
     public float TreeDensity;
     public float TreeType;
     public float InfraStructure;
-    public float RoadQuality;
     public float BuildingQuality;
 
 
 /// <summary>
 /// This method is used to calculate the voting results for the path quantity
 /// </summary>
-///<returns> Returns a int value between -1 and 1 </returns>
+///<returns> Returns a int value between 0 and 2 </returns>
     public int RoundToInt(float value)
     {
-        int result = Mathf.RoundToInt(value/2);
+        int result = Mathf.RoundToInt(Mathf.Abs(value));
         return result;
     }
 }

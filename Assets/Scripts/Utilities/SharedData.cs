@@ -4,6 +4,9 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "SharedData", menuName = "ScriptableObjects/SharedData", order = 1)]
 public class SharedData : ScriptableObject
 {
+   
+   public int XGridSize;
+   public int YGridSize;
     public int TileSize = 1;
 
     [System.Serializable]
@@ -20,6 +23,30 @@ public class SharedData : ScriptableObject
     public enum Direction
     {
         North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest
+    }
+
+    public enum NonDiagonalDirection
+    {
+        North, East, South, West
+    }
+
+    public enum RoadTiles
+    {
+        PathUR = 1,
+        PathRD = 2,
+        PathDL = 3,
+        PathUL = 4,
+        PathRL = 5,
+        PathUD = 6,
+        PathX = 9,
+        PathRDL = 10,
+        PathUDL = 11,
+        PathURD = 12,
+        PathURL = 13,
+        PathU = 14,
+        PathR = 15,
+        PathD = 16,
+        PathL = 17,
     }
 
     [SerializeField]
@@ -39,8 +66,13 @@ public class SharedData : ScriptableObject
         PathUDL = 11,
         PathURD = 12,
         PathURL = 13,
-
+        PathU = 14,
+        PathR = 15,
+        PathD = 16,
+        PathL = 17,
     };
+
+
 
     public enum TerrainType
     {

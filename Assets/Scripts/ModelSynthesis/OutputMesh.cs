@@ -26,7 +26,11 @@ public class OutputMesh : MonoBehaviour
         SharedData.TileType.PathUDL,
         SharedData.TileType.PathURD,
         SharedData.TileType.PathURL,
-        SharedData.TileType.PathX
+        SharedData.TileType.PathX,
+        SharedData.TileType.PathU,
+        SharedData.TileType.PathR,
+        SharedData.TileType.PathD,
+        SharedData.TileType.PathL,
         };
 
     public void AssignData()
@@ -35,7 +39,7 @@ public class OutputMesh : MonoBehaviour
         labelGrid = modelSynthesis2DManager.LabelGrid;
         gridWidth = labelGrid.Width;
         gridHeight = labelGrid.Height;
-        tileSize = modelSynthesis2DManager.TileSize;
+        tileSize = SharedData.TileSize;
     }
 
     public void GenerateMesh()
@@ -66,6 +70,7 @@ public class OutputMesh : MonoBehaviour
                     GameObject tilePrefab = SelectPrefabToSpawn(modelTile);
                     Vector3 worldPosition = new Vector3(x * tileSize, tilePrefab.transform.position.y, y * tileSize);
                     GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
+                    instance.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
                     instance.transform.parent = transform;
                 }
             }
@@ -83,7 +88,8 @@ public class OutputMesh : MonoBehaviour
         {
             int PathTypeVariantIndex = votingResults.RoundToInt(votingResults.PathType);
             int PathWidthVariantIndex = votingResults.RoundToInt(votingResults.PathWidth);
-            prefabToSpawn = LoadPathType(PathTypeVariantIndex, PathWidthVariantIndex, modelTile);
+            //prefabToSpawn = LoadPathType(PathTypeVariantIndex, PathWidthVariantIndex, modelTile);
+            prefabToSpawn = LoadPathType(0, 0, modelTile);
         }
         else
         {

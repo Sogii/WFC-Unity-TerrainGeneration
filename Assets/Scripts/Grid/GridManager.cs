@@ -5,8 +5,8 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [Header("Gridinfo")]
-    public int GridWidth = 50;
-    public int GridHeight = 50;
+    private int gridWidth;
+    private int gridHeight;
     // public SharedData.TerrainType[,] TileGrid;
 
     [Header("TilePrefabs")]
@@ -32,18 +32,21 @@ public class GridManager : MonoBehaviour
 
     private void InnitializeGrid()
     {
-        ModelTerrainTypeGrid = new TerrainTypeGrid(GridWidth, GridHeight);
+        gridHeight = sharedData.YGridSize;
+        gridWidth = sharedData.XGridSize;
+        ModelTerrainTypeGrid = new TerrainTypeGrid(gridWidth, gridHeight);
     }
 
 
     private void ConvertObjectsToGrid()
     {
         ObjectToGridConverter objectToGridConverter = this.gameObject.GetComponent<ObjectToGridConverter>();
-        objectToGridConverter.IntegrateMeshByName("Water", SharedData.TerrainType.WaterTerrain);
+
         objectToGridConverter.IntegrateMeshByName("Buildings", SharedData.TerrainType.BufferTerrain);
         objectToGridConverter.IntegrateMeshByName("Traintracks", SharedData.TerrainType.BufferTerrain);
         objectToGridConverter.IntegrateMeshByName("Road", SharedData.TerrainType.BufferTerrain);
         objectToGridConverter.IntegrateMeshByName("Urban", SharedData.TerrainType.BufferTerrain);
+        objectToGridConverter.IntegrateMeshByName("Water", SharedData.TerrainType.WaterTerrain);
         objectToGridConverter.IntegrateRiverMesh();
     }
 
@@ -55,9 +58,9 @@ public class GridManager : MonoBehaviour
 
     void FillGridWithFillerTiles(SharedData.TerrainType fillerTile)
     {
-        for (int x = 0; x < GridWidth; x++)
+        for (int x = 0; x < gridWidth; x++)
         {
-            for (int y = 0; y < GridHeight; y++)
+            for (int y = 0; y < gridHeight; y++)
             {
                 ModelTerrainTypeGrid.SetTerrainTypeAt(new Coordinate(x, y), fillerTile);
             }
@@ -74,10 +77,10 @@ public class GridManager : MonoBehaviour
         Debug.Log("Printing TerrainTypeGrid:");
 
         string gridString = "";
-        for (int y = GridHeight - 1; y >= 0; y--)  // Changed to reverse order to represent top-to-bottom
+        for (int y = gridHeight - 1; y >= 0; y--)  // Changed to reverse order to represent top-to-bottom
         {
             string rowString = "";
-            for (int x = 0; x < GridWidth; x++)
+            for (int x = 0; x < gridWidth; x++)
             {
                 // Getting terrain type at given coordinates
                 SharedData.TerrainType terrainType = ModelTerrainTypeGrid.GetTerrainTypeAt(new Coordinate(x, y));
