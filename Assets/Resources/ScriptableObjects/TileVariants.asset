@@ -207,7 +207,7 @@ MonoBehaviour:
       - tileType: 4
         pathTerrainVariant: {fileID: 508161582431490671, guid: 8b5cf809a8edc4048ac21a9986cfcf21, type: 3}
       - tileType: 5
-        pathTerrainVariant: {fileID: 1802082682486797627, guid: 637f938c9279d624ab4cd43359f4065f, type: 3}
+        pathTerrainVariant: {fileID: 1802082682486797627, guid: 66cc4b75bac93f04ab273b65efef6e0f, type: 3}
       - tileType: 6
         pathTerrainVariant: {fileID: 1802082682486797627, guid: 481c1377fb7724b46be4a80a3f9b4490, type: 3}
       - tileType: 7
