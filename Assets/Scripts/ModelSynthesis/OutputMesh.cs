@@ -101,7 +101,7 @@ public class OutputMesh : MonoBehaviour
 
     private GameObject LoadPathType(int PathTypeVariantIndex, int PathWidthVariantIndex, ModelTile modelTile)
     {
-       // Debug.Log("PathTypeVariantIndex: " + PathTypeVariantIndex + " PathWidthVariantIndex: " + PathWidthVariantIndex + " modelTile.tileType: " + modelTile.tileType);
+        // Debug.Log("PathTypeVariantIndex: " + PathTypeVariantIndex + " PathWidthVariantIndex: " + PathWidthVariantIndex + " modelTile.tileType: " + modelTile.tileType);
         GameObject gameObjectToLoad = tileVariants.PathTilesVariants[PathTypeVariantIndex].pathSizeVariants[PathWidthVariantIndex].pathTerrainVariants[(int)modelTile.tileType].pathTerrainVariant;
         return gameObjectToLoad;
     }
@@ -113,11 +113,18 @@ public class OutputMesh : MonoBehaviour
         return rotation;
     }
 
-    public void SpawnCollapsedLabel(Coordinate coordinate, ModelTile modelTile)
+    public void SpawnCollapsedLabel(Coordinate coordinate)
     {
-        GameObject tilePrefab = modelTile.gameObject;
-        Vector3 worldPosition = new Vector3(coordinate.X * tileSize, 0, coordinate.Y * tileSize);
-        GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
-        instance.transform.parent = transform;
+        List<ModelTile> labels = labelGrid.GetLabelsAt(new Coordinate(coordinate.X, coordinate.Y));
+
+        if (labels.Count == 1)
+        {
+            ModelTile modelTile = labels[0];
+            GameObject tilePrefab = SelectPrefabToSpawn(modelTile);
+            Vector3 worldPosition = new Vector3(coordinate.X * tileSize, tilePrefab.transform.position.y, coordinate.Y * tileSize);
+            GameObject instance = Instantiate(tilePrefab, worldPosition, tilePrefab.transform.rotation);
+            instance.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
+            instance.transform.parent = transform;
+        }
     }
 }

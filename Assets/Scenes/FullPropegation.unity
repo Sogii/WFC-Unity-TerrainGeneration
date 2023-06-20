@@ -730,7 +730,7 @@ Transform:
   m_GameObject: {fileID: 1359893977}
   m_LocalRotation: {x: -0, y: -0.10014599, z: -0, w: 0.99497277}
   m_LocalPosition: {x: 45, y: -49, z: 133}
-  m_LocalScale: {x: 17.333323, y: 3.7725108, z: 35.934326}
+  m_LocalScale: {x: 11.133227, y: 2.4230912, z: 23.080688}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -856,20 +856,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 872630778256e6542ac4df15241d3c0a, type: 2}
     - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 555.18896
-      objectReference: {fileID: 0}
-    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.052805115
-      objectReference: {fileID: 0}
-    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.28343
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -3809945072200597350, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -880,20 +872,12 @@ PrefabInstance:
       value: City model simplified
       objectReference: {fileID: 0}
     - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 593.8714
-      objectReference: {fileID: 0}
-    - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.052805115
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.21957
+      value: 0.33999988
       objectReference: {fileID: 0}
     - target: {fileID: 6099135959303080388, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_IsActive
@@ -957,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d727357fdef589343b2701c3c4afae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstantlyGenerate: 1
+  InstantlyGenerate: 0
   assignNeighbourWeights: {fileID: 11400000, guid: c85977eaf0cd7914e8cd637ddcd7bf7b, type: 2}
   AdjacencyInfoAnalyzer: {fileID: 1601699517}
   OutputMesh: {fileID: 1789307232}
