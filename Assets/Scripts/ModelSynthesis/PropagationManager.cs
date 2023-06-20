@@ -33,7 +33,6 @@ public class PropagationManager
     {
         while (queue.Count > 0)
         {
-            labelGrid.PrintGridLabels();
             Coordinate propagationCords = queue.Dequeue();
             List<ModelTile> labels = new List<ModelTile>(labelGrid.GetLabelsAt(propagationCords));
             //Prevents propagation of labels if there is only one label in the cell
@@ -44,7 +43,7 @@ public class PropagationManager
                 {
                     //Checks if the label is consistent with its neighbours & adds it to the tilestoremove list if it is not
                     List<ModelTile> tilesToRemove = FindInconsistentTiles(propagationCords, tile);
-
+                    
                     //removes all wrong labels in one go & enqueues the neighbours of the cell
                     foreach (ModelTile tileToRemove in tilesToRemove)
                     {
@@ -54,7 +53,7 @@ public class PropagationManager
                         if (labelGrid.GetLabelsAt(propagationCords).Count == 1)
                         {
                             OutputMesh outputMesh = ModelSynthesis2DManager.Instance.OutputMesh;
-                            outputMesh.SpawnCollapsedLabel(propagationCords, labelGrid.GetLabelsAt(propagationCords)[0]);
+                            outputMesh.SpawnCollapsedLabel(propagationCords);
                         }
                     }
                 }
@@ -131,7 +130,7 @@ public class PropagationManager
 
         labelGrid.SetLabelsAt(cord, new List<ModelTile> { chosenLabel });
         OutputMesh outputMesh = ModelSynthesis2DManager.Instance.OutputMesh;
-        outputMesh.SpawnCollapsedLabel(cord, chosenLabel);
+        outputMesh.SpawnCollapsedLabel(cord);
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
             Coordinate neighbourCord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
@@ -153,7 +152,7 @@ public class PropagationManager
         foreach (SharedData.Direction direction in Enum.GetValues(typeof(SharedData.Direction)))
         {
             Coordinate neighBourcord = UtilityFunctions.GetNeighbourCoordinate(cord, direction);
-            // Continue to next direction if neighbor is out of bounds.
+            // Continue to next direction if neighbor isn't out of bounds.
             if (!(UtilityFunctions.IsWithinGridBounds(neighBourcord, labelGrid)))
                 continue;
 

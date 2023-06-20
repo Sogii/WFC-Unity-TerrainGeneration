@@ -864,12 +864,24 @@ PrefabInstance:
       value: -0.00000027743
       objectReference: {fileID: 0}
     - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 550.1277
+      objectReference: {fileID: 0}
+    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 602.0611
+      objectReference: {fileID: 0}
+    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.09434
+      objectReference: {fileID: 0}
+    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.42514
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -3809945072200597350, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -882,6 +894,14 @@ PrefabInstance:
     - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalScale.y
       value: 561.6446
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 529.62445
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 574.1429
       objectReference: {fileID: 0}
     - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalPosition.x
@@ -957,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d727357fdef589343b2701c3c4afae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstantlyGenerate: 1
+  InstantlyGenerate: 0
   assignNeighbourWeights: {fileID: 11400000, guid: c85977eaf0cd7914e8cd637ddcd7bf7b, type: 2}
   AdjacencyInfoAnalyzer: {fileID: 1601699517}
   OutputMesh: {fileID: 1789307232}
