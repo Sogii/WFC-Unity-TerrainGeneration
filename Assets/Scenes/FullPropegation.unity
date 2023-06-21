@@ -590,7 +590,7 @@ Camera:
   far clip plane: 1000
   field of view: 37
   orthographic: 1
-  orthographic size: 50
+  orthographic size: 40
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -856,14 +856,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 872630778256e6542ac4df15241d3c0a, type: 2}
     - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 574.55597
-      objectReference: {fileID: 0}
-    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00000027743
-      objectReference: {fileID: 0}
-    - target: {fileID: -4470455406946765199, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalScale.x
       value: 550.1277
       objectReference: {fileID: 0}
@@ -890,10 +882,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_Name
       value: City model simplified
-      objectReference: {fileID: 0}
-    - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 561.6446
       objectReference: {fileID: 0}
     - target: {fileID: 5326884247264983140, guid: d8c2f63c57a7f3d4788a7619304c6141, type: 3}
       propertyPath: m_LocalScale.x
